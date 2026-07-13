@@ -179,6 +179,8 @@ class TestNamingSSOT(unittest.TestCase):
     def test_materialized_tree_has_no_legacy_facet_dirs(self) -> None:
         from runtime.domain_knowledge_paths import FORBIDDEN_MATERIALIZED_TOP_DIRS, MATERIALIZED_BY_ROOT
 
+        if not MATERIALIZED_BY_ROOT.is_dir():
+            self.skipTest("materialized/by-root not present (fresh checkout)")
         for root_dir in MATERIALIZED_BY_ROOT.iterdir():
             if not root_dir.is_dir():
                 continue

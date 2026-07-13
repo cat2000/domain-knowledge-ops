@@ -18,9 +18,15 @@ dist/
 cursor-skills-share-*.zip
 
 # Local pipeline outputs (do not publish production tenant data)
-domain-knowledge/curated/by-root/
-domain-knowledge/extracted/by-root/
-domain-knowledge/materialized/by-root/
+domain-knowledge/curated/by-root/**
+domain-knowledge/extracted/by-root/**
+domain-knowledge/materialized/by-root/**
+!domain-knowledge/curated/by-root/
+!domain-knowledge/extracted/by-root/
+!domain-knowledge/materialized/by-root/
+!domain-knowledge/curated/by-root/.gitkeep
+!domain-knowledge/extracted/by-root/.gitkeep
+!domain-knowledge/materialized/by-root/.gitkeep
 !domain-knowledge/curated/README.md
 !domain-knowledge/extracted/README.md
 !domain-knowledge/materialized/README.md
