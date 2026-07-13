@@ -1,0 +1,10 @@
+key: DEMO-BILL-1
+primary: billing
+themes: [billing]
+product_line: saas
+material_kind: normative_business
+distill_tier: proposition_core
+proposition_id: billing-seat-proration
+business_extract: true
+signal: domain
+notes: Offline saas-billing fixture — not a live Jira issue.

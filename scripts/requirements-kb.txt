@@ -1,0 +1,2 @@
+# Optional: English pages → zh-CN display for KB extracts (see confluence_kb_zh_display.py)
+deep-translator>=1.11.4

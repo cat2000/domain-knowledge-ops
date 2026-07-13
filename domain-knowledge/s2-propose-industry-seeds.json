@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "description": "Empty module_seeds until strategy.md §2 is filled. strategy_dimensions are generic propose rubrics only — not industry modules.",
+  "strategy_dimensions": [
+    {
+      "id": "subject-market",
+      "label": "Subject & market",
+      "concern": "Who the rule applies to, which market/channel, policy version"
+    },
+    {
+      "id": "eligibility-branch-outcome",
+      "label": "Eligibility → branch → outcome",
+      "concern": "Conditions → state → user-visible result"
+    },
+    {
+      "id": "time-cycle",
+      "label": "Time & cycles",
+      "concern": "Windows, deadlines, review periods"
+    },
+    {
+      "id": "policy-vs-implementation",
+      "label": "Policy vs implementation",
+      "concern": "Keep policy semantics; demote API/fields to support"
+    }
+  ],
+  "module_seeds": []
+}

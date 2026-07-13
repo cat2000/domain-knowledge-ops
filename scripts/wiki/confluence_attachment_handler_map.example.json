@@ -1,0 +1,6 @@
+{
+  "_comment": "Copy to scripts/wiki/confluence_attachment_handler_map.json to override extension → handler without editing Python. Handler ids: text_plain, csv_utf8, tsv_utf8, json_text, xlsx_openpyxl, pdf_pypdf, image_tesseract (local Tesseract OCR), skip",
+  ".tfss": "skip",
+  ".doc": "skip",
+  ".docx": "skip"
+}

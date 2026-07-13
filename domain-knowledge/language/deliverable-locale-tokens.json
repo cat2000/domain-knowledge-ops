@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "description": "Labels/filenames for deliverables by deliverable_locale. English contracts cite token keys; agents emit locale-specific strings.",
+  "locales": {
+    "en": {
+      "checklist": {
+        "status_confirmed": "confirmed",
+        "status_pending": "pending",
+        "status_not_archived": "not-archived",
+        "field_slug": "Proposition slug",
+        "field_axis": "Strategy axis",
+        "field_scan": "Domain subdirectory (scan)",
+        "field_main_entry": "Main entry",
+        "field_status": "Status",
+        "field_glossary_note": "Glossary note",
+        "field_note": "Note",
+        "continue_keyword": "continue"
+      },
+      "filenames": {
+        "work_draft_glob": "*work-draft.md",
+        "source_brief_glob": "*source-brief.md",
+        "locale_brief_glob": "*domain-brief.md",
+        "work_draft_suffix": "-work-draft.md",
+        "source_brief_suffix": "-source-brief.md",
+        "locale_brief_suffix": "-domain-brief.md",
+        "gap_scan_filename": "gap-scan.md",
+        "full_key_index_filename": "full-key-index.md"
+      },
+      "s5_headings": {
+        "overview_scope": "## Overview and scope",
+        "input_disposition": "## Input disposition",
+        "domain_model": "## Domain model",
+        "ordering_rationale": "## Ordering rationale",
+        "closed_chains": "## Closed decision chains",
+        "pending_adjudication": "## Pending adjudication",
+        "structured_detail": "## Structured detail handoff",
+        "provenance": "## Provenance",
+        "doc_purpose": "## Document purpose",
+        "domain_overview": "## Domain overview",
+        "implementation_support": "## Implementation support"
+      },
+      "s5_labels": {
+        "first_class_objects": "First-class objects",
+        "metrics_fields": "Metrics / fields",
+        "display_containers": "Display containers",
+        "object_relations": "Object relations",
+        "state_machine": "State machine / transitions",
+        "boundary_candidates": "Boundary candidates",
+        "domain_object": "Domain object",
+        "state_change": "State change",
+        "business_action": "Business action",
+        "display_field_anchor": "Display container / field anchor",
+        "applicable_objects": "Applicable objects",
+        "trigger_condition": "Trigger condition",
+        "branch_or_action": "Branch or action",
+        "user_visible_effect": "User-visible effect",
+        "evidence_source": "Evidence source",
+        "decision_impact": "Decision impact",
+        "associated_chain": "Associated chain",
+        "associated_upstream": "Associated upstream",
+        "pending_decision_point": "Pending decision point",
+        "current_evidence": "Current evidence",
+        "pending_items": "Pending items"
+      },
+      "s6_s7_headings": {
+        "overview_scope": "## Overview and scope",
+        "out_of_scope": "## Out of scope",
+        "domain_model_summary": "## Domain model summary",
+        "core_business_rules": "## Core business rules",
+        "glossary": "## Glossary",
+        "open_items": "## Open items",
+        "key_details": "## Key details",
+        "provenance": "## Provenance"
+      },
+      "s7_decision_card_labels": {
+        "confirmed_rule": "Confirmed rule",
+        "open_boundary": "Open boundary",
+        "user_visible_effect": "User-visible effect",
+        "linked_open_items": "Linked open items"
+      },
+      "s7_open_item_labels": {
+        "affects_rule": "Affected rule",
+        "pending_or_needed": "Pending / needed",
+        "suggested_owner": "Suggested owner",
+        "impact_if_confirmed": "Impact if confirmed"
+      },
+      "phrases": {
+        "no_closed_chain": "No closed decision chains found",
+        "placeholder_patterns": ["TBD", "TODO", "pending confirmation", "to be confirmed"]
+      }
+    },
+    "zh-CN": {
+      "checklist": {
+        "status_confirmed": "确认",
+        "status_pending": "待确认",
+        "status_not_archived": "不归档",
+        "field_slug": "命题 slug",
+        "field_axis": "strategy 维度",
+        "field_scan": "领域子目录（扫描）",
+        "field_main_entry": "主入口",
+        "field_status": "状态",
+        "field_glossary_note": "术语备注",
+        "field_note": "备注",
+        "continue_keyword": "继续"
+      },
+      "filenames": {
+        "work_draft_glob": "*领域知识-工作稿.md",
+        "source_brief_glob": "*source-brief.md",
+        "locale_brief_glob": "*领域知识定稿.md",
+        "work_draft_suffix": "-领域知识-工作稿.md",
+        "source_brief_suffix": "-source-brief.md",
+        "locale_brief_suffix": "-领域知识定稿.md",
+        "gap_scan_filename": "遗漏扫描.md",
+        "full_key_index_filename": "全量KEY索引.md"
+      },
+      "s5_headings": {
+        "overview_scope": "## 概述与范围",
+        "input_disposition": "## 输入处置摘要",
+        "domain_model": "## 领域模型",
+        "ordering_rationale": "## 组织顺序说明",
+        "closed_chains": "## 已闭环决策链",
+        "pending_adjudication": "## 待裁决关键问题",
+        "structured_detail": "## 结构化明细转交",
+        "provenance": "## 溯源",
+        "doc_purpose": "## 文档用途",
+        "domain_overview": "## 领域概述",
+        "implementation_support": "## 实施支撑"
+      },
+      "s5_labels": {
+        "first_class_objects": "一等业务对象",
+        "metrics_fields": "指标/字段",
+        "display_containers": "展示容器",
+        "object_relations": "对象关系",
+        "state_machine": "状态机/状态转换",
+        "boundary_candidates": "边界候选",
+        "domain_object": "领域对象",
+        "state_change": "状态变化",
+        "business_action": "业务动作",
+        "display_field_anchor": "展示容器/字段锚点",
+        "applicable_objects": "适用对象",
+        "trigger_condition": "触发条件",
+        "branch_or_action": "分支或动作",
+        "user_visible_effect": "用户可见影响",
+        "evidence_source": "证据来源",
+        "decision_impact": "决策影响",
+        "associated_chain": "关联链",
+        "associated_upstream": "关联前置域",
+        "pending_decision_point": "待裁决点",
+        "current_evidence": "当前证据",
+        "pending_items": "待确认事项"
+      },
+      "s6_s7_headings": {
+        "overview_scope": "## 概述与范围",
+        "out_of_scope": "## 不在本文展开",
+        "domain_model_summary": "## 领域模型摘要",
+        "core_business_rules": "## 核心业务规则",
+        "glossary": "## 术语说明",
+        "open_items": "## 待确认事项",
+        "key_details": "## 关键明细",
+        "provenance": "## 溯源"
+      },
+      "s7_decision_card_labels": {
+        "confirmed_rule": "已确认规则",
+        "open_boundary": "待确认边界",
+        "user_visible_effect": "用户可见影响",
+        "linked_open_items": "关联待确认事项"
+      },
+      "s7_open_item_labels": {
+        "affects_rule": "影响规则",
+        "pending_or_needed": "待确认/待补充",
+        "suggested_owner": "建议确认人",
+        "impact_if_confirmed": "确认后影响"
+      },
+      "phrases": {
+        "no_closed_chain": "当前未形成已闭环决策链",
+        "placeholder_patterns": ["待补充", "按来源条件触发", "按来源分支动作执行", "待确认对象", "按来源动作触发"]
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: Skill feedback (template)
+    url: https://github.com/cat2000/domain-knowledge-ops/issues/new?template=skill_feedback.md
+    about: Report unclear skill behavior, gate failures, or demo issues
+  - name: Bug report (template)
+    url: https://github.com/cat2000/domain-knowledge-ops/issues/new?template=bug_report.md
+    about: Report a script, test, or layout regression

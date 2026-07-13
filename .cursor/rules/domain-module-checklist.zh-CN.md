@@ -1,0 +1,41 @@
+> English SSOT: [`domain-module-checklist.mdc`](./domain-module-checklist.mdc).
+
+# 领域模块确认页（DOMAIN_MODULE_CHECKLIST.md）
+
+**何时适用**：编辑或刷新 `domain-knowledge/curated/by-root/<根>/DOMAIN_MODULE_CHECKLIST.md`；或刚完成 **`@generate-knowledge-from-wiki`** / **`@distill-domain-knowledge`**。
+
+**版式**：`domain-knowledge/DOMAIN_MODULE_CHECKLIST.template.md` · **全流程**：`.cursor/skills/generate-knowledge-from-wiki/RUNBOOK.md`
+
+**窄屏版式（必守）**：每个主题一块 `### 主题名` + `- **字段**: 值`；**禁止**再写「主题 | strategy | … | 状态」宽表。人通常只改 **状态**（`待确认` → `确认`）。状态文案见 `domain-knowledge/language/deliverable-locale-tokens.json`。
+
+## 1. 标尺
+
+只使用 `domain-knowledge/strategy.md` **第二节**——**不**另创行业标准。
+
+## 2. S2（刷新本页时）
+
+- **主题块** = `strategy.md` 第二节 × 扫描 `materialized/`
+- **打标** = 每个 `materialized/**/*.md` → `_materialization_closure.json`
+- **禁止**：在多个产出目录重复粘贴同一段 `materialized/` 原文
+- **分散素材防漏**：还须对 `materialized/` 做全文检索与语义补漏；上一轮稳定 `glossary.md` 仅作同义词/缩写提示，不得作为领域边界依据。补全路径写入 closure 与确认页，本轮新术语写入 **术语备注**；**不得**仅凭文件名或 `facet-*` 认定已覆盖
+- **暂停**：等人将认可模块的 **状态** 标为 **`确认`**
+
+## 3. 成稿（用户 **`继续`**）
+
+仅 **`确认`** 模块：**S3** `_aggregate/` → **S4** 领域模型 → **S5** 工作稿 → **S6** 原语言定稿 → **S7** 目标语言定稿。
+
+## 4. 门禁
+
+- S2 后（建议）：`python3 scripts/distill/coverage.py --root-id <根>`
+- S7 后：`python3 scripts/domain_check.py distill --root-id <根>`
+
+## 5. 本页附录链接
+
+`_materialization_closure.json`、`_附录/`（若存在）。
+
+## 6. 禁止
+
+- 编造 Confluence 未出现的业务数字或政策；不确定写「待定」并保留溯源
+- **S1–S5** 禁止翻译
+- `materialized/` 仅在定稿 **`## 溯源`** 中单行引用（见 `distill-quality-bar.md`）
+- 把确认页改回宽 Markdown 表

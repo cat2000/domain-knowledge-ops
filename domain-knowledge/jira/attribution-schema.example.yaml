@@ -1,0 +1,36 @@
+# Example: domain-knowledge/curated/by-root/<root_id>/jira/attribution/DEMO-123.yaml
+# Written by: scripts/jira/steps/attribute.py (first_principles) + optional Cursor override (cursor_review)
+
+key: DEMO-123
+type: Story
+# Parent: Jira fields.parent (JQL parent = <KEY>), alongside issuelinks
+parent: DEMO-100
+hierarchy_root: DEMO-1
+parent_summary: "[Ordering] Buyer amend open order"
+themes:
+  - ordering
+primary: ordering
+# Channel (≠ domain): see domain-knowledge/jira/first-principles-attribution.md
+product_line: orders-portal
+# normative_business | mapping_engineering | collaboration_noise
+material_kind: normative_business
+signal: business
+confidence: high
+substance_chars: 2400
+substance_tier: rich
+distill_queue: true
+distill_tier: proposition_core
+proposition_id: ordering:amend-open
+proposition_extract: true
+effective_at: "2025-11-20T10:00:00Z"
+scanned_at: "2026-05-19T12:00:00Z"
+attribution_method: cursor_review
+supersedes: []
+amended_by: []
+related_keys:
+  - DEMO-90
+comment_count: 12
+wiki_gap: false
+spike_role: null
+business_extract: false
+one_line: One-line statement of the business question this ticket adjudicates

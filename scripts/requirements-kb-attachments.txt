@@ -1,0 +1,10 @@
+# Optional: Confluence attachment text extraction (see confluence_attachment_extract.py)
+# Install: pip install -r scripts/requirements-kb-attachments.txt
+#
+# PNG/JPEG OCR also needs the Tesseract *binary* + language data on the OS, e.g. macOS:
+#   brew install tesseract tesseract-lang
+# Then verify: tesseract --list-langs   (expect chi_sim for simplified Chinese)
+openpyxl>=3.1.0
+pypdf>=4.0.0
+pillow>=10.0.0
+pytesseract>=0.3.10

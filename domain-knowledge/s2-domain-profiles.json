@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "description": "Empty shell until strategy.md §2 is filled and Cursor derives themes/facets. Do not ship industry modules here.",
+  "checklist_themes": [],
+  "s1_facets": [],
+  "s1_noise": {
+    "min_title_chars": 2,
+    "exact_titles": [
+      "Test"
+    ],
+    "title_prefixes": []
+  },
+  "s2": {
+    "primary_facet_to_slug": {},
+    "domain_cues": {},
+    "business_signals": [
+      "如果",
+      "当",
+      "仅当",
+      "必须",
+      "不得",
+      "if",
+      "when",
+      "must",
+      "unless",
+      "eligible",
+      "status",
+      "state"
+    ],
+    "strong_cues": [],
+    "engineering_noise": [
+      "meeting minutes",
+      "会议纪要",
+      "getting-started",
+      "入门",
+      "architecture",
+      "技术架构",
+      "release note",
+      "版本发布",
+      "roadmap",
+      "definition of done",
+      "sprint review"
+    ],
+    "hard_non_business_path": [
+      "getting-started",
+      "hotfix-meeting-minutes",
+      "app-store"
+    ],
+    "explicit_non_business_path": [],
+    "route_overrides": []
+  }
+}

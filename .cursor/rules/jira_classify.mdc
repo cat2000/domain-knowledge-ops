@@ -1,0 +1,34 @@
+---
+description: Jira Classify guardrails for attribute/read_business and Cursor review.
+globs: scripts/jira/**
+alwaysApply: false
+---
+
+# Jira Classify Guardrails
+
+Chinese locale: [`jira_classify.zh-CN.md`](./jira_classify.zh-CN.md).
+
+Applies to Jira Classify (`attribute` / `read_business` / Classify segment of `run_jira_knowledge.py`).
+
+## Execution order
+
+1. `attribute.py` first → `attribution/<KEY>.yaml` and `_ticket_attribution.json`
+2. `read_business.py` next → `by-theme/<slug>/gap-scan.md` (locale filename may differ via tokens)
+3. `domain_check.py jira --full-raw` as the Classify gate
+
+## Semantics
+
+- Theme gap-scan / index files are an **index layer**, not an Extract-done signal
+- `gateway` / `requirements` are triage sinks — never promote to checklist **confirmed** propositions
+- Default `read_business` scans attribution themes; after humans mark **confirmed**, refresh with `--confirmed-only`
+- Primary script source is `jira/raw/`; `materialized/` is for reading and closure indexing only
+
+## Cursor review (B1)
+
+- For any team that configures low-confidence / `cursor_review` tickets, run that review before claiming Classify done
+- Team-specific review notes live under `domain-knowledge/jira/teams/<team>.json` (and optional `*-attribution.md` if present)
+
+## Forbidden
+
+- Claiming the pipeline done from attribution coverage alone
+- Advancing past Classify without `domain_check jira --full-raw`

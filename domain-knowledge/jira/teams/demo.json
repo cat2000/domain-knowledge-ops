@@ -1,0 +1,10 @@
+{
+  "team": "demo",
+  "root_id": "100001",
+  "version": 1,
+  "description": "Placeholder classify config. Fill facets from strategy.md §2 after setup-domain-ops derives profiles.",
+  "sink_slugs": [],
+  "epic_primary": {},
+  "title_primary": [],
+  "facets": []
+}

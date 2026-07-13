@@ -1,0 +1,203 @@
+{
+  "global": {
+    "doc_intent_patterns": [
+      {
+        "intent": "release_change",
+        "pattern": "(release|road\\s*map|roadmap|milestone|phase|版本|发布|上线|优化|性能|sprint|bug\\s*fix|hotfix|迭代)"
+      },
+      {
+        "intent": "api_contract",
+        "pattern": "(api|interface|endpoint|swagger|request|response|payload|字段|参数|返回|ws/|/api/|service)"
+      },
+      {
+        "intent": "test_ops",
+        "pattern": "(test|uat|qa|验证|联调|压测|回归|mock|checklist|runbook|演练|操作)"
+      },
+      {
+        "intent": "discussion_decision",
+        "pattern": "(discussion|design|review|decision|question|问题|讨论|方案|纪要|是否|->)"
+      }
+    ],
+    "candidate_patterns": {
+      "rule_signal": "(如果|当|仅当|除非|否则|必须|不得|可|会|将|资格|达标|支付|下单|促销|订单|状态|奖励|结算|\\bif\\b|\\bwhen\\b|\\bmust\\b|\\bonly\\b|\\bunless\\b|\\bthen\\b|\\bshould\\b|\\border\\b|\\bpayment\\b|\\bpromo\\b)",
+      "outcome_signal": "(成功|失败|可见|不可见|发放|拒绝|通过|取消|生效|失效|获得|success|failed|visible|hidden|granted|rejected|applied|cancelled)",
+      "api_business_constraint": "(仅当|必须|不得|不能|失败|成功|状态|回调|占用|释放|取消|库存|校验|促销|订单|支付|\\bmust\\b|\\bonly\\b|\\bcannot\\b|\\bshould\\b|\\bfailed\\b|\\bsuccess\\b|\\bstatus\\b|\\bcallback\\b|\\bvalidate\\b|\\binventory\\b|\\bpromo\\b|\\border\\b|\\bpayment\\b)",
+      "discussion_resolution": "(->\\s*(是|否|未确定)|结论|采用|不采用|暂不|确认|决定|\\bdecide\\b|\\bdecision\\b|\\bresolved\\b|\\byes\\b|\\bno\\b)"
+    },
+    "candidate_types": [
+      "contract_candidate",
+      "evidence_note",
+      "noise_context"
+    ],
+    "intent_gate": {
+      "min_page_total_for_ratio": 4,
+      "release_like_intents": [
+        "release_change",
+        "test_ops"
+      ],
+      "release_confidence_min": 3,
+      "release_page_total_min": 10,
+      "release_contract_ratio_max": 0.6,
+      "rule_confidence_min": 3,
+      "rule_page_total_min": 8,
+      "rule_contract_ratio_min": 0.2
+    },
+    "extract_effectiveness_gate": {
+      "enabled": true,
+      "arrow_qa": {
+        "min_samples": 2,
+        "min_rate": 0.5
+      },
+      "status_transition": {
+        "min_samples": 2,
+        "min_rate": 0.6
+      },
+      "unresolved_capture": {
+        "min_samples": 2,
+        "min_rate": 0.7
+      }
+    },
+    "causality_gate": {
+      "enabled": true,
+      "decision_core_min_samples": 8,
+      "decision_core_min_ratio": 0.2,
+      "unresolved_critical_min_samples": 2,
+      "unresolved_exposed_min_ratio": 0.8
+    },
+    "admission_model": {
+      "enabled": true,
+      "stage1": {
+        "min_causality_score": 8,
+        "min_signal": 3,
+        "min_fields": 3,
+        "allow_tracks": [
+          "decision_core",
+          "unresolved_critical"
+        ]
+      },
+      "stage1_by_intent": {
+        "api_contract": {
+          "min_signal": 2,
+          "min_fields": 2
+        },
+        "rule_spec": {
+          "min_causality_score": 7
+        },
+        "discussion_decision": {
+          "min_causality_score": 7
+        }
+      },
+      "semantic_retention": {
+        "enabled": true,
+        "max_extra_per_page": 8,
+        "force_roles": [
+          "named_business_structure",
+          "branch_marker",
+          "unresolved_marker",
+          "threshold_anchor"
+        ],
+        "require_signal_for_threshold": true
+      },
+      "anti_false_negative_gate": {
+        "enabled": true,
+        "min_samples": 3,
+        "max_high_causality_miss_rate": 0.35,
+        "min_causality_score": 8,
+        "tracks": [
+          "decision_core",
+          "unresolved_critical"
+        ]
+      },
+      "distribution_guard": {
+        "enabled": true,
+        "min_stage1_samples": 12,
+        "min_distinct_stage1_sources": 2,
+        "min_distinct_stage1_intents": 2,
+        "max_single_source_share": 0.7,
+        "max_single_intent_share": 0.85
+      }
+    },
+    "miss_audit": {
+      "score_thresholds": {
+        "high": 6,
+        "medium": 4
+      },
+      "anti_reject_threshold_default": 3,
+      "anti_reject_threshold_by_intent": {
+        "release_change": 2,
+        "test_ops": 2,
+        "api_contract": 3,
+        "discussion_decision": 4,
+        "rule_spec": 4
+      },
+      "review_min_score_by_intent": {
+        "release_change": 5,
+        "test_ops": 5,
+        "api_contract": 4,
+        "discussion_decision": 4,
+        "rule_spec": 4
+      },
+      "rescue_from_auto_reject": {
+        "enabled": true,
+        "min_score": 7,
+        "max_anti_score_for_rescue": 2,
+        "require_rule_signal": true,
+        "require_decision_confidence_min": 3,
+        "apply_to_intents": [
+          "release_change",
+          "test_ops",
+          "api_contract",
+          "discussion_decision",
+          "rule_spec"
+        ]
+      },
+      "review_priority": {
+        "enabled": true,
+        "p0_min_score": 6,
+        "p0_max_anti_score": 1,
+        "p0_require_decision_confidence_min": 3,
+        "p1_min_score": 5,
+        "p1_max_anti_score": 2
+      },
+      "decision_value_topn": {
+        "enabled": true,
+        "top_n": 20,
+        "include_priorities": [
+          "P0"
+        ],
+        "dedup": {
+          "enabled": true,
+          "top_n": 12,
+          "key_mode": "formula_signature",
+          "min_text_len": 12
+        },
+        "weights": {
+          "base_score": 2,
+          "decision_confidence": 2,
+          "decision_fields": 2,
+          "rule_signal_bonus": 2,
+          "api_constraint_bonus": 1,
+          "unknown_decision_penalty": 2,
+          "missing_fields_penalty_each": 1,
+          "anti_score_penalty": 1
+        }
+      },
+      "auto_promote_candidate": {
+        "enabled": true,
+        "include_priorities": [
+          "P0"
+        ],
+        "min_business_value_score": 20,
+        "min_decision_confidence": 3,
+        "min_decision_fields": 2,
+        "max_anti_score": 1,
+        "require_rule_signal": true,
+        "require_outcome_signal": false,
+        "reject_formula_like": true,
+        "top_n": 20
+      }
+    }
+  },
+  "intent_overrides": {},
+  "team_overrides": {}
+}

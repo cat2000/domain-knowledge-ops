@@ -1,0 +1,13 @@
+key: DEMO-1
+type: Story
+primary: ordering
+themes:
+  - ordering
+product_line: demo
+confidence: high
+substance_tier: substantive
+distill_tier: proposition_core
+proposition_id: amend_open_order
+proposition_extract: true
+attribution_method: fixture
+one_line: Amend open-order line quantities while quote is valid

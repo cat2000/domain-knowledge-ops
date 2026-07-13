@@ -1,0 +1,2 @@
+# Confluence KB sync: zh-CN display for extracts (see scripts/confluence_kb_zh_display.py)
+-r scripts/requirements-kb.txt

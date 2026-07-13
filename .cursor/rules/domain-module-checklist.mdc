@@ -1,0 +1,47 @@
+---
+description: When editing DOMAIN_MODULE_CHECKLIST.md (domain module confirmation page): refresh from strategy §2 + materialized scan; humans mark confirmed before deliver.
+globs: domain-knowledge/curated/**/DOMAIN_MODULE_CHECKLIST.md
+alwaysApply: false
+---
+
+# Domain module confirmation page (DOMAIN_MODULE_CHECKLIST.md)
+
+Chinese locale: [`domain-module-checklist.zh-CN.md`](./domain-module-checklist.zh-CN.md).
+
+**When**: Editing or refreshing `domain-knowledge/curated/by-root/<root>/DOMAIN_MODULE_CHECKLIST.md`; or right after **`@generate-knowledge-from-wiki`** / **`@distill-domain-knowledge`**.
+
+**Layout**: `domain-knowledge/DOMAIN_MODULE_CHECKLIST.template.md` · **Full flow**: `.cursor/skills/generate-knowledge-from-wiki/RUNBOOK.md`
+
+**Narrow layout (required)**: one block per theme — `### Theme name` + `- **Field**: value`. **Do not** write wide tables (`Theme | strategy | … | Status`). Humans usually only change **Status** (`pending` → `confirmed`). Locale status strings: `domain-knowledge/language/deliverable-locale-tokens.json`.
+
+## 1. Yardstick
+
+Use only `domain-knowledge/strategy.md` **§2** — **do not** invent a separate industry standard.
+
+## 2. S2 (when refreshing this page)
+
+- **Theme blocks** = `strategy.md` §2 × scan of `materialized/`
+- **Tagging** = each `materialized/**/*.md` → `_materialization_closure.json`
+- **Forbidden**: paste the same `materialized/` body into multiple output dirs
+- **Scattered-source coverage**: full-text search + semantic gap-fill on `materialized/`; prior stable `glossary.md` is synonym/abbrev hints only, **not** domain-boundary authority. Write completed paths into closure and this page; new terms into **glossary note**; **do not** treat filenames or `facet-*` alone as covered
+- **Pause**: wait for humans to set accepted modules' **Status** to **`confirmed`**
+
+## 3. Deliver (user says **`continue`**)
+
+Only **`confirmed`** modules: **S3** `_aggregate/` → **S4** domain model → **S5** work draft → **S6** source brief → **S7** locale brief.
+
+## 4. Gates
+
+- After S2 (recommended): `python3 scripts/distill/coverage.py --root-id <root>`
+- After S7: `python3 scripts/domain_check.py distill --root-id <root>`
+
+## 5. Appendix links on this page
+
+`_materialization_closure.json`, `_appendix/` (if present).
+
+## 6. Forbidden
+
+- Invent business numbers or policies absent from Confluence; if unsure write “TBD” and keep provenance
+- **S1–S5**: no translation
+- Cite `materialized/` only as single-line refs under brief **`## Provenance`** (see `distill-quality-bar.md`)
+- Reintroduce wide Markdown tables on this confirmation page

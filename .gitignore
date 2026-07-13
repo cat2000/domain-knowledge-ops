@@ -1,0 +1,27 @@
+.env
+*.pem
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+
+# Ephemeral agent chunk lists (generate-knowledge-from-wiki distill batches)
+domain-knowledge/.distill_chunk_*.txt
+
+# Jira REST fetch output (requirement-risk / ticket-splitter)
+.jira_attachments/
+.team_domain_knowledge/
+
+# Internal packaging artifacts (not part of the open-source product)
+dist/
+*.tar.gz
+cursor-skills-share-*.zip
+
+# Local pipeline outputs (do not publish production tenant data)
+domain-knowledge/curated/by-root/
+domain-knowledge/extracted/by-root/
+domain-knowledge/materialized/by-root/
+!domain-knowledge/curated/README.md
+!domain-knowledge/extracted/README.md
+!domain-knowledge/materialized/README.md
+!domain-knowledge/materialized/_TEMPLATE.md

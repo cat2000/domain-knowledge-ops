@@ -1,0 +1,39 @@
+{
+  "version": 2,
+  "defaults": {
+    "deliverable_locale": "en",
+    "atlassian_site": "https://your-site.atlassian.net",
+    "default_team": "demo"
+  },
+  "teams": {
+    "demo": {
+      "root_id": "100001",
+      "display_name": "Demo Product Team",
+      "attribution_config": "domain-knowledge/jira/teams/demo.json",
+      "confluence_overview": "https://your-site.atlassian.net/wiki/spaces/DEMO/overview?homepageId=100001",
+      "aliases": ["default"],
+      "s2_profile": "default",
+      "deliver_by_proposition": {
+        "ordering": ["ordering", "ordering-domain-brief.md"],
+        "orders": ["orders", "orders-domain-brief.md"],
+        "identity": ["identity", "identity-domain-brief.md"]
+      },
+      "jira": {
+        "agile_team": "Demo Product Team",
+        "board_id": 1,
+        "board_name": "Demo Board",
+        "jql_base": "\"agile team\"[dropdown] = \"Demo Product Team\"",
+        "issuetypes": ["Epic", "Story", "Bug", "Task", "Spike"],
+        "order": "created ASC, key ASC",
+        "hierarchy_filter": "parent",
+        "batch_limit": 100,
+        "smoke_limit": 10,
+        "sprint_issue_cap": 2000,
+        "sprint_issue_order": "key ASC",
+        "sprint_filter_origin_board": false,
+        "time_window_months": 3,
+        "default_start_date": "2024-01-01"
+      }
+    }
+  }
+}
