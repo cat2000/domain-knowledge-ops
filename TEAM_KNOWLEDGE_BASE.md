@@ -6,7 +6,7 @@
 
 ## Authoritative roots (configure yours)
 
-Edit [`domain-knowledge/jira/team-roots.json`](domain-knowledge/jira/team-roots.json) (start from [`team-roots.example.json`](domain-knowledge/jira/team-roots.json)):
+Edit [`domain-knowledge/jira/team-roots.json`](domain-knowledge/jira/team-roots.json) (start from [`team-roots.example.json`](domain-knowledge/jira/team-roots.example.json)):
 
 - **Confluence overview URL** per team
 - **`root_id`** → `extracted|materialized|curated/by-root/<root_id>/`
@@ -29,7 +29,7 @@ Locale-specific spellings for checklist status live in [`domain-knowledge/langua
 
 ## Newcomer path (~30–60 min)
 
-1. **60s offline**: `@requirement-risk DEMO-1 team=demo` (no Atlassian)
+1. **60s offline**: `@requirement-risk DEMO-1 team=demo` — `DEMO-1` is a **shipped fake ticket** (not live Jira); see [`WALKTHROUGH.md`](WALKTHROUGH.md) Path A
 2. `@setup-domain-ops` — credentials, teams, **strategy §2**, derive profiles
 3. [`domain-knowledge/README.md`](domain-knowledge/README.md) — on-disk layout
 4. [`domain-knowledge/strategy.md`](domain-knowledge/strategy.md) — methodology (+ your filled §2)

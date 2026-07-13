@@ -6,10 +6,10 @@ Use this checklist for release polish and marketplace distribution.
 
 ## GitHub repository
 
-- [ ] Create public repo; push `main` with green CI
-- [ ] Replace every `OWNER` placeholder (README badges, INSTALL, CHANGELOG links, issue templates)
-- [ ] Topics: `cursor`, `agent-skills`, `confluence`, `jira`, `domain-driven-design`, `atlassian`
-- [ ] Tag `v0.1.0` and publish a GitHub Release from [`CHANGELOG.md`](../CHANGELOG.md)
+- [x] Create public repo; push `main` with green CI — https://github.com/cat2000/domain-knowledge-ops
+- [x] Replace `OWNER` placeholders with `cat2000`
+- [ ] Topics: `cursor`, `agent-skills`, `confluence`, `jira`, `domain-driven-design`, `atlassian` (set in About if not done)
+- [x] Tag `v0.1.0` pushed; [ ] Publish GitHub Release UI from that tag if not done yet
 - [ ] Enable Discussions (Q&A + Show and tell)
 
 ## `npx skills` / agentskills.io

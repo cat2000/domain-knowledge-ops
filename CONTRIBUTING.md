@@ -4,7 +4,7 @@ Thank you for helping improve agent skills, scripts, and docs for enterprise dom
 
 ## Maintainers
 
-- **@qmli** (placeholder — update before public launch)
+- **[@cat2000](https://github.com/cat2000)** — primary maintainer for this public repository
 
 For security reports, use [GitHub Security Advisories](SECURITY.md) instead of public issues.
 

@@ -8,10 +8,19 @@
 
 ## 60-second demo (no Atlassian)
 
+**What you are invoking**
+
+| Token | Meaning |
+|-------|---------|
+| `DEMO-1` | A **fake Jira issue key** shipped in this repo (not a live ticket). Story: buyer amends an open order while the quote is still valid. Body + brief live under [`domain-knowledge/fixtures/offline-demo/`](domain-knowledge/fixtures/offline-demo/). |
+| `team=demo` | The shipped sample team in `team-roots.json` (root `100001`). Tells the agent which offline curated tree to read. |
+
+Skills that see a `DEMO-*` key **skip Jira/network** and use that fixture instead.
+
 ```bash
 git clone https://github.com/cat2000/domain-knowledge-ops.git
 cd domain-knowledge-ops
-# Open the repo root in Cursor, then:
+# Open the **repo root** as the Cursor workspace (not a subfolder), then:
 ```
 
 ```text
@@ -19,7 +28,7 @@ cd domain-knowledge-ops
 @ticket-splitter DEMO-1 team=demo
 ```
 
-Uses the checked-in fixture under [`domain-knowledge/fixtures/offline-demo/`](domain-knowledge/fixtures/offline-demo/). Sample outputs: [`docs/demo/`](docs/demo/).
+Expected shape of output (for comparison): [`docs/demo/`](docs/demo/).
 
 **Next:** paths A–C → [`WALKTHROUGH.md`](WALKTHROUGH.md) · install → [`INSTALL.md`](INSTALL.md) · pack check: `python3 scripts/verify_skills_pack.py`
 
@@ -28,7 +37,7 @@ Uses the checked-in fixture under [`domain-knowledge/fixtures/offline-demo/`](do
 | Pack | Teaches agents… | Human gate |
 |------|-----------------|------------|
 | Superpowers / Spec Kit / general coding skills | **How to build** software (TDD, plans, implementation) | Varies by pack |
-| **Domain Knowledge Ops (this repo)** | **How to adjudicate domain truth** from Confluence + Jira, then stress-test stories | **confirm** on module cuts before Compose; **continue** after |
+| **Domain Knowledge Ops (this repo)** | **How to adjudicate domain truth** from Confluence + Jira, then stress-test stories | **confirm** on module cuts before Compose; **continue** after ([token glossary](TEAM_KNOWLEDGE_BASE.md#process-tokens-use-consistently)) |
 
 Use both: build with theirs; review stories against **S7 locale briefs** from ours.
 
@@ -111,6 +120,8 @@ After **S7** briefs exist under `domain-knowledge/curated/by-root/<root_id>/_del
 @requirement-risk PROJ-123
 @ticket-splitter PROJ-123
 ```
+
+Replace `PROJ-123` with your **real** Jira issue key (placeholder only — not a fixture).
 
 ## Configuration (not hard-coded tenants)
 

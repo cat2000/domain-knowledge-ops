@@ -10,20 +10,21 @@ Pipeline steps referenced here use **S1–S7** (Ingest → Recognize → Compose
 git clone https://github.com/cat2000/domain-knowledge-ops.git
 cd domain-knowledge-ops
 python3 scripts/verify_skills_pack.py   # offline layout check (CI runs the same)
-# Open this folder as the Cursor workspace root — skills load from .cursor/skills/
+# Open this folder as the Cursor **workspace root** (File → Open Folder on the repo root).
+# Skills load from `.cursor/skills/` only when the workspace root is this clone.
 ```
 
-Then try the offline demo (no Atlassian):
+Then try the offline demo (no Atlassian). **`DEMO-1`** is a **fake issue key** shipped under [`domain-knowledge/fixtures/offline-demo/`](domain-knowledge/fixtures/offline-demo/) (Acme Orders amend story); **`team=demo`** is the sample team. `DEMO-*` skips live Jira.
 
 ```text
 @requirement-risk DEMO-1 team=demo
 ```
 
-Walkthrough: [`WALKTHROUGH.md`](WALKTHROUGH.md).
+Walkthrough (explains tokens): [`WALKTHROUGH.md`](WALKTHROUGH.md).
 
 ## Via `npx skills` (multi-agent)
 
-Validate locally before the repo is public:
+Local path install (from a clone):
 
 ```bash
 npx skills add ./path/to/domain-knowledge-ops --list

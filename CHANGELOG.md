@@ -7,9 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
+### Fixed
 
-- (nothing yet)
+- Clarify offline demo tokens (`DEMO-1`, `DEMO-BILL-1`, `team=demo`) and `PROJ-123` placeholder in README / WALKTHROUGH / INSTALL
+- Fix `TEAM_KNOWLEDGE_BASE.md` link to `team-roots.example.json`; update maintainer to `@cat2000`
 
 ## [0.1.0] - 2026-07-13
 
