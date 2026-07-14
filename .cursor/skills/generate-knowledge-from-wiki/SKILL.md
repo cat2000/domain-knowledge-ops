@@ -30,11 +30,13 @@ Process terms (first mention): **confirm** = approve module cut lines; **source 
 
 1. **Strategy-first**: if `s2-domain-profiles.json` `checklist_themes` is empty, or `strategy.md` §2 is still mostly placeholders → **stop**, run `@setup-domain-ops`. Never silently invent industry modules.
 2. Default run is **prep only** (S1→S2) then **pause**; do not Compose until checklist rows are marked **confirm**.
-3. **Tagging acceptance before confirm**: after S2, run `python3 scripts/distill/tagging_acceptance.py --root-id <R>`, show the report, and **do not** ask humans to confirm every row. Zero-source rows stay **pending**. Industry cuts are axes; completeness = closure + report (+ Jira when board exists).
-4. **No translation in S1–S6**. **S6** = source-language brief (structure + adjudication, same language as S5). **S7** = convert that brief into `defaults.deliverable_locale` (**expression only**, no new semantics).
-5. **confirm** means module boundaries are accepted — **not** that briefs already exist, and **not** that every corpus rule is already written into S7.
-6. No in-repo HTTP LLM API writing `curated/`.
-7. S1 page errors block S2 by default (unless explicit `--allow-partial`).
+3. **Tagging acceptance before confirm**: after S2, run `python3 scripts/distill/tagging_acceptance.py --root-id <R>`, show the report, and **do not** ask humans to confirm every row. Zero-source rows stay **pending**. Industry cuts are axes; completeness = remount + closure + report (+ Jira when board exists).
+4. **Keep industry axes**: remount product-surface wiki into those axes ([`references/industry-axis-remount.md`](references/industry-axis-remount.md)); do not recreate Mall/Hui/Gateway modules by default.
+5. **No translation in S1–S6**. **S6** = source-language brief. **S7** = locale expression only.
+6. **confirm** ≠ briefs already exist, and ≠ every corpus rule already written into S7.
+7. **Zero-rule fake coverage banned**: after S7, run `tagging_acceptance.py --after-s7 --strict`; confirmed + sources + zero `### 规则` → revert or rewrite.
+8. No in-repo HTTP LLM API writing `curated/`.
+9. S1 page errors block S2 by default (unless explicit `--allow-partial`).
 
 Full Compose rules → [`references/iron-laws.md`](references/iron-laws.md) (load on demand). Long playbook (by step only): [`RUNBOOK.md`](./RUNBOOK.md) · zh: [`RUNBOOK.zh-CN.md`](./RUNBOOK.zh-CN.md).
 
@@ -47,7 +49,7 @@ Full Compose rules → [`references/iron-laws.md`](references/iron-laws.md) (loa
 # if board_id set and Jira attribution empty: @add-knowledge-from-jira team=<key> then re-tag
 ```
 
-Follow [`FIRST-RUN.md`](./FIRST-RUN.md): checklist → **tagging acceptance** → **confirm** → **continue** → S6 source brief → S7 locale brief.
+Follow [`FIRST-RUN.md`](./FIRST-RUN.md): checklist → **tagging acceptance** → **confirm** → **continue** → S6 → S7 → `--after-s7`.
 
 Offline risk/split without wiki: `@requirement-risk DEMO-1 team=demo` ([`WALKTHROUGH.md`](../../../WALKTHROUGH.md) Path A).
 
@@ -58,8 +60,8 @@ Offline risk/split without wiki: `@requirement-risk DEMO-1 team=demo` ([`WALKTHR
 | 0 | Ensure profiles non-empty; else `@setup-domain-ops` |
 | 1 | `python3 scripts/sync_domain_knowledge_from_confluence.py --url "…"` (S1) |
 | 2 | Read `PIPELINE_HANDOFF.json` → root `<R>` |
-| 3 | Optional propose → RUNBOOK **§ S2** only → `s2_recognize.py --root-id <R>` → `tagging_acceptance.py --root-id <R>` → **pause** (Jira if board + empty attribution) |
-| 4 | On **continue** (default): Compose **S3→S5**; run `tagging_acceptance.py --root-id <R> --after-s3`; then **S6 → S7**; open RUNBOOK **§ for that step** only. Use `@distill-domain-knowledge` only for advanced no-resync / single-step resume |
+| 3 | Optional propose → RUNBOOK **§ S2** → `s2_recognize.py` → `tagging_acceptance.py` → **pause** (Jira if board + empty attribution); remount per industry-axis-remount |
+| 4 | On **continue**: Compose **S3→S5→S6→S7** with remount write-through; `--after-s3` then `--after-s7 --strict` |
 | 5 | After S7: `python3 scripts/run_distill_gate.py --root-id <R>` |
 
 Do **not** preload RUNBOOK or iron-laws end-to-end.
@@ -84,10 +86,12 @@ Risk/split **read the S7 locale brief** (reader brief) by default. If source lan
 ## Forbidden
 
 - Compose S3–S7 without **confirm**
-- Confirming zero-source modules or claiming corpus coverage from the industry cut alone
+- Confirming zero-source modules, or confirmed + sources + **zero** S7 rules (fake coverage)
+- Claiming corpus coverage from the industry cut alone
+- Recreating Mall/Hui/Gateway/Messaging modules by default instead of remounting into industry axes
 - Translating in S2–S6; skipping S6 and jumping straight to a locale-only draft
 - Claiming “briefs done” from work drafts or S6 alone when S7 is required
-- Shipping low-evidence S7 without an **Evidence insufficiency** banner (non-SSOT for risk)
+- Shipping low-evidence S7 without an **Evidence insufficiency** banner when intentionally thin (non-SSOT for risk)
 ## Further reading
 
 | Doc | When |

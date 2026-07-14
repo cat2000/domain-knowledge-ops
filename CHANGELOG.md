@@ -23,8 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`domain_profiles`** — v3 library `root_id` → mounting team
 - **S2 checklist Note** — status + source-count aware; zero-source rows warn against confirm
 - **requirement-risk validator** — accept English `Scope` / `Counts: MUST FIX …` variants
-- **`tagging_acceptance.py`** — prep report (closure / Jira half / per-module confirm advice) + optional `--after-s3` exhaustiveness; Path C / wiki skills require it before confirm
-- **Path C** — default Jira half when board exists; done = OK confirms + pending empty modules (not “all rows confirmed”)
+- **`tagging_acceptance.py`** — prep report (closure / Jira half / remount hints / per-module confirm advice) + `--after-s3` exhaustiveness + `--after-s7 --strict` write-through gate (zero-rule fake coverage = FAIL); Path C / wiki skills require it before confirm and after S7
+- **Industry-axis remount** — [`industry-axis-remount.md`](.cursor/skills/generate-knowledge-from-wiki/references/industry-axis-remount.md); keep adjudication axes; remount Mall/Hui/checkout/contest/identity surfaces into them (iron-laws 4d/4e)
+- **Path C** — default Jira half when board exists; done = OK confirms + pending empty modules (not “all rows confirmed”); ban zero-rule confirmed S7
 
 ### Fixed
 

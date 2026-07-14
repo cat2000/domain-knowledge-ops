@@ -13,7 +13,9 @@
 4. **`确认`** = 认可领域块划分，授权 Compose；**≠** 已完成定稿（需 S6 + S7）
 4a. **零 tagged 来源不得确认**：closure 中该 slug 无 Confluence/Jira 页（S2 备注 / `tagging_acceptance.py` / `pages_with_props=0`）时保持 **待确认**。禁止为「勾完清单」而确认。
 4b. **确认前打标验收**：S2 后运行 `tagging_acceptance.py --root-id <R>` 并展示报告；禁止引导「全部确认」。行业切块只是题面；完整性靠双向打标 + 报告。已配置 board 但 Jira attribution=0 = 打标不完整，应先补 Jira。
-4c. **成稿穷尽度**：S3 后跑 `tagging_acceptance.py --after-s3`。规则数远小于 `pages_with_props` → 写入待确认或不得声称「已齐」。低证据 S7 必须带 **证据不足** 横幅（对 risk 非 SSOT）。
+4c. **成稿穷尽度**：S3 后跑 `--after-s3`；S7 后跑 `--after-s7`（可选 `--strict`）。规则数远小于 `pages_with_props` → 重挂载或待确认，不得声称「已齐」。低证据 S7 必须带 **证据不足** 横幅（对 risk 非 SSOT）。
+4d. **禁止零规则假覆盖**：已确认且有来源，但 S7 无任何 `### 规则` → 改回 **待确认** 或重写；禁止空核心规则当交付。
+4e. **保持业态裁决轴，产品面重挂载**：默认不重建 Mall/Hui/Gateway/Messaging 模块。将密的 App/渠道页挂入现有业态轴，见 [`industry-axis-remount.md`](./industry-axis-remount.md)。仅当无轴可装且人确认时才提议新 slug。
 5. S1 `facet-*` = 机器粗分，**≠** checklist 确认 slug（命题级认域在 **S2**）
 6. 正本在 Confluence；勿长期手改 `materialized/` 当权威
 7. **S1 完整性铁律**：抽取报告有 page error 时默认不得进入 S2；只有显式 `--allow-partial` 才可写 partial handoff，且必须把缺页风险带入后续判断

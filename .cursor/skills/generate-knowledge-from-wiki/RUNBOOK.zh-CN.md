@@ -184,6 +184,10 @@ python3 scripts/distill/tagging_acceptance.py --root-id <R>
 
 **低证据**：仅在有意时确认；S7 顶部必须有 **证据不足** 横幅，缺口写入待确认；risk 在 `EVIDENCE_COVERAGE` 中按非 SSOT 处理。
 
+**零规则假覆盖禁止**：已确认且有来源，但 S7 无任何 `### 规则` → 改回 **待确认** 或重写。
+
+**保持业态裁决轴**：产品面密页重挂载入现有轴（见 `industry-axis-remount.md`）；默认不重建 Mall/惠/Gateway/Messaging 模块。
+
 重扫时 **增量合并**；**保留**人手 **`确认`**。S2 按状态 + 来源数刷新 **备注**（确认后清除过时的「等待人工确认」）。
 
 ---
@@ -227,6 +231,16 @@ S3.5（新增，脚本化命题中间层）：
   - `proposition_quality` 对 `doc_intent/candidate_type` 做硬校验（字段合法性、一致性、缺失）
   - 意图分流比例门禁只在“标题强匹配 + 样本量足够”时触发硬失败（如 release 页面契约泄漏过高）
   - 禁止直接把启发式 `doc_intent` 误差放大为全链路失败
+
+**重挂载（保持业态裁决轴）**：归集时将 Mall/惠/结账/竞赛/身份等产品面页挂入已确认业态 slug —— 见 [`references/industry-axis-remount.md`](./references/industry-axis-remount.md)。默认不重建这些为模块。
+
+**S3 后（起草 S6/S7 前必做）**：
+
+```bash
+python3 scripts/distill/tagging_acceptance.py --root-id <R> --after-s3
+```
+
+对照 closure / `pages_with_props` /（随后）S7 规则数。写尽不足 → 重挂载残留证据或待确认；不得声称「已齐」。`pages_with_props=0` → 不得交付已确认 S7。
 
 S3.6（最小派生审计视图）：
 
@@ -410,7 +424,13 @@ S6 生成原则（主链路）：
 - S6 可优化可读性与术语一致性，但不得新增/删除业务判定语义。
 - 语义修订必须回到 S4/S5 完成，S6 只承接已确认语义。
 
-**成稿完成（单主题）**：**S6 定稿.md** 存在。**全库门禁**：`domain_check.py distill`（**S6 后**）。
+**成稿完成（单主题）**：S7 目标语言定稿存在，且无证据不足横幅（或明确按非 SSOT 承认）；并跑通：
+
+```bash
+python3 scripts/distill/tagging_acceptance.py --root-id <R> --after-s7 --strict
+```
+
+**全库门禁**：`domain_check.py distill`（**S7 后**）。
 
 ---
 

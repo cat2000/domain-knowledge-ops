@@ -29,5 +29,7 @@ Playbook: [`generate-knowledge-from-wiki/RUNBOOK.md`](../generate-knowledge-from
 
 1. Open **RUNBOOK** and `domain-knowledge/distill-authoring-contract.md`; run the requested range (S2: `python3 scripts/distill/s2_recognize.py --root-id <R>`).
 2. **S3 / S4 / S5 / S6**: do not translate. **S6** = source brief (`*-source-brief.md`). **S7** = locale / reader brief (`*-domain-brief.md` for en; zh-CN filename from `deliverable-locale-tokens.json`).
-3. **S2 contract**: require `S2_DECISION_LEDGER.json` + `S2_REVIEW_DECISIONS.json`; human entry is `DOMAIN_MODULE_CHECKLIST.md`.
-4. `domain_check distill`: after **S2** (coverage); after **S7** (full).
+3. **Keep industry axes**: remount product-surface evidence per [`industry-axis-remount.md`](../generate-knowledge-from-wiki/references/industry-axis-remount.md); do not recreate Mall/Hui/Gateway modules by default.
+4. **S2 contract**: require `S2_DECISION_LEDGER.json` + `S2_REVIEW_DECISIONS.json`; human entry is `DOMAIN_MODULE_CHECKLIST.md`. After S2: `tagging_acceptance.py --root-id <R>` before confirm.
+5. After S3: `tagging_acceptance.py --root-id <R> --after-s3`. After S7: `--after-s7 --strict` (zero-rule fake coverage = FAIL → revert confirm).
+6. `domain_check distill`: after **S2** (coverage); after **S7** (full).

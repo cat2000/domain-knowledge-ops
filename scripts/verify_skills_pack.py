@@ -113,6 +113,7 @@ def verify() -> int:
         "domain-knowledge/fixtures/saas-billing/jira/DEMO-BILL-1.md",
         "domain-knowledge/fixtures/saas-billing/curated/by-root/100001/_deliver/billing/billing-domain-brief.md",
         ".cursor/skills/generate-knowledge-from-wiki/FIRST-RUN.md",
+        ".cursor/skills/generate-knowledge-from-wiki/references/industry-axis-remount.md",
     ):
         path = REPO_ROOT / rel
         if path.is_file():
