@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`setup-domain-ops`** — slim dialogue; **writes v3** `team-roots.json` (`libraries` + team mounts)
 - **Path C / TEAM_KNOWLEDGE_BASE** — single-library v3 onboarding; shipped `team-roots.json` + `team-roots.example.json` are v3
 - **`teams/registry.py`** / **`jira_team_config`** — use normalized team-roots (v3-aware)
+- **Locale S7 path resolve** — `deliverable_locale.resolve_locale_brief_path` + `resolve_deliver_path` find zh-CN `*-领域知识定稿.md` even when map still lists `*-domain-brief.md`
+- **`domain_profiles`** — v3 library `root_id` → mounting team
+- **S2 checklist Note** — status + source-count aware; zero-source rows warn against confirm
+- **requirement-risk validator** — accept English `Scope` / `Counts: MUST FIX …` variants
 
 ### Fixed
 

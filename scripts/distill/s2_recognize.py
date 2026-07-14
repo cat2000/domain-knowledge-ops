@@ -130,6 +130,44 @@ def _not_archived_status() -> str:
     return token("checklist.status_not_archived", default_locale())
 
 
+def _is_confirmed_status(status: str) -> bool:
+    from runtime.deliverable_locale import all_locale_values
+
+    value = str(status or "").strip()
+    return bool(value) and value in set(all_locale_values("checklist.status_confirmed"))
+
+
+def _source_count_for_slug(
+    slug: str,
+    machine_rows: list[DecisionEntry],
+    review_map: dict[str, ReviewDecision],
+) -> int:
+    n = 0
+    prefix = f"_deliver/{slug}/"
+    for row in machine_rows:
+        target = _resolve_target(row, review_map.get(row.materialized_file))
+        if target.startswith(prefix):
+            n += 1
+    return n
+
+
+def _module_checklist_note(status: str, source_count: int) -> str:
+    """Status-aware Note; warn when zero tagged sources (do not recommend confirm)."""
+    if source_count <= 0:
+        if _is_confirmed_status(status):
+            return (
+                "WARNING: confirmed but zero tagged sources — prefer Status pending; "
+                "Compose yields a thin placeholder only"
+            )
+        return (
+            "No tagged sources in closure — keep Status pending; "
+            "do not confirm until Confluence/Jira evidence exists"
+        )
+    if _is_confirmed_status(status):
+        return "Human confirmed — Compose authorized"
+    return "S2 decision ledger (awaiting human confirm)"
+
+
 def _read(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
@@ -580,6 +618,7 @@ def _build_checklist(
     for slug, cn, axis in SLUGS:
         status = statuses.get(slug, _pending_status())
         scan_dirs = _render_scan_dirs(scan_dirs_by_slug.get(slug), slug)
+        source_count = _source_count_for_slug(slug, machine_rows, review_map)
         lines.extend(
             render_module_block(
                 theme=cn,
@@ -588,12 +627,13 @@ def _build_checklist(
                 scan_dirs=scan_dirs,
                 main_entry=_target_work_draft(slug),
                 status=status,
-                note="S2 decision ledger (awaiting human confirm)",
+                note=_module_checklist_note(status, source_count),
             )
         )
     for slug in sorted(extra_slugs):
         status = statuses.get(slug, _pending_status())
         scan_dirs = _render_scan_dirs(scan_dirs_by_slug.get(slug), slug)
+        source_count = _source_count_for_slug(slug, machine_rows, review_map)
         lines.extend(
             render_module_block(
                 theme=f"New business module ({slug})",
@@ -602,7 +642,7 @@ def _build_checklist(
                 scan_dirs=scan_dirs,
                 main_entry=_target_work_draft(slug),
                 status=status,
-                note="Source: S2_REVIEW_DECISIONS",
+                note=_module_checklist_note(status, source_count),
             )
         )
     lines.extend(

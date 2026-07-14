@@ -28,12 +28,36 @@ def load_domain_profiles() -> dict:
     return raw
 
 
-@lru_cache(maxsize=1)
-def load_team_roots() -> dict:
+def _load_normalized_team_roots_doc() -> dict:
     if not TEAM_ROOTS_PATH.is_file():
         return {}
-    raw = json.loads(TEAM_ROOTS_PATH.read_text(encoding="utf-8", errors="replace"))
-    return raw.get("teams") or {}
+    try:
+        from teams.team_roots_normalize import load_normalized_team_roots
+
+        doc = load_normalized_team_roots(TEAM_ROOTS_PATH)
+        return doc if isinstance(doc, dict) else {}
+    except (ImportError, OSError, ValueError, json.JSONDecodeError, TypeError, KeyError):
+        raw = json.loads(TEAM_ROOTS_PATH.read_text(encoding="utf-8", errors="replace"))
+        return raw if isinstance(raw, dict) else {}
+
+
+@lru_cache(maxsize=1)
+def load_team_roots() -> dict:
+    """Return teams with primary-library fields flattened (v3-compatible)."""
+    return dict(_load_normalized_team_roots_doc().get("teams") or {})
+
+
+def _library_root_ids() -> dict[str, str]:
+    """library_key → root_id from team-roots (v3 libraries{} or flattened)."""
+    doc = _load_normalized_team_roots_doc()
+    out: dict[str, str] = {}
+    for key, rec in (doc.get("libraries") or {}).items():
+        if not isinstance(rec, dict):
+            continue
+        rid = str(rec.get("root_id") or rec.get("library_id") or "").strip()
+        if rid:
+            out[str(key)] = rid
+    return out
 
 
 def team_key_for_scope(scope: str | None) -> str | None:
@@ -47,6 +71,16 @@ def team_key_for_scope(scope: str | None) -> str | None:
     for key, rec in load_team_roots().items():
         if str(rec.get("root_id") or "").strip() == value:
             return str(key)
+    # Match library root_id → first team that mounts it (v3)
+    for lib_key, rid in _library_root_ids().items():
+        if rid != value:
+            continue
+        for team_key, rec in load_team_roots().items():
+            libs = rec.get("libraries") if isinstance(rec, dict) else None
+            if isinstance(libs, list) and lib_key in [str(x) for x in libs]:
+                return str(team_key)
+            if team_key == lib_key:
+                return str(team_key)
     return None
 
 
@@ -60,6 +94,9 @@ def _team_record_for_scope(scope: str | None) -> tuple[str | None, dict | None]:
     for key, rec in teams.items():
         if str(rec.get("root_id") or "").strip() == value:
             return str(key), rec
+    team_key = team_key_for_scope(value)
+    if team_key and team_key in teams:
+        return team_key, teams[team_key]
     return None, None
 
 
@@ -189,4 +226,3 @@ __all__ = [
     "require_checklist_themes",
     "team_key_for_scope",
 ]
-

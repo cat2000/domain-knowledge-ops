@@ -75,7 +75,7 @@ Jira key?
 ├─ DEMO-* / offline → fixtures/offline-demo; skip network
 ├─ real key → attachments via MCP or fetch script
 ├─ Resolve team/root
-├─ primary slug → S7 locale brief (`*-domain-brief.md`); else S6 source-brief / work draft (noted)
+├─ primary slug → S7 locale brief (`*-domain-brief.md` / `*-领域知识定稿.md` per locale); else S6 source-brief / work draft (noted)
 ├─ Jira says “dev only, test elsewhere”? → do not invent test rows; note in narrative
 ├─ brief mode? → Scope + split overview + correction note (still gated)
 ├─ Draft → .jira_attachments/<KEY>/split_draft.md when KEY present

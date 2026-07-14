@@ -213,7 +213,13 @@ def default_proposition_slugs(team_or_root: str) -> list[str]:
 def resolve_deliver_path(
     root: Path, team_or_root: str, proposition_or_theme: str
 ) -> tuple[Path | None, str]:
-    """Return (deliver_md path, jira by-theme directory name)."""
+    """Return (deliver_md path, jira by-theme directory name).
+
+    Filename resolution is locale-aware: prefers the map entry, then the active
+    ``deliverable_locale`` S7 suffix, then any known locale brief on disk.
+    """
+    from runtime.deliverable_locale import resolve_locale_brief_path
+
     team_key, _team_rec = resolve_team(team_or_root)
     deliver_map = deliver_by_proposition(team_key)
 
@@ -226,4 +232,9 @@ def resolve_deliver_path(
         return None, proposition_or_theme
 
     d, fname = pair
-    return root / "_deliver" / d / fname, jira_theme_for_proposition(team_key, prop)
+    deliver_dir = root / "_deliver" / d
+    resolved = resolve_locale_brief_path(deliver_dir, prop, fname)
+    if resolved is not None:
+        return resolved, jira_theme_for_proposition(team_key, prop)
+    # Map entry path even if missing (callers may want to create it)
+    return deliver_dir / fname, jira_theme_for_proposition(team_key, prop)

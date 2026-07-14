@@ -145,6 +145,46 @@ class TestDomainProfiles(unittest.TestCase):
             # Shipped shell: default profile is empty themes (strategy-first)
             self.assertEqual(domain_profiles.load_checklist_themes("999999"), [])
 
+    def test_v3_library_root_id_resolves_to_mounting_team(self) -> None:
+        from runtime import domain_profiles
+
+        with tempfile.TemporaryDirectory() as tmp:
+            roots = Path(tmp) / "team-roots.json"
+            roots.write_text(
+                json.dumps(
+                    {
+                        "version": 3,
+                        "defaults": {"deliverable_locale": "en", "default_team": "cma"},
+                        "libraries": {
+                            "cma": {
+                                "root_id": "48693262",
+                                "library_id": "48693262",
+                                "s2_profile": "default",
+                            }
+                        },
+                        "teams": {
+                            "cma": {
+                                "libraries": ["cma"],
+                                "display_name": "CMA",
+                                "s2_profile": "default",
+                            }
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with patch.object(domain_profiles, "TEAM_ROOTS_PATH", roots):
+                domain_profiles.load_team_roots.cache_clear()
+                try:
+                    self.assertEqual(
+                        domain_profiles.team_key_for_scope("48693262"), "cma"
+                    )
+                    self.assertEqual(
+                        domain_profiles.load_checklist_themes("48693262"), []
+                    )
+                finally:
+                    domain_profiles.load_team_roots.cache_clear()
+
 
 if __name__ == "__main__":
     unittest.main()

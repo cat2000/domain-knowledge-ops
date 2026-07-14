@@ -11,6 +11,7 @@
 2. **成稿 Compose**（**`确认`** 后 **`继续`**）：**S3 → S4 → S5 → S6 → S7**（仅 `确认` 行）
 3. **S3 只做保真分轨、索引与可验证传递，S4 建领域模型，S5 基于模型生成工作稿且语言与源一致，S6 产出原语言裁决定稿（不翻译），S7 仅做目标语言（`deliverable_locale`）表达转换**（不得引入新语义）
 4. **`确认`** = 认可领域块划分，授权 Compose；**≠** 已完成定稿（需 S6 + S7）
+4a. **零 tagged 来源不得确认**：closure 中该 slug 无 Confluence/Jira 页（S2 备注告警 / `pages_with_props=0`）时保持 **待确认**。禁止为「勾完清单」而确认；空确认只会产出不可对外承诺的薄占位。
 5. S1 `facet-*` = 机器粗分，**≠** checklist 确认 slug（命题级认域在 **S2**）
 6. 正本在 Confluence；勿长期手改 `materialized/` 当权威
 7. **S1 完整性铁律**：抽取报告有 page error 时默认不得进入 S2；只有显式 `--allow-partial` 才可写 partial handoff，且必须把缺页风险带入后续判断

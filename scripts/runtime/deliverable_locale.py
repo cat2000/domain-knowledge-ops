@@ -96,6 +96,54 @@ def locale_brief_globs() -> list[str]:
     return all_locale_values("filenames.locale_brief_glob")
 
 
+def locale_brief_filename(slug: str, locale: str | None = None) -> str:
+    """Return `<slug><locale_brief_suffix>` for the active (or given) locale."""
+    s = str(slug).strip()
+    suffix = token("filenames.locale_brief_suffix", locale) or "-domain-brief.md"
+    if not suffix.startswith(("-", ".")):
+        suffix = f"-{suffix}"
+    return f"{s}{suffix}"
+
+
+def resolve_locale_brief_path(
+    deliver_dir: Path,
+    slug: str,
+    preferred_name: str | None = None,
+    *,
+    locale: str | None = None,
+) -> Path | None:
+    """Find an on-disk S7 locale brief under ``deliver_dir``.
+
+    Order: preferred map name → default-locale filename → any locale suffix → globs.
+    Handles team-roots maps that still list ``*-domain-brief.md`` while locale is zh-CN.
+    """
+    if not deliver_dir.is_dir():
+        return None
+    candidates: list[Path] = []
+    seen: set[str] = set()
+
+    def _add(name: str | None) -> None:
+        n = str(name or "").strip()
+        if not n or n in seen:
+            return
+        seen.add(n)
+        candidates.append(deliver_dir / n)
+
+    _add(preferred_name)
+    _add(locale_brief_filename(slug, locale))
+    for suffix in all_locale_values("filenames.locale_brief_suffix"):
+        sfx = suffix if suffix.startswith(("-", ".")) else f"-{suffix}"
+        _add(f"{str(slug).strip()}{sfx}")
+    for path in candidates:
+        if path.is_file():
+            return path
+    for pattern in locale_brief_globs():
+        hits = sorted(deliver_dir.glob(pattern))
+        if hits:
+            return hits[0]
+    return None
+
+
 def gap_scan_filename(locale: str | None = None) -> str:
     """Return the Classify gap-scan index filename for a locale (default: default_locale()).
 

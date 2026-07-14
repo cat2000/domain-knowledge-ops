@@ -58,7 +58,11 @@ Write **`version: 3`** JSON. Do **not** write the old v2 shape (root/overview on
 10. For each space, collect **overview URL** (or homepage id). One space → one library key (stable slug, e.g. product or space_key lowercased).
 11. Write under `libraries.<library_key>`:
     - `display_name`, `root_id` / `library_id` (homepage id), `confluence_overview`, optional `space_key`, `s2_profile`
-    - `deliver_by_proposition` from confirmed modules: `"<slug>": ["<slug>", "<slug>-domain-brief.md"]`
+    - `deliver_by_proposition` from confirmed modules, using the **active** `defaults.deliverable_locale` S7 filename:
+      - `en` → `"<slug>": ["<slug>", "<slug>-domain-brief.md"]`
+      - `zh-CN` → `"<slug>": ["<slug>", "<slug>-领域知识定稿.md"]`
+      - (suffix from `domain-knowledge/language/deliverable-locale-tokens.json` → `filenames.locale_brief_suffix`)
+      Do **not** hard-code English `*-domain-brief.md` when locale is `zh-CN`.
 12. Set `defaults.default_library` to the primary (usually the only) library key.
 13. Remind next step per space:
     ```text

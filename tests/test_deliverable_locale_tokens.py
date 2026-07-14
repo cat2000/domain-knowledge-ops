@@ -79,6 +79,27 @@ class TestDeliverableLocaleTokenMap(unittest.TestCase):
         self.assertIn("*domain-brief.md", globs)
         self.assertIn("*领域知识定稿.md", globs)
 
+    def test_locale_brief_filename_en_and_zh(self) -> None:
+        m = self._loader()
+        self.assertEqual(m.locale_brief_filename("orders", "en"), "orders-domain-brief.md")
+        self.assertEqual(
+            m.locale_brief_filename("orders", "zh-CN"), "orders-领域知识定稿.md"
+        )
+
+    def test_resolve_locale_brief_path_prefers_on_disk_zh_over_en_map(self) -> None:
+        import tempfile
+        from pathlib import Path
+
+        m = self._loader()
+        with tempfile.TemporaryDirectory() as tmp:
+            d = Path(tmp)
+            zh = d / "orders-领域知识定稿.md"
+            zh.write_text("# ok\n", encoding="utf-8")
+            found = m.resolve_locale_brief_path(
+                d, "orders", preferred_name="orders-domain-brief.md", locale="zh-CN"
+            )
+            self.assertEqual(found, zh)
+
     def test_default_locale_reads_team_roots(self) -> None:
         m = self._loader()
         locale = m.default_locale()

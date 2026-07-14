@@ -75,7 +75,7 @@ class _EnLocale:
         r"^####\s+(R-\d+)\s*·\s*(MUST FIX|SHOULD CLARIFY|OPTIONAL)\s*·", re.MULTILINE
     )
     counts_re: re.Pattern[str] = re.compile(
-        r"Counts\s*:\s*MUST\s*(\d+)\s*[·/／]\s*SHOULD\s*(\d+)\s*[·/／]\s*OPTIONAL\s*(\d+)",
+        r"(?:\*\*)?Counts(?:\*\*)?\s*:\s*MUST\s*(?:FIX\s+)?(\d+)\s*[·/／]\s*SHOULD\s*(?:CLARIFY\s+)?(\d+)\s*[·/／]\s*OPTIONAL\s*(\d+)",
         re.IGNORECASE,
     )
     top_starts: tuple[str, ...] = ("MUST-FIX Top", "MUST FIX Top", "必须修复 Top")
@@ -270,7 +270,7 @@ def check_presentation_basics(
     del table  # reserved for i18n
     errors: list[str] = []
     if not _SCOPE_RE.search(text):
-        errors.append("缺少「范围」行（呈现契约 P1）")
+        errors.append("Missing Scope / 范围 line (presentation P1)")
     if brief and not _EVIDENCE_COVERAGE_RE.search(text):
         errors.append("brief 模式缺少 EVIDENCE_COVERAGE / 证据覆盖 小节")
     if re.search(r"跟票", text):
@@ -371,7 +371,7 @@ def _S(lang: str) -> dict[str, str]:
 TOP_RID_RE = re.compile(r"`(R-\d+)`|\*\*(R-\d+)\*\*|(?<![A-Za-z0-9-])(R-\d+)(?![A-Za-z0-9-])")
 
 _SCOPE_RE = re.compile(
-    r"^(?:\*\*)?范围(?:\*\*)?\s*[:：]|^-\s*范围\s*[:：]",
+    r"^(?:\*\*)?(?:范围|Scope)(?:\*\*)?\s*[:：]|^-\s*(?:范围|Scope)\s*[:：]",
     re.MULTILINE,
 )
 _EVIDENCE_COVERAGE_RE = re.compile(

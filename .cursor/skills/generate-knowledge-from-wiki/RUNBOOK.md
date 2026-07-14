@@ -182,11 +182,13 @@ Confirmation-page rules: [`domain-module-checklist.mdc`](../../rules/domain-modu
 
 | Action | Description |
 |------|------|
-| Human edits the confirmation page | Set module **Status** → **`confirmed`** (field-block layout) |
+| Human edits the confirmation page | Set module **Status** → **`confirmed`** (field-block layout) **only when** the row has tagged Confluence/Jira sources in closure (see Note). Zero-source rows stay **`pending`**. |
 | **`continue`** | Runs **S3→S7** on **confirmed rows** (can be scoped to a slug) |
 | No **confirm** yet | **Do not** run S3 / S4 / S5 / S6 |
 
-On rescan, **merge incrementally**; **preserve** manually marked **confirm**.
+**Empty evidence**: if Note says no tagged sources (or `pages_with_props=0` after S3), **do not** mark **confirm**. Leave pending / thin placeholder until sources exist. Confirming an empty module only authorizes a non-committal S7 stub — that is a process failure, not a shippable brief.
+
+On rescan, **merge incrementally**; **preserve** manually marked **confirm**. S2 refreshes **Note** from Status + source count (clears stale “awaiting human confirm” once Status is confirmed).
 
 ---
 
