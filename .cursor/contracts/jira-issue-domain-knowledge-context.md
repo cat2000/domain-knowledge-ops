@@ -74,7 +74,7 @@ Locale filenames follow `domain-knowledge/language/deliverable-locale-tokens.jso
 | Same theme | theme cluster notes if present | Cluster context (do not copy ticket KPIs) |
 | KEY mentioned in theme indexes | search `<KEY>` under `by-theme/<slug>/` | Whether already summarized |
 
-If no **S7 locale brief**: may read `*-work-draft.md` or `_aggregate/<slug>/` (note “not locale brief” in the report); do not treat Recognize aggregates as business commitments.
+If no **S7 locale brief**: may read `*-source-brief.md` (**S6**), else `*-work-draft.md`, else `_aggregate/<slug>/` (note “not locale brief” / “not S7” in the report); do not treat Recognize aggregates as business commitments.
 
 ### 3.3 Cross-cutting
 

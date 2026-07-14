@@ -21,7 +21,9 @@ Ships with one demo team (`demo`, root `100001`, placeholder Atlassian URLs). Do
 |-------|---------|
 | **confirm** | Human accepts a module-cut row on `DOMAIN_MODULE_CHECKLIST.md` (authorizes Compose for that slug) |
 | **continue** | Resume **S3–S7** Compose for **confirmed** rows only |
-| **brief** | Short output mode on `@requirement-risk` / `@ticket-splitter` (summary + coverage, or split overview only) |
+| **brief** | Short output mode on `@requirement-risk` / `@ticket-splitter` only (summary + coverage, or split overview) — **not** a synonym for S7 |
+| **locale brief** / **reader brief** | **S7** `*-domain-brief.md` (deliverable-locale reader doc) |
+| **source brief** | **S6** `*-source-brief.md` (source-language adjudication; intermediate) |
 
 Locale-specific spellings for checklist status live in [`domain-knowledge/language/deliverable-locale-tokens.json`](domain-knowledge/language/deliverable-locale-tokens.json). English docs use the English tokens above.
 
@@ -42,10 +44,10 @@ Walkthrough paths: [`WALKTHROUGH.md`](WALKTHROUGH.md).
 ## Story review order
 
 1. [`domain-knowledge/language/glossary.md`](domain-knowledge/language/glossary.md)
-2. Relevant **S7** brief under `_deliver/<slug>/*-domain-brief.md`
+2. Relevant **S7 locale brief** (reader brief) under `_deliver/<slug>/*-domain-brief.md`
 3. Only then drill into `materialized/` / `extracted/` for evidence
 
-`@requirement-risk` and `@ticket-splitter` read **S7** locale briefs by default. Optional **S6** `*-source-brief.md` when locale conversion is not yet done.
+`@requirement-risk` and `@ticket-splitter` read **S7** locale briefs by default. If S7 is missing: optional **S6** `*-source-brief.md`, else work draft (note “not S7” in the report).
 
 ---
 

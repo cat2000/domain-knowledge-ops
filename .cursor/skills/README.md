@@ -71,7 +71,7 @@ Or: `@requirement-risk team=<your-team-key> PROJ-123` · optional `stage=pre_spr
 |-------|---------|-----------------|
 | [`setup-domain-ops`](setup-domain-ops/SKILL.md) | `@setup-domain-ops` | No (config only) |
 | [`generate-knowledge-from-wiki`](generate-knowledge-from-wiki/SKILL.md) | `@…` + Confluence URL | Yes |
-| [`distill-domain-knowledge`](distill-domain-knowledge/SKILL.md) | `@…` + root-id | Yes |
+| [`distill-domain-knowledge`](distill-domain-knowledge/SKILL.md) | `@…` + root-id (advanced; default resume = **continue**) | Yes |
 | [`add-knowledge-from-jira`](add-knowledge-from-jira/SKILL.md) | `@…` + team/mode | Yes (supplement) |
 | [`requirement-risk`](requirement-risk/SKILL.md) | explicit `@` + KEY/text | No (read-only) |
 | [`ticket-splitter`](ticket-splitter/SKILL.md) | explicit `@` + KEY | No (read-only) |

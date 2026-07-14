@@ -84,9 +84,9 @@ Jira key?
 │       └─ yes → use MCP
 ├─ Resolve team/root (user team= > attribution > Agile Team > keywords)
 ├─ Business brief root vs Agile Team root aligned?
-│       ├─ yes → read _deliver/<slug>/* brief (S6)
+│       ├─ yes → read _deliver/<slug>/*-domain-brief.md (S7 locale brief)
 │       └─ no → dual-read; document in EVIDENCE_COVERAGE
-├─ primary slug known? → S6 brief or work draft (note if not S6)
+├─ primary slug known? → S7 locale brief; else S6 source-brief / work draft (note “not S7”)
 ├─ focus=security|scope|risk → deepen that axis on full baseline
 ├─ brief mode? → summary + EVIDENCE_COVERAGE only (still gated)
 ├─ Draft (requirement_risk + presentation)
@@ -124,7 +124,7 @@ Jira key?
 
 - [`references/presentation.md`](references/presentation.md) · P10: [`../_shared/presentation-p10.md`](../_shared/presentation-p10.md)
 - [`../../contracts/jira-issue-domain-knowledge-context.md`](../../contracts/jira-issue-domain-knowledge-context.md)
-- Read S6 briefs as **evidence** only; do not write `curated/`.
+- Prefer **S7** `*-domain-brief.md` as **evidence** only (fallback: **S6** `*-source-brief.md`, else work draft — note in `EVIDENCE_COVERAGE`); do not write `curated/`.
 
 ## Agent checklist
 

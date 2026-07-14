@@ -49,10 +49,10 @@ Operational steps **S1–S7** map to narrative stages **Ingest → Recognize →
 |-------|---------|----------------|---------------|
 | [`setup-domain-ops`](.cursor/skills/setup-domain-ops/SKILL.md) | `@setup-domain-ops` | Config (strategy §2, teams, profiles) | No |
 | [`generate-knowledge-from-wiki`](.cursor/skills/generate-knowledge-from-wiki/SKILL.md) | `@generate-knowledge-from-wiki` + Confluence URL | **S1** Ingest → **S2** Recognize → **S3–S7** Compose (after **confirm**) | Yes |
-| [`distill-domain-knowledge`](.cursor/skills/distill-domain-knowledge/SKILL.md) | `@distill-domain-knowledge` | **S2–S7** when `materialized/` already exists | Yes |
+| [`distill-domain-knowledge`](.cursor/skills/distill-domain-knowledge/SKILL.md) | `@distill-domain-knowledge` | **Advanced** Compose/Recognize when `materialized/` exists (default resume = **continue**) | Yes |
 | [`add-knowledge-from-jira`](.cursor/skills/add-knowledge-from-jira/SKILL.md) | `@add-knowledge-from-jira` + team/board | Ingest → Classify → shared **S2** → **S3–S7** | Yes |
 | [`requirement-risk`](.cursor/skills/requirement-risk/SKILL.md) | `@requirement-risk` + issue key | Reads **S7** `*-domain-brief.md` | No |
-| [`ticket-splitter`](.cursor/skills/ticket-splitter/SKILL.md) | `@ticket-splitter` + issue key | Reads **S7** briefs; INVEST slices | No |
+| [`ticket-splitter`](.cursor/skills/ticket-splitter/SKILL.md) | `@ticket-splitter` + issue key | Reads **S7** locale briefs; INVEST slices | No |
 
 | Step | Name | Actor | Primary artifacts |
 |------|------|-------|-------------------|
@@ -102,6 +102,8 @@ Contract and invariants: [`.cursor/contracts/domain-knowledge-pipeline-contract.
 
 ## Full pipeline quick start
 
+User-facing steps (verbs only): [`WALKTHROUGH.md`](WALKTHROUGH.md) **Path C**. Agent-oriented commands:
+
 ```bash
 cp .env.example .env   # ATLASSIAN_* and CONFLUENCE_BASE_URL
 ./scripts/setup.sh     # optional: venv + deps
@@ -114,15 +116,15 @@ cp domain-knowledge/jira/team-roots.example.json domain-knowledge/jira/team-root
 @generate-knowledge-from-wiki https://your-site.atlassian.net/wiki/spaces/DEMO/overview?homepageId=100001
 ```
 
-After **S7** briefs exist under `domain-knowledge/curated/by-root/<root_id>/_deliver/`:
+After checklist rows are marked **confirm**, say **continue** (default Compose resume). When **S7** locale / reader briefs exist under `domain-knowledge/curated/by-root/<root_id>/_deliver/`:
 
 ```text
 @requirement-risk PROJ-123
 @ticket-splitter PROJ-123
 ```
 
-Replace `PROJ-123` with your **real** Jira issue key (placeholder only — not a fixture).
-
+Replace `PROJ-123` with your **real** Jira issue key (placeholder only — not a fixture).  
+Advanced no-resync Compose: `@distill-domain-knowledge` (see that skill).
 ## Configuration (not hard-coded tenants)
 
 | File | Role |

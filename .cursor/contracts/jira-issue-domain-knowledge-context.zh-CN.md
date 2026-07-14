@@ -73,7 +73,7 @@ SSOT：`domain-knowledge/jira/team-roots.json` · 解析代码：`scripts/teams/
 | 同主题已跑 Jira 备料 | `R/jira/by-theme/<slug>/` 索引与证据 | 同命题历史实现口径 |
 | 本票在主题索引中 | 在 `by-theme/<slug>/` 内 **搜索 `<KEY>`** | 是否已有归纳 |
 
-无 **S7 本地语言定稿** 时：可读工作稿或 `_aggregate/<slug>/`（报告中注明「非定稿」）；勿把 Recognize 聚合层当业务承诺。
+无 **S7 本地语言定稿** 时：可读 `*-source-brief.md`（**S6**），否则工作稿（`*-工作稿.md` / `*-work-draft.md`），再否则 `_aggregate/<slug>/`（报告中注明「非定稿」/「非 S7」）；勿把 Recognize 聚合层当业务承诺。
 
 ### 3.3 横切
 

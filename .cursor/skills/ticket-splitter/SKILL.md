@@ -75,7 +75,7 @@ Jira key?
 ├─ DEMO-* / offline → fixtures/offline-demo; skip network
 ├─ real key → attachments via MCP or fetch script
 ├─ Resolve team/root
-├─ primary slug → S6 brief (or work draft, noted)
+├─ primary slug → S7 locale brief (`*-domain-brief.md`); else S6 source-brief / work draft (noted)
 ├─ Jira says “dev only, test elsewhere”? → do not invent test rows; note in narrative
 ├─ brief mode? → Scope + split overview + correction note (still gated)
 ├─ Draft → .jira_attachments/<KEY>/split_draft.md when KEY present
@@ -105,7 +105,7 @@ Jira key?
 
 - [`references/presentation.md`](references/presentation.md) · P10: [`../_shared/presentation-p10.md`](../_shared/presentation-p10.md)
 - [`../../contracts/jira-issue-domain-knowledge-context.md`](../../contracts/jira-issue-domain-knowledge-context.md)
-- Anchor `scope` / `done_when` to S6 briefs when present (R2.5).
+- Anchor `scope` / `done_when` to **S7** locale briefs when present (R2.5); if only S6 / work draft exists, note “not S7” and still constrain to that evidence.
 
 Unlike `@add-knowledge-from-jira`, this skill outputs **iteration backlog items**, not library merges.
 

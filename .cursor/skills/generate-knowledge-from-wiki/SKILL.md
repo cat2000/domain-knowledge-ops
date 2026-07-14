@@ -3,8 +3,9 @@ name: generate-knowledge-from-wiki
 description: >-
   Use when refreshing team domain truth from Confluence before story review.
   Prep: Ingest+Recognize (S1+S2); deliver: Compose S3→S7 for human-confirmed
-  module slugs. @generate-knowledge-from-wiki + URL. Partial: Recognize only,
-  or @distill-domain-knowledge for Compose.
+  module slugs. @generate-knowledge-from-wiki + URL. After confirm, default
+  resume is continue; @distill-domain-knowledge is advanced (no re-sync /
+  partial step).
 disable-model-invocation: false
 ---
 
@@ -14,7 +15,7 @@ disable-model-invocation: false
 
 Top coding packs teach agents how to build. This skill adjudicates **domain truth** from Confluence, then feeds `@requirement-risk` / `@ticket-splitter`.
 
-Process terms (first mention): **confirm** = approve module cut lines; **source brief** = S6 adjudicated doc in **source language**; **locale brief** / **brief** = S7 target-locale reader doc; **continue** = resume Compose after confirm. (zh-CN strings for these tokens live in `domain-knowledge/language/deliverable-locale-tokens.json`, cited once here rather than inline throughout.)
+Process terms (first mention): **confirm** = approve module cut lines; **source brief** = S6 adjudicated doc in **source language**; **locale brief** / **reader brief** = S7 target-locale reader doc; **brief** alone = short mode on risk/split (see `TEAM_KNOWLEDGE_BASE.md`); **continue** = default resume Compose after confirm. (zh-CN strings for process tokens live in `domain-knowledge/language/deliverable-locale-tokens.json`, cited once here rather than inline throughout.)
 
 **First time with Confluence?** Read [`FIRST-RUN.md`](./FIRST-RUN.md) only — not the full RUNBOOK. Zero-credentials preview: [`../../../WALKTHROUGH.md`](../../../WALKTHROUGH.md).
 
@@ -55,7 +56,7 @@ Offline risk/split without wiki: `@requirement-risk DEMO-1 team=demo` ([`WALKTHR
 | 1 | `python3 scripts/sync_domain_knowledge_from_confluence.py --url "…"` (S1) |
 | 2 | Read `PIPELINE_HANDOFF.json` → root `<R>` |
 | 3 | Optional propose → RUNBOOK **§ S2** only → `s2_recognize.py --root-id <R>` → **pause** for confirm |
-| 4 | On **continue**: Compose **S3→S5 → S6 (source brief) → S7 (locale brief)** (or `@distill-domain-knowledge`); open RUNBOOK **§ for that step** only |
+| 4 | On **continue** (default): Compose **S3→S5 → S6 (source brief) → S7 (locale / reader brief)**; open RUNBOOK **§ for that step** only. Use `@distill-domain-knowledge` only for advanced no-resync / single-step resume |
 | 5 | After S7: `python3 scripts/run_distill_gate.py --root-id <R>` |
 
 Do **not** preload RUNBOOK or iron-laws end-to-end.
@@ -64,10 +65,10 @@ Do **not** preload RUNBOOK or iron-laws end-to-end.
 
 | Step | What | Language | Typical artifact |
 |------|------|----------|------------------|
-| **S6** | Adjudicated reader structure from S5 | **Source language** (no translation) | `_deliver/<slug>/<slug>-source-brief.md` |
-| **S7** | Locale conversion of S6 only | `team-roots.json` → `defaults.deliverable_locale` (`zh-CN` / `en`) | `…-domain-brief.md` (en); zh-CN filename from `deliverable-locale-tokens.json` |
+| **S6** | Adjudicated **source brief** from S5 | **Source language** (no translation) | `_deliver/<slug>/<slug>-source-brief.md` |
+| **S7** | Locale conversion of S6 only (**reader brief**) | `team-roots.json` → `defaults.deliverable_locale` (`zh-CN` / `en`) | `…-domain-brief.md` (en); zh-CN filename from `deliverable-locale-tokens.json` |
 
-Risk/split **read the S7 locale brief** by default. If source language already equals `deliverable_locale`, S7 still emits the canonical locale filename (may be near-identical to S6).
+Risk/split **read the S7 locale brief** (reader brief) by default. If source language already equals `deliverable_locale`, S7 still emits the canonical locale filename (may be near-identical to S6).
 
 ## Responsibility (summary)
 
