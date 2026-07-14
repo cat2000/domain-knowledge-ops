@@ -12,13 +12,32 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from jira.lib._paths import REPO_ROOT
 from runtime.atlassian_env import atlassian_auth_header, jira_api_base, load_dotenv
+from teams.team_roots_normalize import load_normalized_team_roots
 
 TEAM_ROOTS_PATH = REPO_ROOT / "domain-knowledge/jira/team-roots.json"
 
+_NORMALIZED: Dict[str, Any] | None = None
+
+
+def clear_team_roots_cache() -> None:
+    global _NORMALIZED
+    _NORMALIZED = None
+
+
+def _normalized_doc() -> Dict[str, Any]:
+    global _NORMALIZED
+    if _NORMALIZED is None:
+        _NORMALIZED = load_normalized_team_roots(TEAM_ROOTS_PATH)
+    return _NORMALIZED
+
 
 def load_team_roots() -> Dict[str, Any]:
-    data = json.loads(TEAM_ROOTS_PATH.read_text(encoding="utf-8"))
-    return data.get("teams") or {}
+    """Team records with primary-library fields flattened (v2 + v3)."""
+    return dict(_normalized_doc().get("teams") or {})
+
+
+def load_libraries() -> Dict[str, Any]:
+    return dict(_normalized_doc().get("libraries") or {})
 
 
 def _alias_index(teams: Dict[str, Any]) -> Dict[str, str]:
@@ -50,6 +69,11 @@ def resolve_team(team_or_root: str) -> Tuple[str, Dict[str, Any]]:
         jira_cfg = rec.get("jira") or {}
         if str(jira_cfg.get("board_id")) == s:
             return key, rec
+        # v3: root_id may live only on a mounted library
+        for lib_key in rec.get("libraries") or []:
+            lib = load_libraries().get(str(lib_key)) or {}
+            if str(lib.get("root_id")) == s or str(lib.get("library_id")) == s:
+                return key, rec
     known = ", ".join(sorted(teams)) or "(none)"
     raise SystemExit(
         f"Unknown team, root_id, or board_id: {team_or_root!r}. "

@@ -1,34 +1,56 @@
 #!/usr/bin/env python3
-"""Team SSOT: domain-knowledge/jira/team-roots.json only (no per-team Python maps)."""
+"""Team SSOT: domain-knowledge/jira/team-roots.json (v2 or v3; see docs/TEAM_ROOTS_V3.md)."""
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
-from jira.lib.jira_team_config import resolve_team as _resolve_team
+from jira.lib.jira_team_config import (
+    clear_team_roots_cache,
+    load_libraries as _load_libraries,
+    load_team_roots as _load_teams,
+    resolve_team as _resolve_team,
+)
 from runtime.paths import REPO_ROOT
+from teams.team_roots_normalize import (
+    libraries_for_team as _libraries_for_team_doc,
+    library_key_for_root_id as _library_key_for_root_id,
+    library_record as _library_record,
+    load_normalized_team_roots,
+    team_keys_for_library as _team_keys_for_library,
+)
 
 TEAM_ROOTS_PATH = REPO_ROOT / "domain-knowledge/jira/team-roots.json"
 
 _ROOT_TO_TEAM: dict[str, str] | None = None
-_CACHE: dict[str, Any] | None = None
+_DOC: dict[str, Any] | None = None
 
 
-def _raw() -> dict[str, Any]:
-    global _CACHE
-    if _CACHE is None:
-        _CACHE = json.loads(TEAM_ROOTS_PATH.read_text(encoding="utf-8"))
-    return _CACHE
+def _doc() -> dict[str, Any]:
+    global _DOC
+    if _DOC is None:
+        _DOC = load_normalized_team_roots(TEAM_ROOTS_PATH)
+    return _DOC
+
+
+def clear_caches() -> None:
+    global _DOC, _ROOT_TO_TEAM
+    _DOC = None
+    _ROOT_TO_TEAM = None
+    clear_team_roots_cache()
 
 
 def load_team_roots() -> dict[str, Any]:
-    return dict(_raw().get("teams") or {})
+    return dict(_load_teams())
+
+
+def load_libraries() -> dict[str, Any]:
+    return dict(_load_libraries())
 
 
 def load_defaults() -> dict[str, Any]:
-    return dict(_raw().get("defaults") or {})
+    return dict(_doc().get("defaults") or {})
 
 
 def configured_team_keys() -> list[str]:
@@ -45,7 +67,6 @@ def default_team_key() -> str | None:
     if preferred:
         if preferred in teams:
             return preferred
-        # Allow alias → canonical
         try:
             key, _ = resolve_team(preferred)
             return key
@@ -88,10 +109,36 @@ def add_team_argument(
     parser.add_argument("--team", **kwargs)
 
 
+def libraries_for_team(team_key: str) -> list[str]:
+    return _libraries_for_team_doc(_doc(), team_key)
+
+
+def library_for_root_id(root_id: str) -> dict[str, Any] | None:
+    key = _library_key_for_root_id(_doc(), root_id)
+    if not key:
+        return None
+    return _library_record(_doc(), key)
+
+
 def team_key_for_root_id(root_id: str) -> str | None:
+    """First team that mounts the library for this root (stable sort)."""
     global _ROOT_TO_TEAM
     if _ROOT_TO_TEAM is None:
-        _ROOT_TO_TEAM = {str(v.get("root_id")): k for k, v in load_team_roots().items()}
+        _ROOT_TO_TEAM = {}
+        doc = _doc()
+        for lib_key, lib in (doc.get("libraries") or {}).items():
+            if not isinstance(lib, dict):
+                continue
+            rid = str(lib.get("root_id") or lib.get("library_id") or "")
+            if not rid:
+                continue
+            teams = _team_keys_for_library(doc, str(lib_key))
+            if teams:
+                _ROOT_TO_TEAM[rid] = teams[0]
+        # v2 inline
+        for tkey, rec in (doc.get("teams") or {}).items():
+            if isinstance(rec, dict) and rec.get("root_id"):
+                _ROOT_TO_TEAM.setdefault(str(rec["root_id"]), str(tkey))
     return _ROOT_TO_TEAM.get(str(root_id))
 
 

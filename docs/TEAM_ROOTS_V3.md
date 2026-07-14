@@ -1,6 +1,6 @@
 # team-roots v3 draft — one space = one library; teams mount many
 
-Status: **design draft** (not wired into `scripts/teams/registry.py` yet).
+Status: **partially wired** — `scripts/teams/team_roots_normalize.py` expands v2→v3 in memory and flattens primary-library fields onto teams so existing callers keep working. Full multi-library classify/risk paths still use the flattened primary `root_id` until later slices.
 
 ## Product model (target)
 
