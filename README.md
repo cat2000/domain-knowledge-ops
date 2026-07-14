@@ -58,6 +58,8 @@ Second industry: `@requirement-risk DEMO-BILL-1 team=demo`
 
 Walkthrough (paths A–C) · [WALKTHROUGH.md](WALKTHROUGH.md) · Install · [INSTALL.md](INSTALL.md) · Pack check: `python3 scripts/verify_skills_pack.py`
 
+**Install = clone this repo.** `npx skills add` only copies skill text into another project — it does **not** ship fixtures, `.env.example`, or pipeline scripts. Not the onboarding path; see [INSTALL.md](INSTALL.md).
+
 ## Story review — what “good” means
 
 ### `@requirement-risk` — fewer wrong builds after the sprint starts
@@ -204,7 +206,7 @@ Ships with team `demo` and fixtures `offline-demo`, `saas-billing`. Add more pro
 | Doc | Purpose |
 |-----|---------|
 | [WALKTHROUGH.md](WALKTHROUGH.md) | Paths A–C (+ B2 billing): offline → industry map → real wiki |
-| [INSTALL.md](INSTALL.md) | Cursor, `npx skills`, multi-harness |
+| [INSTALL.md](INSTALL.md) | **Clone** (supported) · why `npx skills` is not enough |
 | [docs/METHODOLOGY.md](docs/METHODOLOGY.md) | Confirm-gated Compose, module cutting, quality bar |
 | [docs/BENCHMARK.md](docs/BENCHMARK.md) | Story review with vs without an S7 brief |
 | [docs/demo/](docs/demo/) | Sample risk and split outputs |

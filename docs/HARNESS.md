@@ -1,6 +1,7 @@
 # Multi-harness notes
 
-Skills are authored under [`.cursor/skills/`](../.cursor/skills/) and mirrored via [`skills/`](../skills/) for installers that expect a top-level `skills/` tree.
+**Primary install: clone this repository and open the repo root.**  
+Fixtures, `.env.example`, `domain-knowledge/`, `scripts/`, rules, and contracts travel with the checkout. Skills under [`.cursor/skills/`](../.cursor/skills/) (mirrored via [`skills/`](../skills/)) are not a standalone product.
 
 ## Cursor (primary)
 
@@ -8,26 +9,19 @@ Skills are authored under [`.cursor/skills/`](../.cursor/skills/) and mirrored v
 2. Skills load from `.cursor/skills/` automatically.
 3. Offline smoke: `@requirement-risk DEMO-1 team=demo`
 
-## `npx skills` / agentskills-style
-
-See [`INSTALL.md`](../INSTALL.md). Replace `cat2000/domain-knowledge-ops` after the repository is public.
+## `npx skills` / agentskills-style (optional, limited)
 
 ```bash
 npx skills add cat2000/domain-knowledge-ops --list
-npx skills add cat2000/domain-knowledge-ops \
-  --skill requirement-risk \
-  --skill ticket-splitter \
-  --skill setup-domain-ops \
-  -a cursor -y
 ```
 
-**Limitation:** wiki/Jira **S1** scripts live in this repo’s `scripts/` and need a checkout + `.env`. Skill-only install is enough for offline DEMO-* and for risk/split once briefs already exist on disk.
+`--list` is fine for discovery. **Do not** treat `npx skills add … -a cursor` as onboarding: it copies skill folders only (often into `.agents/skills/`) and omits fixtures, `.env.example`, scripts, rules, and contracts. Offline `DEMO-*` and Path C need a **clone**. Details: [`INSTALL.md`](../INSTALL.md).
 
 ## Claude Code / Codex
 
-1. Install headline skills into the harness skill directory (`npx skills … -a claude-code` / `-a codex`, or symlink `.cursor/skills/<name>`).
-2. Keep a clone of this repo available when running Confluence sync or Jira ingest.
-3. Prefer the same offline DEMO-1 smoke before wiring credentials.
+1. Prefer opening a **clone** of this repo (or keep it checked out next to the app).
+2. Optionally symlink `.cursor/skills/<name>` into the harness skills directory **after** the clone provides fixtures/scripts.
+3. Same offline smoke: `@requirement-risk DEMO-1 team=demo` from the clone workspace.
 
 ## Expected smoke outputs
 

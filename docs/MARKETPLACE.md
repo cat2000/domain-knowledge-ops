@@ -13,17 +13,48 @@ Use this checklist for release polish and marketplace distribution.
 - [x] Enable Discussions — https://github.com/cat2000/domain-knowledge-ops/discussions
 - [x] About description updated (story risk / INVEST / offline DEMO-1)
 
-## `npx skills` / agentskills.io
+## Discovery vs install (important for posts)
+
+**Onboarding narrative in every post:** `git clone` → open repo root → `@requirement-risk DEMO-1 team=demo`.  
+Do **not** lead with `npx skills add` — that path does not ship fixtures / `.env.example` / scripts ([INSTALL.md](../INSTALL.md)).
+
+[agentskills.io](https://agentskills.io) is the **open skill format / spec**, not a submit portal.
+
+| Channel | Role | What we do |
+|---------|------|------------|
+| **GitHub clone** | **Supported product install** | Push README / Discussions / Release with clone-first steps |
+| **`npx skills add --list`** | Discovery / skills.sh telemetry only | Keep `skills/` + `SKILL.md` valid; do not claim full install |
+| **[skills.sh](https://skills.sh)** | Leaderboard from install telemetry | Optional; clone remains the aha path |
+| **SkillsMP / crawlers** | Index public `SKILL.md` | Topics + public repo (done) |
+| Optional registries | [skills.re](https://skills.re), [agentskillsource.com](https://agentskillsource.com) | Only if you want a second listing |
 
 - [x] Verify: `npx skills add cat2000/domain-knowledge-ops --list` (6 skills discovered)
 - [x] Document the four headline skills on the Release notes
-- [ ] Optional: submit listing to [agentskills.io](https://agentskills.io) when the catalog accepts external packs
+- [x] Docs state clone-first; npx is limited (INSTALL / README / HARNESS)
+- [ ] Optional: third-party registry submit — not required
 
 ## Cursor marketplace / plugin
 
-- [ ] Evaluate packaging as a Cursor plugin (skills + thin bootstrap) vs clone-workspace model
-- [ ] If plugin: one-command install mirroring Superpowers `/plugin-add` UX
-- [ ] Keep offline DEMO-1 as the post-install aha path
+Official path: [Cursor Plugins](https://cursor.com/docs/plugins) → package as `.cursor-plugin/plugin.json` → local test under `~/.cursor/plugins/local/` → submit at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish) (manual review).
+
+**Decision (evaluate before building):**
+
+| Keep clone-workspace (current) | Add Cursor plugin |
+|--------------------------------|-------------------|
+| Full pipeline needs `scripts/` + `.env` + `domain-knowledge/` | One-click skills for risk/split consumers |
+| Offline DEMO-1 already works from repo root | Marketplace discoverability inside Cursor |
+| Simpler SSOT | Plugin **cannot** ship secrets; S1 sync still needs a checkout |
+
+Recommended evaluation order:
+
+1. Spike: `.cursor-plugin/plugin.json` pointing at `skills/` (or symlinked headline four only)
+2. Local load: `ln -s "$(pwd)" ~/.cursor/plugins/local/domain-knowledge-ops` → Reload Window → `@requirement-risk DEMO-1`
+3. Decide: **skills-only plugin** (risk/split + setup) vs **defer** until someone installs without cloning
+4. If yes: submit marketplace form; keep DEMO-1 as post-install aha; document that wiki Compose still needs the full repo
+
+- [ ] Spike `.cursor-plugin/plugin.json` + local install smoke
+- [ ] Go / no-go write-up in Discussions
+- [ ] If go: submit [marketplace/publish](https://cursor.com/marketplace/publish); keep offline DEMO-1 as aha path
 
 ## Launch narrative
 

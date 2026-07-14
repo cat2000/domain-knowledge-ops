@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Install narrative** — clone-the-repo is the only supported onboarding/Path C path; `npx skills add` documented as limited (skill folders only, no fixtures / `.env.example` / scripts)
+
 ### Fixed
 
 - Clarify offline demo tokens (`DEMO-1`, `DEMO-BILL-1`, `team=demo`) and `PROJ-123` placeholder in README / WALKTHROUGH / INSTALL

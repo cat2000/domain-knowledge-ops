@@ -1,75 +1,68 @@
 # Install Domain Knowledge Ops skills
 
-Skills live in [`.cursor/skills/`](.cursor/skills/) (Cursor-native). Top-level [`skills/`](skills/) symlinks the same folders so [`npx skills`](https://github.com/vercel-labs/skills) / [agentskills.io](https://agentskills.io) installers can discover them.
+**Supported path: clone this repository and open the repo root in Cursor.**  
+Demo fixtures, `.env.example`, `domain-knowledge/`, pipeline `scripts/`, rules, and contracts all live in the checkout. That is what newcomers and real work need.
 
-Pipeline steps referenced here use **S1–S7** (Ingest → Recognize → Compose through locale briefs). See [`.cursor/contracts/domain-knowledge-pipeline-contract.md`](.cursor/contracts/domain-knowledge-pipeline-contract.md).
+Skills load from [`.cursor/skills/`](.cursor/skills/). Top-level [`skills/`](skills/) symlinks the same folders for discovery tools — that does **not** mean skill-only install is enough to run the product.
 
-## Fastest path (Cursor)
+Pipeline **S1–S7**: [domain-knowledge-pipeline-contract.md](.cursor/contracts/domain-knowledge-pipeline-contract.md).
+
+## Recommended: clone + open repo root (Cursor)
 
 ```bash
 git clone https://github.com/cat2000/domain-knowledge-ops.git
 cd domain-knowledge-ops
 python3 scripts/verify_skills_pack.py   # offline layout check (CI runs the same)
-# Open this folder as the Cursor **workspace root** (File → Open Folder on the repo root).
-# Skills load from `.cursor/skills/` only when the workspace root is this clone.
+# File → Open Folder on this repo root (not a subfolder).
 ```
 
-Then try the offline demo (no Atlassian). **`DEMO-1`** is a **fake issue key** shipped under [`domain-knowledge/fixtures/offline-demo/`](domain-knowledge/fixtures/offline-demo/) (Acme Orders amend story); **`team=demo`** is the sample team. `DEMO-*` skips live Jira.
+Offline demo (no Atlassian). **`DEMO-1`** is a shipped fake key under [`domain-knowledge/fixtures/offline-demo/`](domain-knowledge/fixtures/offline-demo/); **`team=demo`** is the sample team. `DEMO-*` skips live Jira.
 
 ```text
 @requirement-risk DEMO-1 team=demo
+@ticket-splitter DEMO-1 team=demo
 ```
 
-Walkthrough (explains tokens): [`WALKTHROUGH.md`](WALKTHROUGH.md).
+Real tenant (credentials): copy [`.env.example`](.env.example) → `.env`, then [WALKTHROUGH.md](WALKTHROUGH.md) **Path C**.
 
-## Via `npx skills` (multi-agent)
+## What each path covers
 
-Local path install (from a clone):
+| Need | Use |
+|------|-----|
+| Offline demo (`DEMO-1` / `DEMO-BILL-1`) | **Clone** + open repo root |
+| Setup + Confluence → **S7** briefs | **Clone** + `.env` + `@setup-domain-ops` / `@generate-knowledge-from-wiki` |
+| Story risk/split on real Jira | **Clone** with briefs under `domain-knowledge/curated/` (or fixtures for DEMO) |
+| Jira history into Compose | **Clone** + `@add-knowledge-from-jira` |
+
+## Optional: `npx skills` (limited — not for newcomers)
+
+`npx skills add` only copies **skill markdown folders** into another project (often under `.agents/skills/`). It does **not** install:
+
+- `.env.example`, `WALKTHROUGH.md`, product README
+- `domain-knowledge/` (strategy, team-roots, **fixtures**)
+- pipeline `scripts/`, `.cursor/rules/`, `.cursor/contracts/`, `_shared/`
+
+So: **no reliable offline DEMO**, **no Path C**, broken relative links to rules/contracts. Do **not** recommend this as the install path in posts or onboarding.
+
+Use only if you already maintain briefs/scripts in the target repo and want skill text copied in:
 
 ```bash
-npx skills add ./path/to/domain-knowledge-ops --list
-```
+npx skills add cat2000/domain-knowledge-ops --list   # discovery / telemetry only
 
-From the public repo:
-
-```bash
-# List installable skills
-npx skills add cat2000/domain-knowledge-ops --list
-
-# Headline skills into the current project (Cursor + others)
+# Advanced — expect incomplete workspace; prefer clone instead
 npx skills add cat2000/domain-knowledge-ops \
   --skill requirement-risk \
   --skill ticket-splitter \
-  --skill setup-domain-ops \
-  --skill generate-knowledge-from-wiki \
   -a cursor -y
-
-# Optional: Claude Code / Codex
-npx skills add cat2000/domain-knowledge-ops --skill requirement-risk -a claude-code -a codex -y
 ```
 
-From a local checkout:
+For anything beyond “skill files appeared,” **clone**.
 
-```bash
-npx skills add ./path/to/domain-knowledge-ops --all -a cursor -y
-```
+## Other harnesses (Claude Code / Codex)
 
-**Note:** Full wiki sync (**S1–S7**) still needs this repo’s `scripts/` + `.env` (Confluence). Skill-only install is enough for offline fixtures and for risk/split once **S7** briefs exist.
+Still prefer a **full clone** as the workspace (or keep this repo checked out beside the app repo). Symlink or copy `.cursor/skills/<name>` only after fixtures/scripts/`.env` are available from the clone.
 
-## Claude Code plugin-style
-
-1. Add this repository as a skill source, **or** copy/symlink `.cursor/skills/<name>` into your Claude skills directory.
-2. Prefer installing at least: `setup-domain-ops`, `generate-knowledge-from-wiki`, `requirement-risk`, `ticket-splitter`.
-3. Keep the Python pipeline in-repo when running **S1–S7** (scripts are not bundled inside each skill folder).
-
-## What each install path covers
-
-| Need | Minimum install |
-|------|-----------------|
-| Offline demo (`DEMO-1`) | Open repo in Cursor |
-| Story risk/split on existing briefs | `requirement-risk`, `ticket-splitter` |
-| Full Confluence → **S7** briefs | Repo + `.env` + `generate-knowledge-from-wiki` (+ `setup-domain-ops` first time) |
-| Jira history into same Compose path | `add-knowledge-from-jira` + wiki Recognize/Compose |
+Skill-only copy into a harness directory has the **same gaps** as `npx skills` above.
 
 ## Complement, don’t replace
 
@@ -78,4 +71,4 @@ npx skills add ./path/to/domain-knowledge-ops --all -a cursor -y
 | Superpowers / Spec Kit / general coding skills | How the agent **builds software** |
 | **This pack** | How the agent **adjudicates domain truth** from Confluence/Jira for story review |
 
-Use both: build with theirs; review stories against **S7** briefs from ours.
+Use both: build with theirs; review stories against **S7** briefs from ours — from a **clone** of this repo.

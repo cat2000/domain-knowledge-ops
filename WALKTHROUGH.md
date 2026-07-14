@@ -72,7 +72,7 @@ Five **user** actions. Do **not** pre-read the full RUNBOOK. When the agent is m
 | **confirm** then **continue** | Compose **S3–S7** → reader brief (`*-domain-brief.md`) |
 | `@requirement-risk` / `@ticket-splitter` | Read that reader brief as evidence |
 
-Install / multi-harness: [`INSTALL.md`](INSTALL.md).  
+Install = **clone this repo** (not `npx skills` alone): [`INSTALL.md`](INSTALL.md).  
 Pack layout check (no network): `python3 scripts/verify_skills_pack.py`
 
 ---
