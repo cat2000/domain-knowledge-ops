@@ -2,15 +2,18 @@
 name: setup-domain-ops
 description: >-
   One-time setup: credentials, company/business intro → industry module
-  template (confirm), Confluence space URL(s), Jira board id(s). Derives
-  strategy §2 draft and profiles before wiki sync. See docs/TEAM_ROOTS_V3.md.
+  template (confirm), Confluence space URL(s), Jira board id(s). Writes
+  team-roots.json as v3 (libraries + teams mounting them). See docs/TEAM_ROOTS_V3.md.
 disable-model-invocation: true
 ---
 
 # setup-domain-ops
 
 Configure this repo for **your** tenant with a **short** dialogue.  
-Target model ([`docs/TEAM_ROOTS_V3.md`](../../../docs/TEAM_ROOTS_V3.md)): **one Confluence space = one library**; each Jira team mounts `libraries[]`. Until v3 JSON is wired, still write today’s `team-roots.json` shape (one team record can hold overview + board); keep the **same slim questions**.
+Model ([`docs/TEAM_ROOTS_V3.md`](../../../docs/TEAM_ROOTS_V3.md)): **one Confluence space = one library**; each Jira team mounts `libraries[]`.
+
+**Path C default (single library):** one space + one board → one `libraries.*` entry + one `teams.*` with `libraries: [<that key>]`.  
+Write **`version: 3`** JSON. Do **not** write the old v2 shape (root/overview on the team). Template: [`team-roots.example.json`](../../../domain-knowledge/jira/team-roots.example.json). Multi-mount illustration only: [`team-roots.v3.example.json`](../../../domain-knowledge/jira/team-roots.v3.example.json).
 
 ## When to run
 
@@ -27,7 +30,7 @@ Target model ([`docs/TEAM_ROOTS_V3.md`](../../../docs/TEAM_ROOTS_V3.md)): **one 
    - `ATLASSIAN_EMAIL` / `ATLASSIAN_API_TOKEN`
    - `ATLASSIAN_BASE_URL` and `CONFLUENCE_BASE_URL` (no placeholders in production)
 2. Set `defaults.deliverable_locale` (`zh-CN` or `en`) when editing `team-roots.json`.
-3. If `team-roots.json` still has `your-site.atlassian.net`, offer to copy from `team-roots.example.json`.
+3. If `team-roots.json` still has `your-site.atlassian.net`, offer to copy from `team-roots.example.json`, then replace placeholders.
 
 ### B. Company intro → industry template (required)
 
@@ -50,27 +53,35 @@ Target model ([`docs/TEAM_ROOTS_V3.md`](../../../docs/TEAM_ROOTS_V3.md)): **one 
    - `domain-knowledge/jira/teams/<team>.json` — classify facets aligned to slugs (when team exists)
 9. Do not continue to wiki with empty `checklist_themes`.
 
-### D. Confluence spaces (libraries)
+### D. Confluence spaces → `libraries.*` (v3)
 
-10. For each space, collect **overview URL** (or homepage id). One space → one library / one `root_id` subtree.
-11. Write into `team-roots.json` (v2 today: on the team or shared root fields; v3 later: `libraries.*`).
-12. Remind next step per space:
+10. For each space, collect **overview URL** (or homepage id). One space → one library key (stable slug, e.g. product or space_key lowercased).
+11. Write under `libraries.<library_key>`:
+    - `display_name`, `root_id` / `library_id` (homepage id), `confluence_overview`, optional `space_key`, `s2_profile`
+    - `deliver_by_proposition` from confirmed modules: `"<slug>": ["<slug>", "<slug>-domain-brief.md"]`
+12. Set `defaults.default_library` to the primary (usually the only) library key.
+13. Remind next step per space:
     ```text
     @generate-knowledge-from-wiki <overview-URL>
     ```
 
-### E. Jira boards (teams)
+### E. Jira boards → `teams.*` mounts (v3)
 
-13. For each delivery team, collect **board_id** (+ optional display name / agile team / jql_base).
-14. Record which **libraries** this board uses (default: libraries just configured).
-15. Write `jira.board_id` (and related) into `team-roots.json`; remind:
+14. For each delivery team, collect **board_id** (+ optional display name / agile team / jql_base).
+15. Write under `teams.<team_key>`:
+    - `libraries: ["<library_key>", …]` — Path C single-lib: one entry (the library from D)
+    - `jira.board_id` and related fields; `attribution_config` when present
+    - **Do not** put `root_id` / `confluence_overview` / `deliver_by_proposition` on the team (those live on the library)
+16. Set `defaults.default_team` when there is a primary team. Remind:
     ```text
     @add-knowledge-from-jira team=<team_key>
     ```
 
-### F. Hygiene
+### F. File shape checklist (before finish)
 
-16. Remind: do **not** commit production `curated/` / `extracted/` / `materialized/` or `.env` to a public fork.
+17. `team-roots.json` must have `"version": 3`, non-empty `libraries`, and every team with non-empty `libraries[]`.
+18. Single-library Path C is done when: one library + one team mounting it + profiles non-empty + handoff commands shown.
+19. Remind: do **not** commit production `curated/` / `extracted/` / `materialized/` or `.env` to a public fork.
 
 ## Hard stops
 
@@ -78,9 +89,11 @@ Target model ([`docs/TEAM_ROOTS_V3.md`](../../../docs/TEAM_ROOTS_V3.md)): **one 
 - Empty `checklist_themes` → do not pretend Recognize/wiki modules exist.
 - Never reintroduce shipped demo modules (`checkout`, `compensation-cbp`, …) unless the user’s confirmed strategy contains them.
 - Do not scrape the public web into brief rule bodies; optional public hints for *module naming* only, always confirmed.
+- Do not write v2-only team records (overview + board on the same object without `libraries{}`).
 
 ## Out of scope
 
 - Running full S1–S7 (hand off to `@generate-knowledge-from-wiki`)
 - Parsing `strategy.md` with scripts (agent derives JSON; scripts read JSON only)
 - Multi-space merge into one `_deliver/` (deferred; see TEAM_ROOTS_V3)
+- Full multi-mount classify/risk (config may list several libraries; runtime still uses primary mount until a later slice)

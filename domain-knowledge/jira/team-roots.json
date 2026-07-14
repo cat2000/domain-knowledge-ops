@@ -1,23 +1,32 @@
 {
-  "version": 2,
+  "version": 3,
   "defaults": {
     "deliverable_locale": "en",
     "atlassian_site": "https://your-site.atlassian.net",
-    "default_team": "demo"
+    "default_team": "demo",
+    "default_library": "demo"
   },
-  "teams": {
+  "libraries": {
     "demo": {
+      "display_name": "Demo space library",
+      "library_id": "100001",
       "root_id": "100001",
-      "display_name": "Demo Product Team",
-      "attribution_config": "domain-knowledge/jira/teams/demo.json",
+      "space_key": "DEMO",
       "confluence_overview": "https://your-site.atlassian.net/wiki/spaces/DEMO/overview?homepageId=100001",
-      "aliases": ["default"],
       "s2_profile": "default",
       "deliver_by_proposition": {
         "ordering": ["ordering", "ordering-domain-brief.md"],
         "orders": ["orders", "orders-domain-brief.md"],
         "identity": ["identity", "identity-domain-brief.md"]
-      },
+      }
+    }
+  },
+  "teams": {
+    "demo": {
+      "libraries": ["demo"],
+      "display_name": "Demo Product Team",
+      "attribution_config": "domain-knowledge/jira/teams/demo.json",
+      "aliases": ["default"],
       "jira": {
         "agile_team": "Demo Product Team",
         "board_id": 1,

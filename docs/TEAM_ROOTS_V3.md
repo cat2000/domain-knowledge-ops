@@ -1,6 +1,6 @@
 # team-roots v3 draft — one space = one library; teams mount many
 
-Status: **partially wired** — `scripts/teams/team_roots_normalize.py` expands v2→v3 in memory and flattens primary-library fields onto teams so existing callers keep working. Full multi-library classify/risk paths still use the flattened primary `root_id` until later slices.
+Status: **single-library Path C ready** — shipped `team-roots.json` / `team-roots.example.json` are **v3**; `@setup-domain-ops` writes v3; normalize still expands legacy v2 and flattens primary mount for callers. Full multi-library classify/risk (beyond primary mount) is still a later slice.
 
 ## Product model (target)
 
@@ -179,12 +179,12 @@ No “merge these spaces into one library?” in v3 default.
 
 ## Implementation order
 
-1. Schema + example (this doc)  
-2. Slim `setup-domain-ops` to the dialogue above (docs/skill first; v3 JSON when registry lands)  
-3. `registry.py`: v3 load + v2 expand; `libraries_for_team`, `library_for_root_id`  
-4. Single-library path ≡ current by-root  
-5. Team mounts multiple libraries for risk/split + Jira classify  
-6. Docs: WALKTHROUGH Path C, TEAM_KNOWLEDGE_BASE  
+1. Schema + example (this doc) — done  
+2. Slim `setup-domain-ops` dialogue — done  
+3. `registry.py`: v3 load + v2 expand; `libraries_for_team`, `library_for_root_id` — done  
+4. Single-library Path C ≡ by-root + v3 JSON on disk / setup writes v3 — done  
+5. Team mounts multiple libraries for risk/split + Jira classify — later  
+6. Docs: WALKTHROUGH Path C, TEAM_KNOWLEDGE_BASE — done for single-lib  
 
 ## Non-goals (v3)
 

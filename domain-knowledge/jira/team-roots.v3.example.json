@@ -85,5 +85,5 @@
       }
     }
   },
-  "_comment": "One Confluence space = one library. Teams mount libraries[] and share a board_id. Multi-space compose is deferred. See docs/TEAM_ROOTS_V3.md."
+  "_comment": "Multi-mount illustration only. Path C / setup default template is team-roots.example.json (single library). See docs/TEAM_ROOTS_V3.md."
 }

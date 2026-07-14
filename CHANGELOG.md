@@ -16,7 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Install narrative** — clone is the **only** supported install; removed `npx skills add` install examples (skill-folder copy is not an onboarding path; `skills/` kept for discovery only)
 - **Path B** — with-vs-without brief contrast via [`docs/BENCHMARK.md`](docs/BENCHMARK.md) (not a same-output re-run of Path A)
-- **`setup-domain-ops`** — slim dialogue: company/intro → industry module template (confirm) → space URL(s) → board id(s); see [`docs/TEAM_ROOTS_V3.md`](docs/TEAM_ROOTS_V3.md)
+- **`setup-domain-ops`** — slim dialogue; **writes v3** `team-roots.json` (`libraries` + team mounts)
+- **Path C / TEAM_KNOWLEDGE_BASE** — single-library v3 onboarding; shipped `team-roots.json` + `team-roots.example.json` are v3
 - **`teams/registry.py`** / **`jira_team_config`** — use normalized team-roots (v3-aware)
 
 ### Fixed

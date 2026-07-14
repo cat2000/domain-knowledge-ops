@@ -151,7 +151,7 @@ See [WALKTHROUGH Path C](WALKTHROUGH.md).
 cp .env.example .env   # ATLASSIAN_* and CONFLUENCE_BASE_URL
 ./scripts/setup.sh     # optional: venv + deps
 cp domain-knowledge/jira/team-roots.example.json domain-knowledge/jira/team-roots.json
-# edit: confluence root_id, board_id, jql_base
+# edit v3: libraries.<key>.root_id + confluence_overview; teams.<key>.jira.board_id + libraries: [<key>]
 ```
 
 ```text
@@ -162,7 +162,7 @@ cp domain-knowledge/jira/team-roots.example.json domain-knowledge/jira/team-root
 Mark checklist rows confirm, then say continue. Then:
 
 ```text
-@requirement-risk PROJ-123
+@requirement-risk PROJ-123 team=<your_team>
 @ticket-splitter PROJ-123
 ```
 
@@ -172,7 +172,7 @@ Mark checklist rows confirm, then say continue. Then:
 |------|------|
 | [domain-knowledge/strategy.md](domain-knowledge/strategy.md) | Methodology + industry fill-in (§2) |
 | [domain-knowledge/s2-domain-profiles.json](domain-knowledge/s2-domain-profiles.json) | Themes/facets from strategy |
-| [domain-knowledge/jira/team-roots.json](domain-knowledge/jira/team-roots.json) | Teams, Confluence roots, Jira boards |
+| [domain-knowledge/jira/team-roots.json](domain-knowledge/jira/team-roots.json) | v3: libraries (spaces) + teams (boards + mounts) |
 | [.env](.env.example) | Atlassian credentials (never commit) |
 
 Pipeline outputs under by-root (`curated/`, `extracted/`, `materialized/`) are local and gitignored. Fixture trees under `fixtures/` ship on purpose.

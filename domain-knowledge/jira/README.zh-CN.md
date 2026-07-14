@@ -28,7 +28,7 @@ Jira 是业务细则的一等来源：AC、评论、状态流转、阈值和 las
 
 ## 团队与配置
 
-团队表、board、`root_id` 以 **[`team-roots.json`](team-roots.json)** 与 **`scripts/teams/registry.py`** 为准。默认示例团队为 `demo`（`board_id=1`）。
+团队表以 **[`team-roots.json`](team-roots.json)**（**v3**：`libraries` + `teams` 挂载）与 **`scripts/teams/registry.py`** 为准。默认示例：`demo` 库 + 团队（`board_id=1`）。模板：[`team-roots.example.json`](team-roots.example.json)。
 
 **Ingest（拉票）**：
 

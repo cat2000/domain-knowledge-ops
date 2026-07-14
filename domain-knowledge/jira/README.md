@@ -28,7 +28,7 @@ Details: **[`add-knowledge-from-jira/RUNBOOK.md`](../../.cursor/skills/add-knowl
 
 ## Teams & config
 
-Boards and `root_id` live in **[`team-roots.json`](team-roots.json)** via **`scripts/teams/registry.py`**.
+Boards and Confluence roots live in **[`team-roots.json`](team-roots.json)** (**v3**: `libraries` + `teams` mounts) via **`scripts/teams/registry.py`**. Template: [`team-roots.example.json`](team-roots.example.json).
 
 **Ingest**:
 

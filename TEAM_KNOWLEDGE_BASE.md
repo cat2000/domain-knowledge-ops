@@ -6,14 +6,15 @@
 
 ## Authoritative roots (configure yours)
 
-Edit [`domain-knowledge/jira/team-roots.json`](domain-knowledge/jira/team-roots.json) (start from [`team-roots.example.json`](domain-knowledge/jira/team-roots.example.json)):
+Edit [`domain-knowledge/jira/team-roots.json`](domain-knowledge/jira/team-roots.json) (start from [`team-roots.example.json`](domain-knowledge/jira/team-roots.example.json)) — **v3** shape:
 
-- **Confluence overview URL** per team
-- **`root_id`** → `extracted|materialized|curated/by-root/<root_id>/`
+- **`libraries.<key>`** — one Confluence space → `root_id` + overview URL + `deliver_by_proposition`
+- **`teams.<key>`** — one Jira `board_id` + `libraries: ["<key>", …]` (Path C: usually one library)
+- On disk still: `extracted|materialized|curated/by-root/<root_id>/`
 
-Ships with one demo team (`demo`, root `100001`, placeholder Atlassian URLs). Domain modules are **not** pre-cut — fill [`strategy.md`](domain-knowledge/strategy.md) §2 via `@setup-domain-ops`, then derive profiles before **S2** Recognize.
+Ships with one demo library + team (`demo`, root `100001`, placeholder Atlassian URLs). Domain modules are **not** pre-cut — fill [`strategy.md`](domain-knowledge/strategy.md) §2 via `@setup-domain-ops`, then derive profiles before **S2** Recognize.
 
-**Draft (v3):** one Confluence **space** = one **library**; each Jira **team** mounts `libraries[]` — [`docs/TEAM_ROOTS_V3.md`](docs/TEAM_ROOTS_V3.md).
+Model: [`docs/TEAM_ROOTS_V3.md`](docs/TEAM_ROOTS_V3.md). Multi-mount illustration: [`team-roots.v3.example.json`](domain-knowledge/jira/team-roots.v3.example.json).
 
 ---
 
@@ -34,7 +35,7 @@ Locale-specific spellings for checklist status live in [`domain-knowledge/langua
 ## Newcomer path (~30–60 min)
 
 1. **60s offline**: `@requirement-risk DEMO-1 team=demo` — `DEMO-1` is a **shipped fake ticket** (not live Jira); see [`WALKTHROUGH.md`](WALKTHROUGH.md) Path A
-2. `@setup-domain-ops` — credentials, teams, **strategy §2**, derive profiles
+2. `@setup-domain-ops` — credentials, v3 team-roots (library + board), **strategy §2**, derive profiles
 3. [`domain-knowledge/README.md`](domain-knowledge/README.md) — on-disk layout
 4. [`domain-knowledge/strategy.md`](domain-knowledge/strategy.md) — methodology (+ your filled §2)
 5. After sync + Recognize + Compose: `curated/by-root/<root_id>/_deliver/<slug>/*-domain-brief.md` (**S7**)

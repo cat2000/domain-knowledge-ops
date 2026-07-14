@@ -57,20 +57,24 @@ Map: [`saas-billing/INDUSTRY.md`](domain-knowledge/fixtures/saas-billing/INDUSTR
 
 ## Path C — Your wiki (credentials)
 
+**Single library first:** one Confluence space + one Jira board. Config is **v3** (`libraries` + `teams` mounting them) — see [`docs/TEAM_ROOTS_V3.md`](docs/TEAM_ROOTS_V3.md). Copy [`team-roots.example.json`](domain-knowledge/jira/team-roots.example.json) if you need a clean template.
+
 Five **user** actions. Do **not** pre-read the full RUNBOOK. When the agent is mid-run, open [`FIRST-RUN.md`](.cursor/skills/generate-knowledge-from-wiki/FIRST-RUN.md) for the matching step only.
 
 1. **Credentials** — `cp .env.example .env` and set Atlassian URLs + token
-2. **Name your cut** — `@setup-domain-ops` — answer org/product/module questions; **confirm** the proposed module list when asked
+2. **Setup** — `@setup-domain-ops` — company/product intro → **confirm** module cut → space overview URL → board id  
+   Agent writes `team-roots.json` as **v3** (one `libraries.*` + one `teams.*` with `libraries: [<that key>]`), plus `strategy.md` §2 and profiles
 3. **Point at Confluence** — `@generate-knowledge-from-wiki` + your overview URL — wait for a module checklist (stopping there is success for “prep”)
 4. **Approve modules** — mark checklist rows **confirm** → say **continue** — agent writes **reader briefs** under `_deliver/`  
    (Default resume is **continue**. `@distill-domain-knowledge` is advanced: no re-sync / partial step / new chat.)
-5. **Review a real story** — `@requirement-risk PROJ-123` → `@ticket-splitter PROJ-123`  
-   (`PROJ-123` is a **placeholder** — replace with your real Jira issue key, e.g. `ABC-42`. It is not shipped in this repo.)
+5. **Review a real story** — `@requirement-risk PROJ-123 team=<your_team>` → `@ticket-splitter PROJ-123`  
+   (`PROJ-123` is a **placeholder** — replace with your real Jira issue key, e.g. `ABC-42`. It is not shipped in this repo.)  
+   Optional Jira evidence: `@add-knowledge-from-jira team=<your_team>`
 
-| You say / do | What the agent is doing (optional jargon) |
-|--------------|-------------------------------------------|
-| `@setup-domain-ops` | Fill `strategy.md` §2 → derive profiles |
-| `@generate-knowledge-from-wiki` + URL | **S1** Ingest + **S2** Recognize → checklist |
+| You say / do | What lands on disk |
+|--------------|-------------------|
+| `@setup-domain-ops` | v3 `team-roots.json` + `strategy.md` §2 + profiles |
+| `@generate-knowledge-from-wiki` + URL | **S1** Ingest + **S2** Recognize → checklist under `by-root/<root_id>/` |
 | **confirm** then **continue** | Compose **S3–S7** → reader brief (`*-domain-brief.md`) |
 | `@requirement-risk` / `@ticket-splitter` | Read that reader brief as evidence |
 
