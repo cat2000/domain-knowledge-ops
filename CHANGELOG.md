@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **Install narrative** — clone is the **only** supported install; removed `npx skills add` install examples (skill-folder copy is not an onboarding path; `skills/` kept for discovery only)
+- **Path B** — with-vs-without brief contrast via [`docs/BENCHMARK.md`](docs/BENCHMARK.md) (not a same-output re-run of Path A)
 
 ### Fixed
 

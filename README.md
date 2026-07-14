@@ -181,7 +181,7 @@ Pipeline outputs under by-root (`curated/`, `extracted/`, `materialized/`) are l
 
 | Doc | Purpose |
 |-----|---------|
-| [WALKTHROUGH.md](WALKTHROUGH.md) | Paths A–C: offline → industry map → real wiki |
+| [WALKTHROUGH.md](WALKTHROUGH.md) | Paths A–C: demo → with/without brief → real wiki |
 | [INSTALL.md](INSTALL.md) | Clone (only supported install) |
 | [docs/METHODOLOGY.md](docs/METHODOLOGY.md) | Confirm-gated Compose |
 | [docs/BENCHMARK.md](docs/BENCHMARK.md) | With vs without an S7 brief |

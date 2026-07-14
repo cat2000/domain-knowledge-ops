@@ -5,6 +5,13 @@
 > **仅作格式参考。** 不要把下列模块复制进你们的默认 `s2-domain-profiles.json`。  
 > 真实团队应编辑 [`strategy.md`](strategy.md) 第二节，再由 Cursor 派生 profiles。
 
+**Path B（Walkthrough）— 轻量上下文（约 2 分钟）：**
+
+1. **§2.1** — 产品边界一句（可选）
+2. **§2.3** — 模块表
+
+Path B 的 **aha** 在 [`docs/BENCHMARK.md`](../docs/BENCHMARK.md)（有 brief vs 无 brief），不是通读本文件。跳过 §2.2、§2.4–§2.7 与文末 **派生提示**（那些给 Path C / `@setup-domain-ops`）。
+
 下文模拟一家 **B2B 订购平台**「Acme Orders」的填法。
 
 ---
@@ -59,6 +66,6 @@
 
 ---
 
-## 派生提示（给 Agent）
+## 派生提示（给 Agent — Path B 请跳过）
 
 根据上表生成 `checklist_themes` 四条、`facet-ordering` 等 `s1_facets`、以及 `s2.domain_cues`；`module_seeds` 的 `teams` 填 `["orders"]`。人确认后再同步 Wiki。

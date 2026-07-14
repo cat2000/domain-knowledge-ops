@@ -4,6 +4,13 @@
 > Real teams edit [`strategy.md`](strategy.md) §2, then have Cursor derive profiles.  
 > Chinese locale: [`strategy.example.zh-CN.md`](strategy.example.zh-CN.md).
 
+**Path B (Walkthrough) — light context only (~2 min):**
+
+1. **§2.1** — one-line product boundary (optional)
+2. **§2.3** — the module table
+
+The Path B **aha** is [`docs/BENCHMARK.md`](../docs/BENCHMARK.md) (with vs without brief), not this whole file. Skip §2.2, §2.4–§2.7, and the **Derive hint** (those are for Path C / `@setup-domain-ops`).
+
 The sample below fills §2 for a fictional B2B ordering portal **Acme Orders**.
 
 ---
@@ -58,6 +65,6 @@ Example derived slugs (**examples only**): `ordering`, `fulfillment-visibility`,
 
 ---
 
-## Derive hint (for the agent)
+## Derive hint (for the agent — skip on Path B)
 
 From the table above, generate four `checklist_themes`, `facet-ordering` (and related) `s1_facets`, and `s2.domain_cues`; set `module_seeds` `teams` to `["orders"]`. Human-confirm before wiki sync.

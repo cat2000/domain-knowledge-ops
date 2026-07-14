@@ -2,7 +2,7 @@
 
 Same ticket: offline **`DEMO-1`** (Acme Orders amend open order).
 
-This is a **qualitative** benchmark for contributors and launch posts — not a CI metric.
+This is the **Path B aha** in [`WALKTHROUGH.md`](../WALKTHROUGH.md) — also useful for launch posts. Qualitative, not a CI metric.
 
 ## Without a domain brief
 
@@ -28,13 +28,22 @@ Using [`ordering-domain-brief.md`](../domain-knowledge/fixtures/offline-demo/cur
 
 ## How to re-run locally
 
+**With brief (Path A):**
+
 ```text
 @requirement-risk DEMO-1 team=demo
 @ticket-splitter DEMO-1 team=demo
 ```
 
-Compare your agent output to `docs/demo/*.sample.md`. Drift is expected in wording; **rule anchors** (Open + valid quote, expired quote blocks save, shipped lines read-only) should remain.
+**Without brief (Path B):**
 
-## Portability check
+```text
+@requirement-risk DEMO-1 team=demo
+Path B: use only the Jira/fixture ticket body. Do not read domain briefs, curated/, or fixtures under _deliver/.
+```
+
+Compare the two reports using the tables above. Also compare Path A output to `docs/demo/*.sample.md`. Drift in wording is fine; **rule anchors** (Open + valid quote, expired quote blocks save, shipped lines read-only) should appear in the with-brief pass.
+
+## Portability check (Path B2)
 
 Repeat with `@requirement-risk DEMO-BILL-1 team=demo` and [`saas-billing`](../domain-knowledge/fixtures/saas-billing/) — same skill path, different industry brief.

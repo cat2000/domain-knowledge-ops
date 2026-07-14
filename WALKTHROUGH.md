@@ -1,6 +1,6 @@
 # Walkthrough — zero credentials to first value
 
-Three paths. **Path A needs nothing.** Path B explains the industry cut without Confluence. Path C is your real tenant.
+Three paths. **Path A** runs DEMO-1 with the domain brief. **Path B** runs DEMO-1 without the brief, then you compare. **Path C** is your real tenant.
 
 ---
 
@@ -16,40 +16,42 @@ Open this repo root in Cursor. Use the **shipped fake ticket** `DEMO-1` (Acme Or
 **Done when:** a readiness/risk report with Scope + MUST items, then INVEST slices with `scope` and `done_when`, both grounded in the shipped Acme Orders brief.
 
 Fixture layout: [`domain-knowledge/fixtures/offline-demo/`](domain-knowledge/fixtures/offline-demo/) (`jira/DEMO-1.md` + `ordering-domain-brief.md`).  
-Sample outputs (for comparison): [`docs/demo/`](docs/demo/).  
-With vs without brief: [`docs/BENCHMARK.md`](docs/BENCHMARK.md).
+Sample outputs: [`docs/demo/`](docs/demo/).
 
 No `.env`, no network, no `strategy.md` fill.
 
 ---
 
-## Path B — Zero-config industry story (still offline)
+## Path B — With vs without a domain brief (still offline, ~10 min)
 
-Goal: understand **how domain modules are cut** before you touch Atlassian.
+Keep your **Path A** report. Run the Path B prompt below on the same ticket, then compare the two reports. Checklist of what usually diverges: [`docs/BENCHMARK.md`](docs/BENCHMARK.md).
 
-| Step | Read / do | Why |
-|------|-----------|-----|
-| 1 | [`domain-knowledge/strategy.example.md`](domain-knowledge/strategy.example.md) | Filled §2 for fictional **Acme Orders** (format only) |
-| 2 | [`domain-knowledge/fixtures/offline-demo/INDUSTRY.md`](domain-knowledge/fixtures/offline-demo/INDUSTRY.md) | Maps example modules → `ordering` brief + `DEMO-1` |
-| 3 | Skim the **reader brief** | `fixtures/offline-demo/curated/by-root/100001/_deliver/ordering/ordering-domain-brief.md` |
-| 4 | Re-run Path A | Risk/split should cite amend + quote-validity rules from that brief |
+Optional skim (~2 min): [`INDUSTRY.md`](domain-knowledge/fixtures/offline-demo/INDUSTRY.md) — DEMO-1 → `ordering` brief.
 
-You are **not** writing `s2-domain-profiles.json` here. Path B is the mental model:
+### Path A (with brief) — already ran
 
-**fill strategy → name modules → get a reader brief → story review**
+```text
+@requirement-risk DEMO-1 team=demo
+```
 
-(Agent jargon for the same arc: strategy §2 → slug → **S7** `*-domain-brief.md` → `@requirement-risk`.)
+### Path B (without brief)
 
-### Path B2 — Second industry (still offline)
+```text
+@requirement-risk DEMO-1 team=demo
+Path B: use only the Jira/fixture ticket body. Do not read domain briefs, curated/, or fixtures under _deliver/.
+```
 
-Prove the cut is not Acme-specific. **`DEMO-BILL-1`** is another **shipped fake ticket** (Northwind Billing: mid-cycle seat change + proration preview), under [`saas-billing`](domain-knowledge/fixtures/saas-billing/) — still `team=demo`, still no network:
+**Done when:** you can point to at least one concrete difference between the two reports (e.g. invented WMS/API scope vs brief-grounded MUST). Map: [BENCHMARK](docs/BENCHMARK.md).
+
+You are **not** filling `strategy.md` here. Path C builds **your** brief after `@setup-domain-ops`.
+
+### Path B2 — Second industry (optional)
 
 ```text
 @requirement-risk DEMO-BILL-1 team=demo
 ```
 
-Fixture: [`domain-knowledge/fixtures/saas-billing/`](domain-knowledge/fixtures/saas-billing/).  
-Industry map: [`saas-billing/INDUSTRY.md`](domain-knowledge/fixtures/saas-billing/INDUSTRY.md).
+Map: [`saas-billing/INDUSTRY.md`](domain-knowledge/fixtures/saas-billing/INDUSTRY.md).
 
 ---
 
@@ -82,6 +84,6 @@ Pack layout check (no network): `python3 scripts/verify_skills_pack.py`
 | Path | Done when |
 |------|-----------|
 | A | Risk report has Scope + MUST items; split has observable `done_when` faces |
-| B | You can name Acme’s module axis for “amend open order” without opening Confluence |
+| B | Path B (without brief) report differs from Path A on at least one concrete point |
 | B2 | Risk report for `DEMO-BILL-1` cites Active + proration preview from the billing brief |
 | C | Modules marked **confirm** → reader briefs under `_deliver/` → risk/split on a real key |
