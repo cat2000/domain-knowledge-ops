@@ -102,8 +102,8 @@
 ### 2.1 组织与边界
 
 - **组织 / 产品线名称**：（待填）
-- **权威 Confluence 根**：见 [`jira/team-roots.json`](jira/team-roots.json) 的 `root_id` / overview URL
-- **团队 key**：（与 `team-roots.json` 中 key 一致，例如 `demo`）
+- **权威 Confluence 根**：见 [`jira/team-roots.json`](jira/team-roots.json) → `libraries.<key>.root_id` / `confluence_overview`（团队通过 `teams.<key>.libraries` 挂载）
+- **团队 key**：（与 `team-roots.json` 的 `teams` 下 key 一致，例如 `demo`）
 - **产品边界一句话**：（待填——什么在域内、什么明确域外）
 
 ### 2.2 业态与主体

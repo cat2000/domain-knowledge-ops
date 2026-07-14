@@ -103,8 +103,8 @@ Use `@setup-domain-ops` or Cursor dialogue to replace placeholders with your rea
 ### 2.1 Organization & boundaries
 
 - **Organization / product line**: (to fill)
-- **Authoritative Confluence root**: see [`jira/team-roots.json`](jira/team-roots.json) `root_id` / overview URL
-- **Team key**: (must match a key in `team-roots.json`, e.g. `demo`)
+- **Authoritative Confluence root**: see [`jira/team-roots.json`](jira/team-roots.json) → `libraries.<key>.root_id` / `confluence_overview` (team mounts that library via `teams.<key>.libraries`)
+- **Team key**: (must match a key under `teams` in `team-roots.json`, e.g. `demo`)
 - **One-line product boundary**: (to fill — what is in-domain vs explicitly out)
 
 ### 2.2 Industry & subjects

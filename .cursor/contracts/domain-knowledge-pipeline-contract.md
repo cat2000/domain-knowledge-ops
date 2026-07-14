@@ -14,7 +14,7 @@ Chinese locale: [`domain-knowledge-pipeline-contract.zh-CN.md`](./domain-knowled
 | [`domain-knowledge/distill-document-skeleton.md`](../../domain-knowledge/distill-document-skeleton.md) | Draft section skeleton · zh: [`distill-document-skeleton.zh-CN.md`](../../domain-knowledge/distill-document-skeleton.zh-CN.md) |
 | [`domain-knowledge/language/glossary.md`](../../domain-knowledge/language/glossary.md) | Shared glossary |
 | [`domain-knowledge/language/deliverable-locale-tokens.json`](../../domain-knowledge/language/deliverable-locale-tokens.json) | Locale labels / filenames (`deliverable_locale`) |
-| [`domain-knowledge/jira/team-roots.json`](../../domain-knowledge/jira/team-roots.json) | Team `root_id`, Jira, deliver config |
+| [`domain-knowledge/jira/team-roots.json`](../../domain-knowledge/jira/team-roots.json) | v3: `libraries` (space/`root_id`/deliver) + `teams` (board + mounts) |
 
 ---
 

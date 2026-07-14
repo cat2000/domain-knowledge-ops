@@ -29,8 +29,8 @@ Paths A–C: [`../../WALKTHROUGH.md`](../../WALKTHROUGH.md). Install: [`../../IN
 | Clone | `git clone <repo-url>`, open root in Cursor |
 | Privacy | Cursor Settings → General → Privacy Mode (recommended) |
 | Env | Root `.env`: `ATLASSIAN_EMAIL`, `ATLASSIAN_API_TOKEN`, `ATLASSIAN_BASE_URL`, `CONFLUENCE_BASE_URL` |
-| Strategy | `@setup-domain-ops` — fill `strategy.md` §2, derive profiles |
-| Teams | Edit `domain-knowledge/jira/team-roots.json` (or copy from `team-roots.example.json`) |
+| Strategy | `@setup-domain-ops` — fill `strategy.md` §2, derive profiles, write **v3** `team-roots.json` |
+| Teams | `domain-knowledge/jira/team-roots.json` — v3 `libraries` + `teams` mounts (template: `team-roots.example.json`) |
 | Deps | `./scripts/setup.sh` for maintainers; skip for risk/split-only if briefs already exist |
 
 ### 2. Common `@` examples
@@ -41,7 +41,7 @@ Paths A–C: [`../../WALKTHROUGH.md`](../../WALKTHROUGH.md). Install: [`../../IN
 @generate-knowledge-from-wiki https://your-site.atlassian.net/wiki/spaces/DEMO/overview?homepageId=100001
 ```
 
-(Use the `confluence_overview` URL from your `team-roots.json`.)
+(Use `libraries.<key>.confluence_overview` from your `team-roots.json`.)
 
 **Story risk** (explicit `@` — not auto-loaded)
 

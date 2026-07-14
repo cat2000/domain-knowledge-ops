@@ -28,13 +28,14 @@
 
 ## 2. 解析团队与落盘根
 
-团队表 **不是** 固定三行：以 `domain-knowledge/jira/team-roots.json` 的 `teams` 为准（任意 N 个 key）。仓库自带 demo 仅为示例。
+团队表 **不是** 固定三行：以 `domain-knowledge/jira/team-roots.json` 的 `teams` 为准（任意 N 个 key）。仓库自带 demo 仅为示例。**v3**：Confluence 的 `root_id` / overview / deliver 在 `libraries.*`；团队挂载 `libraries[]`（Path C 通常只挂一个）。解析层会把 primary（第一个）挂载展平为 `team.root_id` 供调用方使用。
 
 | 字段 | 含义 |
 |------|------|
-| `team` key | 你在 JSON 里起的名字（如 `demo`、`orders`） |
-| `root_id` | Confluence 落盘根 → `curated/by-root/<root_id>/` |
-| `aliases` | 可选别名，与 key 等价 |
+| `team` key | `teams` 下的名字（如 `demo`） |
+| `libraries[]` | 挂载的 library key（有序；第一个 = primary） |
+| `root_id` | 来自 primary library 的落盘根 → `curated/by-root/<root_id>/` |
+| `aliases` | 可选别名，与 team key 等价 |
 
 SSOT：`domain-knowledge/jira/team-roots.json` · 解析代码：`scripts/teams/registry.py`。
 

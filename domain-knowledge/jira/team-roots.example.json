@@ -15,9 +15,9 @@
       "confluence_overview": "https://your-site.atlassian.net/wiki/spaces/DEMO/overview?homepageId=100001",
       "s2_profile": "default",
       "deliver_by_proposition": {
+        "ordering": ["ordering", "ordering-domain-brief.md"],
         "orders": ["orders", "orders-domain-brief.md"],
-        "identity": ["identity", "identity-domain-brief.md"],
-        "checkout": ["checkout", "checkout-domain-brief.md"]
+        "identity": ["identity", "identity-domain-brief.md"]
       }
     }
   },

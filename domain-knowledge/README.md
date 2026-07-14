@@ -38,8 +38,9 @@ Landing zone for domain knowledge: Confluence → `extracted/` / `materialized/`
 | `distill-document-skeleton.md` | S4/S5 skeleton · [`distill-document-skeleton.zh-CN.md`](distill-document-skeleton.zh-CN.md) |
 | `DOMAIN_MODULE_CHECKLIST.template.md` | Checklist layout · [`DOMAIN_MODULE_CHECKLIST.template.zh-CN.md`](DOMAIN_MODULE_CHECKLIST.template.zh-CN.md) |
 | `language/glossary.md` | Glossary (project-specific) |
-| `jira/team-roots.json` | Teams / roots / boards — **any N keys** |
-| `jira/team-roots.example.json` | Minimal template for new sites |
+| `jira/team-roots.json` | v3: libraries (spaces) + teams (boards + mounts) |
+| `jira/team-roots.example.json` | Path C single-library template |
+| `jira/team-roots.v3.example.json` | Multi-mount illustration only |
 | `jira/teams/*.json` | Per-team classify facets (fill after strategy) |
 
 ---

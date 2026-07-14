@@ -184,7 +184,7 @@ Pipeline outputs under by-root (`curated/`, `extracted/`, `materialized/`) are l
 | [WALKTHROUGH.md](WALKTHROUGH.md) | Paths A–C: demo → with/without brief → real wiki |
 | [INSTALL.md](INSTALL.md) | Clone (only supported install) |
 | [docs/METHODOLOGY.md](docs/METHODOLOGY.md) | Confirm-gated Compose |
-| [docs/TEAM_ROOTS_V3.md](docs/TEAM_ROOTS_V3.md) | Draft: one space = one library; teams mount many |
+| [docs/TEAM_ROOTS_V3.md](docs/TEAM_ROOTS_V3.md) | One space = one library; teams mount libraries (Path C single-lib ready) |
 | [docs/demo/](docs/demo/) | Sample risk and split outputs |
 
 Also: [HARNESS](docs/HARNESS.md) · [CONTRIBUTING](CONTRIBUTING.md) · [CHANGELOG](CHANGELOG.md) · [SECURITY](SECURITY.md) · [MARKETPLACE](docs/MARKETPLACE.md) · [skills README](.cursor/skills/README.md)

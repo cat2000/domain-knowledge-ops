@@ -28,13 +28,14 @@ If the user sets **`team=<key>`** (`team-roots.json`) or **`root-id=<ID>`**: loc
 
 ## 2. Resolve team and on-disk root
 
-The team table is **not** a fixed three rows: use `teams` in `domain-knowledge/jira/team-roots.json` (any N keys). Shipped `demo` is an example only.
+The team table is **not** a fixed three rows: use `teams` in `domain-knowledge/jira/team-roots.json` (any N keys). Shipped `demo` is an example only. **v3**: Confluence `root_id` / overview / deliver map live on `libraries.*`; each team mounts `libraries[]` (Path C: usually one). Resolvers flatten the primary (first) mount onto `team.root_id` for callers.
 
 | Field | Meaning |
 |-------|---------|
-| `team` key | Name in JSON (e.g. `demo`, `orders`) |
-| `root_id` | Confluence on-disk root → `curated/by-root/<root_id>/` |
-| `aliases` | Optional aliases equivalent to the key |
+| `team` key | Name under `teams` (e.g. `demo`) |
+| `libraries[]` | Mounted library keys (ordered; first = primary) |
+| `root_id` | On-disk root from primary library → `curated/by-root/<root_id>/` |
+| `aliases` | Optional aliases equivalent to the team key |
 
 SSOT: `domain-knowledge/jira/team-roots.json` · resolver: `scripts/teams/registry.py`.
 

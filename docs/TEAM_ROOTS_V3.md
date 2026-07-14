@@ -1,4 +1,4 @@
-# team-roots v3 draft — one space = one library; teams mount many
+# team-roots v3 — one space = one library; teams mount many
 
 Status: **single-library Path C ready** — shipped `team-roots.json` / `team-roots.example.json` are **v3**; `@setup-domain-ops` writes v3; normalize still expands legacy v2 and flattens primary mount for callers. Full multi-library classify/risk (beyond primary mount) is still a later slice.
 

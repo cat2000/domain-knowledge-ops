@@ -14,7 +14,7 @@
 | [`domain-knowledge/distill-document-skeleton.md`](../../domain-knowledge/distill-document-skeleton.md) | 工作稿骨架 · zh: [`distill-document-skeleton.zh-CN.md`](../../domain-knowledge/distill-document-skeleton.zh-CN.md) |
 | [`domain-knowledge/language/glossary.md`](../../domain-knowledge/language/glossary.md) | 统一语言 |
 | [`domain-knowledge/language/deliverable-locale-tokens.json`](../../domain-knowledge/language/deliverable-locale-tokens.json) | 本地语言标签/文件名（`deliverable_locale`） |
-| [`domain-knowledge/jira/team-roots.json`](../../domain-knowledge/jira/team-roots.json) | 团队 `root_id`、Jira、deliver 配置 |
+| [`domain-knowledge/jira/team-roots.json`](../../domain-knowledge/jira/team-roots.json) | v3：`libraries`（space/`root_id`/deliver）+ `teams`（board + 挂载） |
 
 ---
 
