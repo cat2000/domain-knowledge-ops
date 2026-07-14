@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Install narrative** — clone is the **only** supported install; removed `npx skills add` install examples (skill-folder copy is not an onboarding path; `skills/` kept for discovery only)
 - **Path B** — with-vs-without brief contrast via [`docs/BENCHMARK.md`](docs/BENCHMARK.md) (not a same-output re-run of Path A)
+- **`setup-domain-ops`** — slim dialogue: company/intro → industry module template (confirm) → space URL(s) → board id(s); see [`docs/TEAM_ROOTS_V3.md`](docs/TEAM_ROOTS_V3.md)
+
+### Added
+
+- [`docs/TEAM_ROOTS_V3.md`](docs/TEAM_ROOTS_V3.md) + [`team-roots.v3.example.json`](domain-knowledge/jira/team-roots.v3.example.json) — one Confluence **space** = one **library**; Jira teams mount `libraries[]` (multi-space compose deferred)
 
 ### Fixed
 

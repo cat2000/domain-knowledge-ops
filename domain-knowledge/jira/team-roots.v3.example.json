@@ -1,0 +1,89 @@
+{
+  "version": 3,
+  "defaults": {
+    "deliverable_locale": "en",
+    "atlassian_site": "https://your-site.atlassian.net",
+    "default_team": "demo",
+    "default_library": "demo"
+  },
+  "libraries": {
+    "demo": {
+      "display_name": "Demo space library",
+      "library_id": "100001",
+      "root_id": "100001",
+      "space_key": "DEMO",
+      "confluence_overview": "https://your-site.atlassian.net/wiki/spaces/DEMO/overview?homepageId=100001",
+      "s2_profile": "default",
+      "deliver_by_proposition": {
+        "orders": ["orders", "orders-domain-brief.md"],
+        "identity": ["identity", "identity-domain-brief.md"],
+        "checkout": ["checkout", "checkout-domain-brief.md"]
+      }
+    },
+    "orders": {
+      "display_name": "Orders space",
+      "library_id": "200001",
+      "root_id": "200001",
+      "space_key": "ORDERS",
+      "confluence_overview": "https://your-site.atlassian.net/wiki/spaces/ORDERS/overview?homepageId=200001",
+      "s2_profile": "default",
+      "deliver_by_proposition": {
+        "ordering": ["ordering", "ordering-domain-brief.md"]
+      }
+    },
+    "payments": {
+      "display_name": "Payments space (cross-team)",
+      "library_id": "200002",
+      "root_id": "200002",
+      "space_key": "PAY",
+      "confluence_overview": "https://your-site.atlassian.net/wiki/spaces/PAY/overview?homepageId=200002",
+      "s2_profile": "default",
+      "deliver_by_proposition": {
+        "payments": ["payments", "payments-domain-brief.md"]
+      }
+    }
+  },
+  "teams": {
+    "demo": {
+      "libraries": ["demo"],
+      "display_name": "Demo Product Team",
+      "attribution_config": "domain-knowledge/jira/teams/demo.json",
+      "aliases": ["default"],
+      "jira": {
+        "agile_team": "Demo Product Team",
+        "board_id": 1,
+        "board_name": "Demo Board",
+        "jql_base": "\"agile team\"[dropdown] = \"Demo Product Team\"",
+        "issuetypes": ["Epic", "Story", "Bug", "Task", "Spike"],
+        "order": "created ASC, key ASC",
+        "hierarchy_filter": "parent",
+        "batch_limit": 100,
+        "smoke_limit": 10,
+        "sprint_issue_cap": 2000,
+        "sprint_issue_order": "key ASC",
+        "sprint_filter_origin_board": false,
+        "time_window_months": 3,
+        "default_start_date": "2024-01-01"
+      }
+    },
+    "orders-web": {
+      "libraries": ["orders", "payments"],
+      "display_name": "Orders Web",
+      "jira": {
+        "board_id": 101,
+        "board_name": "Orders Web",
+        "jql_base": "project = ORD"
+      }
+    },
+    "orders-api": {
+      "libraries": ["orders"],
+      "display_name": "Orders API",
+      "jira": {
+        "board_id": 102,
+        "board_name": "Orders API",
+        "jql_base": "project = OAPI"
+      }
+    }
+  },
+  "_comment": "One Confluence space = one library. Teams mount libraries[] and share a board_id. Multi-space compose is deferred. See docs/TEAM_ROOTS_V3.md."
+}

@@ -13,6 +13,8 @@ Edit [`domain-knowledge/jira/team-roots.json`](domain-knowledge/jira/team-roots.
 
 Ships with one demo team (`demo`, root `100001`, placeholder Atlassian URLs). Domain modules are **not** pre-cut — fill [`strategy.md`](domain-knowledge/strategy.md) §2 via `@setup-domain-ops`, then derive profiles before **S2** Recognize.
 
+**Draft (v3):** one Confluence **space** = one **library**; each Jira **team** mounts `libraries[]` — [`docs/TEAM_ROOTS_V3.md`](docs/TEAM_ROOTS_V3.md).
+
 ---
 
 ## Process tokens (use consistently)

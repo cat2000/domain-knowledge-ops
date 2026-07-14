@@ -1,68 +1,86 @@
 ---
 name: setup-domain-ops
 description: >-
-  One-time setup: Atlassian site, team roots, fill strategy.md §2 via dialogue,
-  then derive s2-domain-profiles / industry seeds. Run before wiki sync.
+  One-time setup: credentials, company/business intro → industry module
+  template (confirm), Confluence space URL(s), Jira board id(s). Derives
+  strategy §2 draft and profiles before wiki sync. See docs/TEAM_ROOTS_V3.md.
 disable-model-invocation: true
 ---
 
 # setup-domain-ops
 
-Configure this repository for **your** Confluence + Jira tenant, then **derive domain cut lines from strategy** — not from any shipped industry template.
+Configure this repo for **your** tenant with a **short** dialogue.  
+Target model ([`docs/TEAM_ROOTS_V3.md`](../../../docs/TEAM_ROOTS_V3.md)): **one Confluence space = one library**; each Jira team mounts `libraries[]`. Until v3 JSON is wired, still write today’s `team-roots.json` shape (one team record can hold overview + board); keep the **same slim questions**.
 
 ## When to run
 
-- First clone of this open-source pack
-- Adding a new product team / Confluence root
+- First clone of this pack
+- Adding a Confluence space (library) or Jira board (team)
 - Changing deliverable locale (`zh-CN` / `en`)
-- Refreshing domain modules after strategy changes
+- Refreshing module cuts after strategy changes
 
 ## Agent checklist
 
-### A. Credentials & teams
+### A. Credentials
 
-1. Ensure root `.env` exists (`cp .env.example .env`) and ask user for:
+1. Ensure root `.env` exists (`cp .env.example .env`) and collect:
    - `ATLASSIAN_EMAIL` / `ATLASSIAN_API_TOKEN`
-   - `ATLASSIAN_BASE_URL` and `CONFLUENCE_BASE_URL` (never leave placeholder in production)
-2. If `domain-knowledge/jira/team-roots.json` still has `your-site.atlassian.net`, offer to start from `team-roots.example.json`.
-3. For each team, collect and write into `team-roots.json`:
-   - `root_id` (Confluence page id)
-   - `confluence_overview` URL
-   - `jira.board_id`, `jira.jql_base`, `jira.agile_team`
-   - `deliver_by_proposition` map (slug → `[dir, filename]`) — may be filled after themes are known
-   - optional `aliases` / `s2_profile: "default"` when using the root profile file
-4. Set `defaults.deliverable_locale` (`zh-CN` or `en`).
+   - `ATLASSIAN_BASE_URL` and `CONFLUENCE_BASE_URL` (no placeholders in production)
+2. Set `defaults.deliverable_locale` (`zh-CN` or `en`) when editing `team-roots.json`.
+3. If `team-roots.json` still has `your-site.atlassian.net`, offer to copy from `team-roots.example.json`.
 
-### B. Fill `strategy.md` §2 (required)
+### B. Company intro → industry template (required)
 
-5. Open [`domain-knowledge/strategy.md`](../../../domain-knowledge/strategy.md). Keep §1 methodology; **fill §2** with the user's answers:
-   - org / product boundary
-   - subjects & markets
-   - 3–8 candidate domain modules (business names + one-line axis)
-   - typical eligibility→branch→outcome questions
-   - time cycles; strengthen/weaken lists; policy vs implementation
-6. Point at [`strategy.example.md`](../../../domain-knowledge/strategy.example.md) only as **format** (fictional Acme Orders) — **do not** copy its slugs into production profiles.
-7. Stop if §2 still says placeholder / to-fill in critical rows; do not invent a fake industry.
+4. Ask only:
+   - **Company / product name**
+   - **Short business intro** (industry, who rules apply to, one-line in-domain vs out-of-domain)
+5. As an **industry expert**, draft a **best-practice domain cut** (not product rule text):
+   - 3–8 candidate modules (business name + one-line axis)
+   - Light `strategy.md` §2 fill from that draft (subjects, strengthen/weaken, a few adjudication questions)
+6. Use [`strategy.example.md`](../../../domain-knowledge/strategy.example.md) only as **format**. Do **not** copy Acme / demo slugs into production profiles.
+7. **Pause for human confirm** on the module table (edit/rename/drop rows). Do not invent a fake industry if the intro is empty — ask again.
 
-### C. Derive machine profiles (required; human confirm)
+**Template vs truth:** the draft is a **cut template**. Adjudicated rules in briefs come later from Confluence + Jira — never treat the template as SSOT.
 
-8. From filled §2, draft and write:
-   - `domain-knowledge/s2-domain-profiles.json` — `checklist_themes`, `s1_facets`, `s2.primary_facet_to_slug`, `domain_cues`, team-appropriate `strong_cues` / `route_overrides`
-   - `domain-knowledge/s2-propose-industry-seeds.json` — `module_seeds` with `teams: ["<team_key>"]` (keep generic `strategy_dimensions`)
-   - `domain-knowledge/jira/teams/<team>.json` — classify `facets` aligned to the same slugs
-9. **Pause and ask the user to confirm** slugs / axes / keywords before continuing.
-10. After confirm, remind:
+### C. Derive machine profiles (after confirm)
+
+8. From confirmed modules + §2 draft, write:
+   - `domain-knowledge/s2-domain-profiles.json` — themes, facets, cues
+   - `domain-knowledge/s2-propose-industry-seeds.json` — `module_seeds` (team keys as known)
+   - `domain-knowledge/jira/teams/<team>.json` — classify facets aligned to slugs (when team exists)
+9. Do not continue to wiki with empty `checklist_themes`.
+
+### D. Confluence spaces (libraries)
+
+10. For each space, collect **overview URL** (or homepage id). One space → one library / one `root_id` subtree.
+11. Write into `team-roots.json` (v2 today: on the team or shared root fields; v3 later: `libraries.*`).
+12. Remind next step per space:
     ```text
-    @generate-knowledge-from-wiki <their overview URL>
+    @generate-knowledge-from-wiki <overview-URL>
     ```
-11. Remind: do **not** commit production `curated/` / `extracted/` / `materialized/` or `.env` to a public fork.
+
+### E. Jira boards (teams)
+
+13. For each delivery team, collect **board_id** (+ optional display name / agile team / jql_base).
+14. Record which **libraries** this board uses (default: libraries just configured).
+15. Write `jira.board_id` (and related) into `team-roots.json`; remind:
+    ```text
+    @add-knowledge-from-jira team=<team_key>
+    ```
+
+### F. Hygiene
+
+16. Remind: do **not** commit production `curated/` / `extracted/` / `materialized/` or `.env` to a public fork.
 
 ## Hard stops
 
-- Empty `checklist_themes` in `s2-domain-profiles.json` → wiki recognize / sync classify must not pretend modules exist. Tell user to finish B→C first.
-- Never reintroduce shipped demo modules (`checkout`, `compensation-cbp`, …) unless the user's strategy actually contains them.
+- Empty company/intro and empty module table → stop; do not invent an industry.
+- Empty `checklist_themes` → do not pretend Recognize/wiki modules exist.
+- Never reintroduce shipped demo modules (`checkout`, `compensation-cbp`, …) unless the user’s confirmed strategy contains them.
+- Do not scrape the public web into brief rule bodies; optional public hints for *module naming* only, always confirmed.
 
 ## Out of scope
 
-- Running full S1–S6 for them (hand off to `@generate-knowledge-from-wiki`)
-- Parsing `strategy.md` with scripts (Agent derives JSON; scripts only read JSON)
+- Running full S1–S7 (hand off to `@generate-knowledge-from-wiki`)
+- Parsing `strategy.md` with scripts (agent derives JSON; scripts read JSON only)
+- Multi-space merge into one `_deliver/` (deferred; see TEAM_ROOTS_V3)
