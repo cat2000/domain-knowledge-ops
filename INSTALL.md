@@ -1,13 +1,14 @@
 # Install Domain Knowledge Ops skills
 
-**Supported path: clone this repository and open the repo root in Cursor.**  
+**Only supported path: clone this repository and open the repo root in Cursor.**
+
 Demo fixtures, `.env.example`, `domain-knowledge/`, pipeline `scripts/`, rules, and contracts all live in the checkout. That is what newcomers and real work need.
 
-Skills load from [`.cursor/skills/`](.cursor/skills/). Top-level [`skills/`](skills/) symlinks the same folders for discovery tools — that does **not** mean skill-only install is enough to run the product.
+Skills load from [`.cursor/skills/`](.cursor/skills/). Top-level [`skills/`](skills/) mirrors the same folders so skill-format crawlers can discover `SKILL.md` files — **discovery plumbing, not a second install method**.
 
 Pipeline **S1–S7**: [domain-knowledge-pipeline-contract.md](.cursor/contracts/domain-knowledge-pipeline-contract.md).
 
-## Recommended: clone + open repo root (Cursor)
+## Clone + open repo root (Cursor)
 
 ```bash
 git clone https://github.com/cat2000/domain-knowledge-ops.git
@@ -25,44 +26,22 @@ Offline demo (no Atlassian). **`DEMO-1`** is a shipped fake key under [`domain-k
 
 Real tenant (credentials): copy [`.env.example`](.env.example) → `.env`, then [WALKTHROUGH.md](WALKTHROUGH.md) **Path C**.
 
-## What each path covers
+## What you get from a clone
 
 | Need | Use |
 |------|-----|
-| Offline demo (`DEMO-1` / `DEMO-BILL-1`) | **Clone** + open repo root |
-| Setup + Confluence → **S7** briefs | **Clone** + `.env` + `@setup-domain-ops` / `@generate-knowledge-from-wiki` |
-| Story risk/split on real Jira | **Clone** with briefs under `domain-knowledge/curated/` (or fixtures for DEMO) |
-| Jira history into Compose | **Clone** + `@add-knowledge-from-jira` |
+| Offline demo (`DEMO-1` / `DEMO-BILL-1`) | Open repo root → `@requirement-risk` / `@ticket-splitter` |
+| Setup + Confluence → **S7** briefs | `.env` + `@setup-domain-ops` / `@generate-knowledge-from-wiki` |
+| Story risk/split on real Jira | Briefs under `domain-knowledge/curated/` (or fixtures for DEMO) |
+| Jira history into Compose | `@add-knowledge-from-jira` |
 
-## Optional: `npx skills` (limited — not for newcomers)
+## Not an install path
 
-`npx skills add` only copies **skill markdown folders** into another project (often under `.agents/skills/`). It does **not** install:
-
-- `.env.example`, `WALKTHROUGH.md`, product README
-- `domain-knowledge/` (strategy, team-roots, **fixtures**)
-- pipeline `scripts/`, `.cursor/rules/`, `.cursor/contracts/`, `_shared/`
-
-So: **no reliable offline DEMO**, **no Path C**, broken relative links to rules/contracts. Do **not** recommend this as the install path in posts or onboarding.
-
-Use only if you already maintain briefs/scripts in the target repo and want skill text copied in:
-
-```bash
-npx skills add cat2000/domain-knowledge-ops --list   # discovery / telemetry only
-
-# Advanced — expect incomplete workspace; prefer clone instead
-npx skills add cat2000/domain-knowledge-ops \
-  --skill requirement-risk \
-  --skill ticket-splitter \
-  -a cursor -y
-```
-
-For anything beyond “skill files appeared,” **clone**.
+Tools that only copy skill folders into another project (for example `npx skills add`) **omit** fixtures, `.env.example`, scripts, rules, and contracts. They are **not** a supported way to run this pack. Do not use them in posts or onboarding. Keep using **clone**.
 
 ## Other harnesses (Claude Code / Codex)
 
-Still prefer a **full clone** as the workspace (or keep this repo checked out beside the app repo). Symlink or copy `.cursor/skills/<name>` only after fixtures/scripts/`.env` are available from the clone.
-
-Skill-only copy into a harness directory has the **same gaps** as `npx skills` above.
+Open a **full clone** as the workspace (or keep this repo checked out beside the app). Symlink `.cursor/skills/<name>` only if the clone already provides fixtures and scripts.
 
 ## Complement, don’t replace
 

@@ -15,22 +15,19 @@ Use this checklist for release polish and marketplace distribution.
 
 ## Discovery vs install (important for posts)
 
-**Onboarding narrative in every post:** `git clone` → open repo root → `@requirement-risk DEMO-1 team=demo`.  
-Do **not** lead with `npx skills add` — that path does not ship fixtures / `.env.example` / scripts ([INSTALL.md](../INSTALL.md)).
+**Onboarding in every post:** `git clone` → open repo root → `@requirement-risk DEMO-1 team=demo`.  
+**Do not** present skill-folder copy tools as an install path ([INSTALL.md](../INSTALL.md)).
 
-[agentskills.io](https://agentskills.io) is the **open skill format / spec**, not a submit portal.
+[agentskills.io](https://agentskills.io) is the **open skill format / spec**, not a submit portal. Top-level `skills/` exists so crawlers can find `SKILL.md` — not so newcomers skip cloning.
 
 | Channel | Role | What we do |
 |---------|------|------------|
-| **GitHub clone** | **Supported product install** | Push README / Discussions / Release with clone-first steps |
-| **`npx skills add --list`** | Discovery / skills.sh telemetry only | Keep `skills/` + `SKILL.md` valid; do not claim full install |
-| **[skills.sh](https://skills.sh)** | Leaderboard from install telemetry | Optional; clone remains the aha path |
-| **SkillsMP / crawlers** | Index public `SKILL.md` | Topics + public repo (done) |
+| **GitHub clone** | **Only supported install** | README / Discussions / Release lead with clone |
+| **Skill-format crawlers / skills.sh** | May index or rank public `SKILL.md` | Keep `skills/` + `SKILL.md` valid; never claim that equals product install |
 | Optional registries | [skills.re](https://skills.re), [agentskillsource.com](https://agentskillsource.com) | Only if you want a second listing |
 
-- [x] Verify: `npx skills add cat2000/domain-knowledge-ops --list` (6 skills discovered)
+- [x] Docs: clone-only install; no npx install examples (INSTALL / README / HARNESS)
 - [x] Document the four headline skills on the Release notes
-- [x] Docs state clone-first; npx is limited (INSTALL / README / HARNESS)
 - [ ] Optional: third-party registry submit — not required
 
 ## Cursor marketplace / plugin

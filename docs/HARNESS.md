@@ -1,7 +1,7 @@
 # Multi-harness notes
 
-**Primary install: clone this repository and open the repo root.**  
-Fixtures, `.env.example`, `domain-knowledge/`, `scripts/`, rules, and contracts travel with the checkout. Skills under [`.cursor/skills/`](../.cursor/skills/) (mirrored via [`skills/`](../skills/)) are not a standalone product.
+**Install: clone this repository and open the repo root.**  
+Fixtures, `.env.example`, `domain-knowledge/`, `scripts/`, rules, and contracts travel with the checkout. Skills under [`.cursor/skills/`](../.cursor/skills/) (mirrored via [`skills/`](../skills/) for discovery) are not a standalone product.
 
 ## Cursor (primary)
 
@@ -9,19 +9,13 @@ Fixtures, `.env.example`, `domain-knowledge/`, `scripts/`, rules, and contracts 
 2. Skills load from `.cursor/skills/` automatically.
 3. Offline smoke: `@requirement-risk DEMO-1 team=demo`
 
-## `npx skills` / agentskills-style (optional, limited)
-
-```bash
-npx skills add cat2000/domain-knowledge-ops --list
-```
-
-`--list` is fine for discovery. **Do not** treat `npx skills add … -a cursor` as onboarding: it copies skill folders only (often into `.agents/skills/`) and omits fixtures, `.env.example`, scripts, rules, and contracts. Offline `DEMO-*` and Path C need a **clone**. Details: [`INSTALL.md`](../INSTALL.md).
-
 ## Claude Code / Codex
 
-1. Prefer opening a **clone** of this repo (or keep it checked out next to the app).
+1. Open a **clone** of this repo (or keep it checked out next to the app).
 2. Optionally symlink `.cursor/skills/<name>` into the harness skills directory **after** the clone provides fixtures/scripts.
 3. Same offline smoke: `@requirement-risk DEMO-1 team=demo` from the clone workspace.
+
+Skill-folder-only copies into another project are **not** supported (same gaps as omitting fixtures/scripts). See [`INSTALL.md`](../INSTALL.md).
 
 ## Expected smoke outputs
 

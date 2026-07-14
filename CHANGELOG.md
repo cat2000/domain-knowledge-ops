@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **Install narrative** — clone-the-repo is the only supported onboarding/Path C path; `npx skills add` documented as limited (skill folders only, no fixtures / `.env.example` / scripts)
+- **Install narrative** — clone is the **only** supported install; removed `npx skills add` install examples (skill-folder copy is not an onboarding path; `skills/` kept for discovery only)
 
 ### Fixed
 

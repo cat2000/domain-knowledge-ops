@@ -1,7 +1,5 @@
-# skills/
+# `skills/` · discovery mirror
 
-Symlinks to [`.cursor/skills/`](../.cursor/skills/) for installers that discover the conventional `skills/<name>/SKILL.md` layout ([agentskills.io](https://agentskills.io), `npx skills add`).
+Symlinks to [`.cursor/skills/`](../.cursor/skills/) so skill-format crawlers can find `skills/<name>/SKILL.md` ([agentskills.io](https://agentskills.io) layout).
 
-**Product install is still clone-the-repo** — `npx skills` copies skill folders only and is not enough for DEMO or Path C. See [`INSTALL.md`](../INSTALL.md).
-
-Canonical edits happen under `.cursor/skills/`. See [`INSTALL.md`](../INSTALL.md).
+**Product install is clone-the-repo only.** See [`INSTALL.md`](../INSTALL.md).
