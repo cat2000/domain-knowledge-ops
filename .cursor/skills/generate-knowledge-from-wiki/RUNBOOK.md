@@ -169,7 +169,15 @@ This script outputs:
 
 Confirmation-page rules: [`domain-module-checklist.mdc`](../../rules/domain-module-checklist.mdc) · Template: [`DOMAIN_MODULE_CHECKLIST.template.md`](../../../domain-knowledge/DOMAIN_MODULE_CHECKLIST.template.md) (one field-block per module — not wide tables).
 
-**Prep-complete report**: confirmation page + closure are both in place; **no** `_aggregate` / brief yet. **Pause** → human marks **confirm**.
+**Prep-complete report**: confirmation page + closure are both in place; **no** `_aggregate` / brief yet. Then **required**:
+
+```bash
+python3 scripts/distill/tagging_acceptance.py --root-id <R>
+```
+
+Show `TAGGING_ACCEPTANCE.md` to the human. **Pause** → human marks **confirm** only for rows the report allows. **Do not** instruct “confirm all modules.”
+
+If `board_id` is configured and the report shows Jira attribution = 0, recommend `@add-knowledge-from-jira team=<key>` (or ingest+classify), then re-run S2 + tagging acceptance before compose.
 
 **Post-S2 gate (recommended)**: `python3 scripts/distill/coverage.py --root-id <R>`
 
@@ -182,11 +190,13 @@ Confirmation-page rules: [`domain-module-checklist.mdc`](../../rules/domain-modu
 
 | Action | Description |
 |------|------|
-| Human edits the confirmation page | Set module **Status** → **`confirmed`** (field-block layout) **only when** the row has tagged Confluence/Jira sources in closure (see Note). Zero-source rows stay **`pending`**. |
+| Human edits the confirmation page | Set module **Status** → **`confirmed`** (field-block layout) **only when** tagging acceptance says OK (tagged Confluence/Jira sources in closure). Zero-source rows stay **`pending`**. |
 | **`continue`** | Runs **S3→S7** on **confirmed rows** (can be scoped to a slug) |
 | No **confirm** yet | **Do not** run S3 / S4 / S5 / S6 |
 
-**Empty evidence**: if Note says no tagged sources (or `pages_with_props=0` after S3), **do not** mark **confirm**. Leave pending / thin placeholder until sources exist. Confirming an empty module only authorizes a non-committal S7 stub — that is a process failure, not a shippable brief.
+**Empty evidence**: if Note / tagging report says no tagged sources (or `pages_with_props=0` after S3), **do not** mark **confirm**. Leave pending. Confirming an empty module is a process failure, not a shippable brief.
+
+**Low evidence**: optional confirm only if intentional; S7 must open with an **Evidence insufficiency** banner and list residual gaps under Open items; `@requirement-risk` must treat that brief as non-SSOT in `EVIDENCE_COVERAGE`.
 
 On rescan, **merge incrementally**; **preserve** manually marked **confirm**. S2 refreshes **Note** from Status + source count (clears stale “awaiting human confirm” once Status is confirmed).
 
@@ -231,6 +241,14 @@ S3.5 (new, script-based proposition intermediate layer):
   - `proposition_quality` performs hard validation on `doc_intent`/`candidate_type` (field validity, consistency, missing values)
   - The intent-triage ratio gate only triggers a hard failure when there is "strong title match + sufficient sample size" (e.g., excessive contract leakage on release pages)
   - Amplifying heuristic `doc_intent` error directly into a full-pipeline failure is forbidden
+
+**After S3 (required before drafting S6/S7):**
+
+```bash
+python3 scripts/distill/tagging_acceptance.py --root-id <R> --after-s3
+```
+
+Compare closure counts vs `pages_with_props` vs (later) S7 rule counts. Under-write → Open items or do not claim the module is fully covered. `pages_with_props=0` → do not ship a committed S7.
 
 S3.6 (minimal derived audit view):
 
@@ -379,7 +397,15 @@ S7 forbids:
 
 When source language already equals `deliverable_locale`, still emit the canonical S7 filename (content may match S6).
 
-**Compose complete (single topic)**: **S7 locale brief** exists. **Repo-wide gate**: `domain_check.py distill` (**post-S7**).
+**Evidence insufficiency (mandatory when low/zero tagged sources or `pages_with_props=0`):** place this banner at the top of S7 (locale labels OK):
+
+```markdown
+> **Evidence insufficiency** — This module lacks enough tagged Confluence/Jira sources for committed adjudication. Treat as non-SSOT for `@requirement-risk` / `@ticket-splitter` until sources are remounted. See Open items.
+```
+
+Prefer reverting Status to **pending** instead of shipping a stub. If the human insists on a placeholder file, the banner + Open items are required.
+
+**Compose complete (single topic)**: **S7 locale brief** exists **without** an insufficiency banner, or with banner explicitly acknowledged as non-SSOT. **Repo-wide gate**: `domain_check.py distill` (**post-S7**).
 
 ### S6 · Brief (legacy heading — superseded)
 

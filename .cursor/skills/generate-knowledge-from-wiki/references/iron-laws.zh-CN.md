@@ -11,7 +11,9 @@
 2. **成稿 Compose**（**`确认`** 后 **`继续`**）：**S3 → S4 → S5 → S6 → S7**（仅 `确认` 行）
 3. **S3 只做保真分轨、索引与可验证传递，S4 建领域模型，S5 基于模型生成工作稿且语言与源一致，S6 产出原语言裁决定稿（不翻译），S7 仅做目标语言（`deliverable_locale`）表达转换**（不得引入新语义）
 4. **`确认`** = 认可领域块划分，授权 Compose；**≠** 已完成定稿（需 S6 + S7）
-4a. **零 tagged 来源不得确认**：closure 中该 slug 无 Confluence/Jira 页（S2 备注告警 / `pages_with_props=0`）时保持 **待确认**。禁止为「勾完清单」而确认；空确认只会产出不可对外承诺的薄占位。
+4a. **零 tagged 来源不得确认**：closure 中该 slug 无 Confluence/Jira 页（S2 备注 / `tagging_acceptance.py` / `pages_with_props=0`）时保持 **待确认**。禁止为「勾完清单」而确认。
+4b. **确认前打标验收**：S2 后运行 `tagging_acceptance.py --root-id <R>` 并展示报告；禁止引导「全部确认」。行业切块只是题面；完整性靠双向打标 + 报告。已配置 board 但 Jira attribution=0 = 打标不完整，应先补 Jira。
+4c. **成稿穷尽度**：S3 后跑 `tagging_acceptance.py --after-s3`。规则数远小于 `pages_with_props` → 写入待确认或不得声称「已齐」。低证据 S7 必须带 **证据不足** 横幅（对 risk 非 SSOT）。
 5. S1 `facet-*` = 机器粗分，**≠** checklist 确认 slug（命题级认域在 **S2**）
 6. 正本在 Confluence；勿长期手改 `materialized/` 当权威
 7. **S1 完整性铁律**：抽取报告有 page error 时默认不得进入 S2；只有显式 `--allow-partial` 才可写 partial handoff，且必须把缺页风险带入后续判断

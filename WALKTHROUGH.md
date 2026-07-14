@@ -59,23 +59,24 @@ Map: [`saas-billing/INDUSTRY.md`](domain-knowledge/fixtures/saas-billing/INDUSTR
 
 **Single library first:** one Confluence space + one Jira board. Config is **v3** (`libraries` + `teams` mounting them) — see [`docs/TEAM_ROOTS_V3.md`](docs/TEAM_ROOTS_V3.md). Copy [`team-roots.example.json`](domain-knowledge/jira/team-roots.example.json) if you need a clean template.
 
-Five **user** actions. Do **not** pre-read the full RUNBOOK. When the agent is mid-run, open [`FIRST-RUN.md`](.cursor/skills/generate-knowledge-from-wiki/FIRST-RUN.md) for the matching step only.
+**User** actions. Do **not** pre-read the full RUNBOOK. When the agent is mid-run, open [`FIRST-RUN.md`](.cursor/skills/generate-knowledge-from-wiki/FIRST-RUN.md) for the matching step only.
 
 1. **Credentials** — `cp .env.example .env` and set Atlassian URLs + token
-2. **Setup** — `@setup-domain-ops` — company/product intro → **confirm** module cut → space overview URL → board id  
+2. **Setup** — `@setup-domain-ops` — company/product intro → **confirm** module cut (question axes only) → space overview URL → board id  
    Agent writes `team-roots.json` as **v3** (one `libraries.*` + one `teams.*` with `libraries: [<that key>]`), plus `strategy.md` §2 and profiles
-3. **Point at Confluence** — `@generate-knowledge-from-wiki` + your overview URL — wait for a module checklist (stopping there is success for “prep”)
-4. **Approve modules** — mark checklist rows **confirm** → say **continue** — agent writes **reader briefs** under `_deliver/`  
+3. **Point at Confluence** — `@generate-knowledge-from-wiki` + your overview URL — wait for checklist **and** tagging acceptance report (`tagging_acceptance.py`)
+4. **Jira half (default when board exists)** — `@add-knowledge-from-jira team=<your_team>` if the report shows attribution = 0, then re-run recognize / tagging acceptance
+5. **Approve modules** — mark **confirm** only on rows the report allows (zero-source stay pending) → say **continue** — agent writes **reader briefs** under `_deliver/`  
    (Default resume is **continue**. `@distill-domain-knowledge` is advanced: no re-sync / partial step / new chat.)
-5. **Review a real story** — `@requirement-risk PROJ-123 team=<your_team>` → `@ticket-splitter PROJ-123`  
-   (`PROJ-123` is a **placeholder** — replace with your real Jira issue key, e.g. `ABC-42`. It is not shipped in this repo.)  
-   Optional Jira evidence: `@add-knowledge-from-jira team=<your_team>`
+6. **Review a real story** — `@requirement-risk PROJ-123 team=<your_team>` → `@ticket-splitter PROJ-123`  
+   (`PROJ-123` is a **placeholder** — replace with your real Jira issue key, e.g. `ABC-42`. It is not shipped in this repo.)
 
 | You say / do | What lands on disk |
 |--------------|-------------------|
 | `@setup-domain-ops` | v3 `team-roots.json` + `strategy.md` §2 + profiles |
-| `@generate-knowledge-from-wiki` + URL | **S1** Ingest + **S2** Recognize → checklist under `by-root/<root_id>/` |
-| **confirm** then **continue** | Compose **S3–S7** → reader brief (`*-domain-brief.md`) |
+| `@generate-knowledge-from-wiki` + URL | **S1** + **S2** → checklist + `TAGGING_ACCEPTANCE.md` |
+| `@add-knowledge-from-jira` (when board set) | Jira attribution into the same root (completes bidirectional tagging) |
+| **confirm** (OK rows only) then **continue** | Compose **S3–S7** → reader brief (`*-domain-brief.md` / locale name) |
 | `@requirement-risk` / `@ticket-splitter` | Read that reader brief as evidence |
 
 Install = **clone this repo**: [`INSTALL.md`](INSTALL.md).  
@@ -90,4 +91,4 @@ Pack layout check (no network): `python3 scripts/verify_skills_pack.py`
 | A | Risk report has Scope + MUST items; split has observable `done_when` faces |
 | B | Path B (without brief) report differs from Path A on at least one concrete point |
 | B2 | Risk report for `DEMO-BILL-1` cites Active + proration preview from the billing brief |
-| C | Modules marked **confirm** → reader briefs under `_deliver/` → risk/split on a real key |
+| C | Tagging acceptance shown → confirm only OK rows → (Jira if board) → S7 for those rows → risk/split on a real key; zero-source modules still **pending** |

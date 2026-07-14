@@ -43,7 +43,7 @@ Write **`version: 3`** JSON. Do **not** write the old v2 shape (root/overview on
 6. Use [`strategy.example.md`](../../../domain-knowledge/strategy.example.md) only as **format**. Do **not** copy Acme / demo slugs into production profiles.
 7. **Pause for human confirm** on the module table (edit/rename/drop rows). Do not invent a fake industry if the intro is empty — ask again.
 
-**Template vs truth:** the draft is a **cut template**. Adjudicated rules in briefs come later from Confluence + Jira — never treat the template as SSOT.
+**Template vs truth:** the draft is a **cut template** (question axes / 大类). It does **not** mean domain knowledge is already covered. Completeness comes later from Confluence + Jira via **bidirectional tagging** (S2 closure) and `tagging_acceptance.py` — say this explicitly when the human confirms the table.
 
 ### C. Derive machine profiles (after confirm)
 
@@ -76,11 +76,13 @@ Write **`version: 3`** JSON. Do **not** write the old v2 shape (root/overview on
     - `libraries: ["<library_key>", …]` — Path C single-lib: one entry (the library from D)
     - `jira.board_id` and related fields; `attribution_config` when present
     - **Do not** put `root_id` / `confluence_overview` / `deliver_by_proposition` on the team (those live on the library)
-16. Set `defaults.default_team` when there is a primary team. Remind:
+16. Set `defaults.default_team` when there is a primary team. Remind Path C order:
     ```text
+    @generate-knowledge-from-wiki <overview-URL>
+    # then tagging acceptance; if board_id set:
     @add-knowledge-from-jira team=<team_key>
     ```
-
+    Jira is the **default** second half of bidirectional tagging when a board exists — not an optional appendix.
 ### F. File shape checklist (before finish)
 
 17. `team-roots.json` must have `"version": 3`, non-empty `libraries`, and every team with non-empty `libraries[]`.

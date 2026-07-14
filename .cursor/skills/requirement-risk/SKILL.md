@@ -125,6 +125,7 @@ Jira key?
 - [`references/presentation.md`](references/presentation.md) · P10: [`../_shared/presentation-p10.md`](../_shared/presentation-p10.md)
 - [`../../contracts/jira-issue-domain-knowledge-context.md`](../../contracts/jira-issue-domain-knowledge-context.md)
 - Prefer **S7** locale brief under `_deliver/<slug>/` as **evidence** only (`*-domain-brief.md` / `*-领域知识定稿.md` per `deliverable_locale`; fallback: **S6** `*-source-brief.md`, else work draft — note in `EVIDENCE_COVERAGE`); do not write `curated/`.
+- If S7 opens with an **Evidence insufficiency** banner, treat as **non-SSOT** in `EVIDENCE_COVERAGE` (do not ground MUST items solely on that brief).
 
 ## Agent checklist
 

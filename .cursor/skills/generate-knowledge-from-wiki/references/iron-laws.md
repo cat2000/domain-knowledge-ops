@@ -12,7 +12,9 @@
 2. **Compose** after **confirm** + **continue**: S3→S4→S5→**S6→S7** for **confirm** rows only.
 3. S3 = fidelity routing/index/transfer; S4 = domain model; S5 = work draft in source language; **S6** = source-language reader productization (**no new semantics, no translation**); **S7** = locale conversion of S6 only (`deliverable_locale`; **expression only**).
 4. **confirm** ≠ briefs already exist (need S6 + S7 when locale differs or when the canonical locale filename is required).
-4a. **Zero tagged sources → do not confirm**: if closure has no Confluence/Jira page for a slug (S2 Note warns / `pages_with_props=0`), keep **pending**. Do not mark **confirm** just to “complete” the checklist; empty confirm only yields a thin non-committal placeholder.
+4a. **Zero tagged sources → do not confirm**: if closure has no Confluence/Jira page for a slug (S2 Note / `tagging_acceptance.py` warns / `pages_with_props=0`), keep **pending**. Do not mark **confirm** just to “complete” the checklist; empty confirm is a process failure.
+4b. **Tagging acceptance before confirm**: after S2, run `tagging_acceptance.py --root-id <R>` and show the report. Do not instruct “confirm all.” Industry cuts are axes; bidirectional tagging + report = completeness gate. Wiki-only with a configured board = incomplete tagging — recommend Jira prep first.
+4c. **Compose exhaustiveness**: after S3, run `tagging_acceptance.py --after-s3`. Under-write (few rules vs many `pages_with_props`) → Open items or no “fully covered” claim. Low-evidence S7 requires an **Evidence insufficiency** banner (non-SSOT for risk).
 5. S1 `facet-*` = machine bucketing ≠ confirmed checklist slug (proposition recognize is S2).
 6. Source of truth is Confluence; do not treat hand-edited `materialized/` as authority.
 7. **S1 integrity**: page errors block S2 unless explicit `--allow-partial` (carry gap risk forward).

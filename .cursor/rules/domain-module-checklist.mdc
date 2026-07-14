@@ -24,7 +24,7 @@ Use only `domain-knowledge/strategy.md` **§2** — **do not** invent a separate
 - **Tagging** = each `materialized/**/*.md` → `_materialization_closure.json`
 - **Forbidden**: paste the same `materialized/` body into multiple output dirs
 - **Scattered-source coverage**: full-text search + semantic gap-fill on `materialized/`; prior stable `glossary.md` is synonym/abbrev hints only, **not** domain-boundary authority. Write completed paths into closure and this page; new terms into **glossary note**; **do not** treat filenames or `facet-*` alone as covered
-- **Pause**: wait for humans to set accepted modules' **Status** to **`confirmed`** — **only if** the row has tagged sources (Note must not say zero sources). Leave empty-evidence rows **pending**.
+- **Pause**: wait for humans to set accepted modules' **Status** to **`confirmed`** — **only if** tagging acceptance (`tagging_acceptance.py`) allows (tagged sources). Leave empty-evidence rows **pending**. Never instruct “confirm all.”
 - On refresh, S2 rewrites **Note** from Status + source count (clears stale “awaiting human confirm” after confirm).
 
 ## 3. Deliver (user says **`continue`**)

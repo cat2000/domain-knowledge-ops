@@ -155,7 +155,15 @@ python3 scripts/distill/s2_recognize.py --root-id <R>
 
 确认页规则：[`domain-module-checklist.mdc`](../../rules/domain-module-checklist.mdc) · 版式：[`DOMAIN_MODULE_CHECKLIST.template.md`](../../../domain-knowledge/DOMAIN_MODULE_CHECKLIST.template.md)。
 
-**备料完成汇报**：确认页 + closure 齐；**尚无** `_aggregate` / 定稿。**暂停** → 人标 **`确认`**。
+**备料完成汇报**：确认页 + closure 齐；**尚无** `_aggregate` / 定稿。然后 **必做**：
+
+```bash
+python3 scripts/distill/tagging_acceptance.py --root-id <R>
+```
+
+向人展示 `TAGGING_ACCEPTANCE.md`。**暂停** → 仅对报告允许的行标 **`确认`**。**禁止**引导「全部确认」。
+
+若已配置 `board_id` 且报告显示 Jira attribution = 0，建议先 `@add-knowledge-from-jira team=<key>`，再重跑 S2 + 打标验收。
 
 **S2 后门禁（建议）**：`python3 scripts/distill/coverage.py --root-id <R>`
 
@@ -168,11 +176,13 @@ python3 scripts/distill/s2_recognize.py --root-id <R>
 
 | 动作 | 说明 |
 |------|------|
-| 人编辑确认页 | 认可行 **「状态」** → **`确认`**（仅当该行有 tagged 来源；备注写明零来源时保持 **待确认**） |
+| 人编辑确认页 | 认可行 **「状态」** → **`确认`**（仅当打标验收允许；零来源保持 **待确认**） |
 | **`继续`** | 对 **`确认` 行** 跑 **S3→S7**（可限定 slug） |
 | 尚无 **`确认`** | **不** 跑 S3 / S4 / S5 / S6 |
 
-**空证据**：备注写明无 tagged 来源（或 S3 后 `pages_with_props=0`）时 **禁止**标 **确认**。空确认只会产出不可对外承诺的薄占位。
+**空证据**：备注 / 打标报告写明无 tagged 来源（或 S3 后 `pages_with_props=0`）时 **禁止**标 **确认**。
+
+**低证据**：仅在有意时确认；S7 顶部必须有 **证据不足** 横幅，缺口写入待确认；risk 在 `EVIDENCE_COVERAGE` 中按非 SSOT 处理。
 
 重扫时 **增量合并**；**保留**人手 **`确认`**。S2 按状态 + 来源数刷新 **备注**（确认后清除过时的「等待人工确认」）。
 
