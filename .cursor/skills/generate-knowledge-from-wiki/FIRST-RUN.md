@@ -39,7 +39,7 @@ After confirm, say **continue** (optionally name a slug):
 
 | # | Action | Artifact |
 |---|--------|----------|
-| 5 | Compose S3→S5 (remount product-surface evidence into **industry axes** — [`references/industry-axis-remount.md`](./references/industry-axis-remount.md)) | work draft |
+| 5 | Compose S3→S5 (land evidence into **industry axes** — [`references/industry-axis-remount.md`](./references/industry-axis-remount.md)) | work draft |
 | 5b | After S3: `python3 scripts/distill/tagging_acceptance.py --root-id <R> --after-s3` | exhaustiveness |
 | 6 | **S6** source-language brief | `_deliver/<slug>/<slug>-source-brief.md` |
 | 7 | **S7** locale brief (`deliverable_locale`) | `…-domain-brief.md` (en); zh-CN filename from tokens |
@@ -48,7 +48,7 @@ After confirm, say **continue** (optionally name a slug):
 
 **Low-evidence / zero-rule S7**: if `pages_with_props=0` or S7 has **zero** `### 规则` while sources exist → **revert confirm** or rewrite. Do not ship empty core-rules. Insufficiency banner alone is only for intentional placeholders (non-SSOT for risk).
 
-Keep **industry adjudication axes**. Remount Mall/Hui/checkout/contest/identity pages into those axes — do not recreate product-surface modules unless strategy changes.
+Keep **industry adjudication axes**. Land sources into those axes by business commitment — do not promote source-tree layout into modules, and do not hard-code tenant remount specials.
 Then: `@requirement-risk KEY` → `@ticket-splitter KEY` (read **S7**).
 
 ## When to open the long RUNBOOK
@@ -67,6 +67,7 @@ Then: `@requirement-risk KEY` → `@ticket-splitter KEY` (read **S7**).
 - Compose without **confirm**
 - Confirm zero-source rows, zero-rule S7 fake coverage, or claim “coverage done” from the industry module table alone
 - Skip tagging acceptance / ignore Jira=0 when a board is configured
-- Recreate Mall/Hui/Gateway/Messaging modules by default instead of remounting into industry axes
-- Invent modules when profiles are empty
-- Expect Path A offline fixture to replace Confluence sync
+- Recreating modules from wiki/Jira filing layout instead of landing into strategy axes
+- Hard-coding tenant product→slug remount tables into the pack
+- Inventing modules when profiles are empty
+- Expecting Path A offline fixture to replace Confluence sync

@@ -31,7 +31,7 @@ Process terms (first mention): **confirm** = approve module cut lines; **source 
 1. **Strategy-first**: if `s2-domain-profiles.json` `checklist_themes` is empty, or `strategy.md` §2 is still mostly placeholders → **stop**, run `@setup-domain-ops`. Never silently invent industry modules.
 2. Default run is **prep only** (S1→S2) then **pause**; do not Compose until checklist rows are marked **confirm**.
 3. **Tagging acceptance before confirm**: after S2, run `python3 scripts/distill/tagging_acceptance.py --root-id <R>`, show the report, and **do not** ask humans to confirm every row. Zero-source rows stay **pending**. Industry cuts are axes; completeness = remount + closure + report (+ Jira when board exists).
-4. **Keep industry axes**: remount product-surface wiki into those axes ([`references/industry-axis-remount.md`](references/industry-axis-remount.md)); do not recreate Mall/Hui/Gateway modules by default.
+4. **Keep industry axes**: land wiki/Jira into those axes ([`references/industry-axis-remount.md`](references/industry-axis-remount.md)); do not promote source-tree layout into modules, and do not hard-code tenant remount tables.
 5. **No translation in S1–S6**. **S6** = source-language brief. **S7** = locale expression only.
 6. **confirm** ≠ briefs already exist, and ≠ every corpus rule already written into S7.
 7. **Zero-rule fake coverage banned**: after S7, run `tagging_acceptance.py --after-s7 --strict`; confirmed + sources + zero `### 规则` → revert or rewrite.
@@ -60,8 +60,8 @@ Offline risk/split without wiki: `@requirement-risk DEMO-1 team=demo` ([`WALKTHR
 | 0 | Ensure profiles non-empty; else `@setup-domain-ops` |
 | 1 | `python3 scripts/sync_domain_knowledge_from_confluence.py --url "…"` (S1) |
 | 2 | Read `PIPELINE_HANDOFF.json` → root `<R>` |
-| 3 | Optional propose → RUNBOOK **§ S2** → `s2_recognize.py` → `tagging_acceptance.py` → **pause** (Jira if board + empty attribution); remount per industry-axis-remount |
-| 4 | On **continue**: Compose **S3→S5→S6→S7** with remount write-through; `--after-s3` then `--after-s7 --strict` |
+| 3 | Optional propose → RUNBOOK **§ S2** → `s2_recognize.py` → `tagging_acceptance.py` → **pause** (Jira if board + empty attribution); land into axes |
+| 4 | On **continue**: Compose **S3→S5→S6→S7** with write-through; `--after-s3` then `--after-s7 --strict` |
 | 5 | After S7: `python3 scripts/run_distill_gate.py --root-id <R>` |
 
 Do **not** preload RUNBOOK or iron-laws end-to-end.
@@ -88,7 +88,8 @@ Risk/split **read the S7 locale brief** (reader brief) by default. If source lan
 - Compose S3–S7 without **confirm**
 - Confirming zero-source modules, or confirmed + sources + **zero** S7 rules (fake coverage)
 - Claiming corpus coverage from the industry cut alone
-- Recreating Mall/Hui/Gateway/Messaging modules by default instead of remounting into industry axes
+- Recreating modules from wiki/Jira filing layout instead of landing into strategy axes
+- Hard-coding tenant product→slug remount tables into the pack
 - Translating in S2–S6; skipping S6 and jumping straight to a locale-only draft
 - Claiming “briefs done” from work drafts or S6 alone when S7 is required
 - Shipping low-evidence S7 without an **Evidence insufficiency** banner when intentionally thin (non-SSOT for risk)

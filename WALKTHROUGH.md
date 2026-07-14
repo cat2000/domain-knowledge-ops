@@ -66,7 +66,7 @@ Map: [`saas-billing/INDUSTRY.md`](domain-knowledge/fixtures/saas-billing/INDUSTR
    Agent writes `team-roots.json` as **v3** (one `libraries.*` + one `teams.*` with `libraries: [<that key>]`), plus `strategy.md` §2 and profiles
 3. **Point at Confluence** — `@generate-knowledge-from-wiki` + your overview URL — wait for checklist **and** tagging acceptance report (`tagging_acceptance.py`)
 4. **Jira half (default when board exists)** — `@add-knowledge-from-jira team=<your_team>` if the report shows attribution = 0, then re-run recognize / tagging acceptance
-5. **Approve modules** — mark **confirm** only on rows the report allows (zero-source stay pending) → say **continue** — agent remounts product-surface wiki into **industry axes** and writes **reader briefs** under `_deliver/`, then runs `--after-s7 --strict`  
+5. **Approve modules** — mark **confirm** only on rows the report allows (zero-source stay pending) → say **continue** — agent lands sources into **industry axes**, writes **reader briefs** under `_deliver/`, then runs `--after-s7 --strict`  
    (Default resume is **continue**. `@distill-domain-knowledge` is advanced: no re-sync / partial step / new chat.)
 6. **Review a real story** — `@requirement-risk PROJ-123 team=<your_team>` → `@ticket-splitter PROJ-123`  
    (`PROJ-123` is a **placeholder** — replace with your real Jira issue key, e.g. `ABC-42`. It is not shipped in this repo.)
@@ -76,7 +76,7 @@ Map: [`saas-billing/INDUSTRY.md`](domain-knowledge/fixtures/saas-billing/INDUSTR
 | `@setup-domain-ops` | v3 `team-roots.json` + `strategy.md` §2 + profiles |
 | `@generate-knowledge-from-wiki` + URL | **S1** + **S2** → checklist + `TAGGING_ACCEPTANCE.md` |
 | `@add-knowledge-from-jira` (when board set) | Jira attribution into the same root (completes bidirectional tagging) |
-| **confirm** (OK rows only) then **continue** | Compose **S3–S7** (remount into industry axes) → reader brief + `--after-s7` |
+| **confirm** (OK rows only) then **continue** | Compose **S3–S7** (land into industry axes + write-through) → reader brief + `--after-s7` |
 | `@requirement-risk` / `@ticket-splitter` | Read that reader brief as evidence |
 
 Install = **clone this repo**: [`INSTALL.md`](INSTALL.md).  
@@ -91,4 +91,4 @@ Pack layout check (no network): `python3 scripts/verify_skills_pack.py`
 | A | Risk report has Scope + MUST items; split has observable `done_when` faces |
 | B | Path B (without brief) report differs from Path A on at least one concrete point |
 | B2 | Risk report for `DEMO-BILL-1` cites Active + proration preview from the billing brief |
-| C | Tagging acceptance shown → confirm only OK rows → (Jira if board) → S7 for those rows with remount write-through + `--after-s7` → risk/split on a real key; zero-source / zero-rule modules still **pending** |
+| C | Tagging acceptance shown → confirm only OK rows → (Jira if board) → S7 for those rows with write-through + `--after-s7` → risk/split on a real key; zero-source / zero-rule modules still **pending** |

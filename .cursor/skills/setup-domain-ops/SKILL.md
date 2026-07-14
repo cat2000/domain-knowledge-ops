@@ -43,7 +43,7 @@ Write **`version: 3`** JSON. Do **not** write the old v2 shape (root/overview on
 6. Use [`strategy.example.md`](../../../domain-knowledge/strategy.example.md) only as **format**. Do **not** copy Acme / demo slugs into production profiles.
 7. **Pause for human confirm** on the module table (edit/rename/drop rows). Do not invent a fake industry if the intro is empty — ask again.
 
-**Template vs truth:** the draft is a **cut template** (industry adjudication axes / 大类). It does **not** mean domain knowledge is already covered. Completeness comes later from Confluence + Jira via **bidirectional tagging** (S2 closure), **remount** of product-surface pages into those axes, and `tagging_acceptance.py` — say this explicitly when the human confirms the table. Do **not** recreate Mall/Hui/Gateway modules unless the human changes strategy.
+**Template vs truth:** the draft is a **cut template** (industry adjudication axes / 大类). It does **not** mean domain knowledge is already covered. Completeness comes later from Confluence + Jira via **bidirectional tagging** (S2 closure), **landing** sources into those axes, and `tagging_acceptance.py` — say this explicitly when the human confirms the table. Do **not** promote filing layout into modules, and do not hard-code tenant remount tables.
 
 ### C. Derive machine profiles (after confirm)
 

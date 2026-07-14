@@ -19,12 +19,12 @@
 - **禁止**：在多个产出目录重复粘贴同一段 `materialized/` 原文
 - **分散素材防漏**：还须对 `materialized/` 做全文检索与语义补漏；上一轮稳定 `glossary.md` 仅作同义词/缩写提示，不得作为领域边界依据。补全路径写入 closure 与确认页，本轮新术语写入 **术语备注**；**不得**仅凭文件名或 `facet-*` 认定已覆盖
 - **暂停**：等人根据打标验收（`tagging_acceptance.py`）将有来源的模块标为 **`确认`**；零来源保持 **待确认**；禁止引导「全部确认」
-- **保持业态裁决轴**：产品面页重挂载入现有 slug（[`industry-axis-remount.md`](../skills/generate-knowledge-from-wiki/references/industry-axis-remount.md)）；默认不重建 Mall/惠/Gateway 模块
+- **保持业态裁决轴**：来源落入现有 slug（[`industry-axis-remount.md`](../skills/generate-knowledge-from-wiki/references/industry-axis-remount.md)）；禁止把归档布局升为模块，禁止硬编码租户重挂载表
 - 刷新时 S2 按状态 + 来源数重写 **备注**（确认后清除过时的「等待人工确认」）
 
 ## 3. 成稿（用户 **`继续`**）
 
-仅 **`确认`** 模块：**S3** `_aggregate/` → **S4** 领域模型 → **S5** 工作稿 → **S6** 原语言定稿 → **S7** 目标语言定稿 — 重挂载证据必须写进规则卡或待确认。
+仅 **`确认`** 模块：**S3** `_aggregate/` → **S4** 领域模型 → **S5** 工作稿 → **S6** 原语言定稿 → **S7** 目标语言定稿 — 落地证据必须写进规则卡或待确认。
 
 ## 4. 门禁
 

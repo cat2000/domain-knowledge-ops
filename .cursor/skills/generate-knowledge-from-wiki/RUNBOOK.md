@@ -242,7 +242,7 @@ S3.5 (new, script-based proposition intermediate layer):
   - The intent-triage ratio gate only triggers a hard failure when there is "strong title match + sufficient sample size" (e.g., excessive contract leakage on release pages)
   - Amplifying heuristic `doc_intent` error directly into a full-pipeline failure is forbidden
 
-**Remount (keep industry axes):** while aggregating, remount Mall/Hui/checkout/contest/identity product-surface pages into confirmed industry slugs — see [`references/industry-axis-remount.md`](./references/industry-axis-remount.md). Do not recreate those as modules.
+**Axis landing (keep industry axes):** while aggregating, land sources into confirmed strategy axes by user-visible commitment — see [`references/industry-axis-remount.md`](./references/industry-axis-remount.md). Do not promote source-tree layout into modules, and do not hard-code tenant remount tables.
 
 **After S3 (required before drafting S6/S7):**
 
@@ -250,7 +250,7 @@ S3.5 (new, script-based proposition intermediate layer):
 python3 scripts/distill/tagging_acceptance.py --root-id <R> --after-s3
 ```
 
-Compare closure counts vs `pages_with_props` vs (later) S7 rule counts. Under-write → remount leftover evidence into the axis or Open items; do not claim fully covered. `pages_with_props=0` → do not ship a committed S7.
+Compare closure counts vs `pages_with_props` vs (later) S7 rule counts. Under-write → land leftover evidence into the owning axis or Open items; do not claim fully covered. `pages_with_props=0` → do not ship a committed S7.
 
 S3.6 (minimal derived audit view):
 
@@ -415,7 +415,7 @@ Prefer reverting Status to **pending** instead of shipping a stub. If the human 
 python3 scripts/distill/tagging_acceptance.py --root-id <R> --after-s7 --strict
 ```
 
-Fix FAIL rows before claiming Compose complete. Remount denser wiki into axes when under-write WARN appears.
+Fix FAIL rows before claiming Compose complete. Land denser leftover evidence into axes when under-write WARN appears.
 
 **Compose complete (single topic)**: **S7 locale brief** exists **without** an insufficiency banner, or with banner explicitly acknowledged as non-SSOT; `--after-s7 --strict` exit 0. **Repo-wide gate**: `domain_check.py distill` (**post-S7**).
 

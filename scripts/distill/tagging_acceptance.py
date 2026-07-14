@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Prep tagging-acceptance + compose exhaustiveness (industry axes kept).
 
-Industry module cuts stay as adjudication axes. Product-surface wiki pages must be
-*remounted* into those axes (not reintroduced as Mall/Hui/Gateway modules).
+Industry cuts stay as adjudication axes. Completeness = land sources into those
+axes + write through to S7 — not a hard-coded product-surface remount table.
 
 Usage:
   python3 scripts/distill/tagging_acceptance.py --root-id <R>
@@ -29,19 +29,6 @@ _install.bootstrap(__file__)
 from distill._paths import CURATED_BY_ROOT, MATERIALIZED_BY_ROOT, REPO_ROOT, resolve_closure_file
 from runtime.checklist_modules import parse_checklist_modules
 from runtime.deliverable_locale import all_locale_values
-
-# Keep industry axes; remount product-surface evidence into them.
-REMOUNT_HINTS: list[tuple[str, str]] = [
-    ("Mall catalog / cart / first-order / IOR coupon", "ordering-fulfillment (or membership if eligibility-only)"),
-    ("Checkout session / node / FPV / pending-pay / promo hold", "ordering-fulfillment"),
-    ("Hui shell / CBP cards / Pacesetter UI", "membership-eligibility and/or compensation-performance"),
-    ("Milestone / Super Expanding Star / contest matrices", "compensation-performance (do not drop after remount)"),
-    ("Privacy gate / password reset / rebind phone / title map", "membership-eligibility (or a confirmed new identity slug)"),
-    ("In-app message center / read-unread / business templates", "ordering-fulfillment or membership if user-visible; else Open items — do not invent messaging module unless strategy confirms"),
-    ("Gateway auth / SDK-only", "appendix / non-business unless it changes a user-visible commitment"),
-    ("Autoship plan rules", "autoship-renewal — keep pending until tagged sources exist"),
-    ("Returns / quality complaints", "returns-quality — confirm only when business rules exist; else pending"),
-]
 
 
 def _is_confirmed(status: str) -> bool:
@@ -138,7 +125,7 @@ def _underwrite_note(
     if require_s7 and rules is not None and rules == 0 and not banner:
         return "FAIL — zero rules and no Evidence insufficiency banner"
     if pt is not None and pwp is not None and pt > 0 and pwp < max(1, pt // 3):
-        return "WARN — many pages lack props; remount / Open items"
+        return "WARN — many pages lack props; land leftover sources / Open items"
     if (
         rules is not None
         and pwp is not None
@@ -147,7 +134,7 @@ def _underwrite_note(
     ):
         return (
             "WARN — under-write (rules << pages_with_props); "
-            "remount product-surface evidence into this axis or list Open items"
+            "land leftover evidence into this axis or list Open items"
         )
     if require_s7 and rules is None:
         return "S7 not written yet"
@@ -165,9 +152,9 @@ def report(root_id: str, *, after_s3: bool, after_s7: bool, strict: bool) -> int
     lines.append(f"# Tagging acceptance · root `{root_id}`")
     lines.append("")
     lines.append(
-        "Keep **industry adjudication axes**. Completeness = remount product-surface "
-        "evidence into those axes + bidirectional tagging + write-through to S7 — "
-        "not the strategy table alone, and not reintroducing Mall/Hui/Gateway as modules."
+        "Keep **industry adjudication axes**. Completeness = land sources into those "
+        "axes + bidirectional tagging + write-through to S7 — not the strategy table "
+        "alone, and not promoting source-tree / channel layout into new modules."
     )
     lines.append("")
 
@@ -223,12 +210,22 @@ def report(root_id: str, *, after_s3: bool, after_s7: bool, strict: bool) -> int
         lines.append(f"- Jira attribution files: **{jira_n}**")
     lines.append("")
 
-    lines.append("## Remount hints (keep industry axes)")
+    lines.append("## Axis landing (essence — not a product remount table)")
     lines.append(
-        "Do **not** recreate product-surface modules. Map dense wiki themes into confirmed axes:"
+        "Land every accepted source into an **existing strategy axis**; "
+        "write through to S7 rules or Open items. Channel/app/facet layout is "
+        "provenance, not a new module tree. See "
+        "`references/industry-axis-remount.md`."
     )
-    for src, dest in REMOUNT_HINTS:
-        lines.append(f"- {src} → **{dest}**")
+    lines.append(
+        "- Prefer existing checklist slug over inventing a parallel cut."
+    )
+    lines.append(
+        "- New slug only when no axis fits — pending until the human confirms."
+    )
+    lines.append(
+        "- Do not hard-code tenant product names into this report or the skills pack."
+    )
     lines.append("")
 
     modules = []
@@ -282,8 +279,8 @@ def report(root_id: str, *, after_s3: bool, after_s7: bool, strict: bool) -> int
     if jira_n == 0:
         lines.append("5. Recommend Jira ingest+classify before compose when `board_id` is set.")
     lines.append(
-        "6. Remount Mall/Hui/checkout/contest/identity surfaces into industry axes "
-        "(see hints) — do not add those as new default modules."
+        "6. Land sources into strategy axes (not source-tree modules); "
+        "write through or keep pending — no tenant remount specials in the pack."
     )
     lines.append("")
 
@@ -321,7 +318,7 @@ def report(root_id: str, *, after_s3: bool, after_s7: bool, strict: bool) -> int
             "Confirmed + sources + zero rules = **fake coverage** — revert confirm."
         )
         lines.append(
-            "Under-write: remount leftover product-surface evidence into this axis, "
+            "Under-write: land leftover evidence into the owning axis, "
             "or list residual pages in Open items — do not claim fully covered."
         )
         lines.append("")

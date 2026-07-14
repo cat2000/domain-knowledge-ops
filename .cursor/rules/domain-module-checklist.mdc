@@ -25,12 +25,12 @@ Use only `domain-knowledge/strategy.md` **§2** — **do not** invent a separate
 - **Forbidden**: paste the same `materialized/` body into multiple output dirs
 - **Scattered-source coverage**: full-text search + semantic gap-fill on `materialized/`; prior stable `glossary.md` is synonym/abbrev hints only, **not** domain-boundary authority. Write completed paths into closure and this page; new terms into **glossary note**; **do not** treat filenames or `facet-*` alone as covered
 - **Pause**: wait for humans to set accepted modules' **Status** to **`confirmed`** — **only if** tagging acceptance (`tagging_acceptance.py`) allows (tagged sources). Leave empty-evidence rows **pending**. Never instruct “confirm all.”
-- **Keep industry axes**: remount product-surface pages into existing slugs ([`industry-axis-remount.md`](../skills/generate-knowledge-from-wiki/references/industry-axis-remount.md)); do not recreate Mall/Hui/Gateway as default modules.
+- **Keep industry axes**: land pages into existing strategy slugs ([`industry-axis-remount.md`](../skills/generate-knowledge-from-wiki/references/industry-axis-remount.md)); do not promote filing layout into modules or hard-code tenant remount tables.
 - On refresh, S2 rewrites **Note** from Status + source count (clears stale “awaiting human confirm” after confirm).
 
 ## 3. Deliver (user says **`continue`**)
 
-Only **`confirmed`** modules: **S3** `_aggregate/` → **S4** domain model → **S5** work draft → **S6** source brief → **S7** locale brief — with remount write-through into rule cards or Open items.
+Only **`confirmed`** modules: **S3** `_aggregate/` → **S4** domain model → **S5** work draft → **S6** source brief → **S7** locale brief — with write-through into rule cards or Open items.
 
 ## 4. Gates
 

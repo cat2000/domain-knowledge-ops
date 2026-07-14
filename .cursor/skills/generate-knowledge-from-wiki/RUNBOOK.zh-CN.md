@@ -186,7 +186,7 @@ python3 scripts/distill/tagging_acceptance.py --root-id <R>
 
 **零规则假覆盖禁止**：已确认且有来源，但 S7 无任何 `### 规则` → 改回 **待确认** 或重写。
 
-**保持业态裁决轴**：产品面密页重挂载入现有轴（见 `industry-axis-remount.md`）；默认不重建 Mall/惠/Gateway/Messaging 模块。
+**保持业态裁决轴**：来源按业务承诺落入现有轴（见 `industry-axis-remount.md`）；禁止把归档布局升为模块，禁止把租户产品名重挂载表写进 pack。
 
 重扫时 **增量合并**；**保留**人手 **`确认`**。S2 按状态 + 来源数刷新 **备注**（确认后清除过时的「等待人工确认」）。
 
@@ -232,7 +232,7 @@ S3.5（新增，脚本化命题中间层）：
   - 意图分流比例门禁只在“标题强匹配 + 样本量足够”时触发硬失败（如 release 页面契约泄漏过高）
   - 禁止直接把启发式 `doc_intent` 误差放大为全链路失败
 
-**重挂载（保持业态裁决轴）**：归集时将 Mall/惠/结账/竞赛/身份等产品面页挂入已确认业态 slug —— 见 [`references/industry-axis-remount.md`](./references/industry-axis-remount.md)。默认不重建这些为模块。
+**轴落地（保持业态裁决轴）**：归集时按用户可见承诺将来源落入已确认业态 slug —— 见 [`references/industry-axis-remount.md`](./references/industry-axis-remount.md)。禁止把源树布局升为模块，禁止硬编码租户重挂载表。
 
 **S3 后（起草 S6/S7 前必做）**：
 
@@ -240,7 +240,7 @@ S3.5（新增，脚本化命题中间层）：
 python3 scripts/distill/tagging_acceptance.py --root-id <R> --after-s3
 ```
 
-对照 closure / `pages_with_props` /（随后）S7 规则数。写尽不足 → 重挂载残留证据或待确认；不得声称「已齐」。`pages_with_props=0` → 不得交付已确认 S7。
+对照 closure / `pages_with_props` /（随后）S7 规则数。写尽不足 → 残留证据入轴或待确认；不得声称「已齐」。`pages_with_props=0` → 不得交付已确认 S7。
 
 S3.6（最小派生审计视图）：
 

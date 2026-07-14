@@ -70,8 +70,9 @@ class TestTaggingAcceptance(unittest.TestCase):
             self.assertIn("INCOMPLETE", text)
             self.assertIn("autoship-renewal", text)
             self.assertIn("NO — keep pending", text)
-            self.assertIn("Remount hints", text)
+            self.assertIn("Axis landing", text)
             self.assertIn("industry adjudication axes", text)
+            self.assertNotIn("Mall catalog", text)
 
     def test_after_s7_fails_zero_rule_fake_coverage(self) -> None:
         from distill import tagging_acceptance as ta
