@@ -8,14 +8,15 @@ Use this checklist for release polish and marketplace distribution.
 
 - [x] Create public repo; push `main` with green CI — https://github.com/cat2000/domain-knowledge-ops
 - [x] Replace `OWNER` placeholders with `cat2000`
-- [ ] Topics: `cursor`, `agent-skills`, `confluence`, `jira`, `domain-driven-design`, `atlassian` (set in About if not done)
-- [x] Tag `v0.1.0` pushed; [ ] Publish GitHub Release UI from that tag if not done yet
-- [ ] Enable Discussions (Q&A + Show and tell)
+- [x] Topics: `cursor`, `agent-skills`, `confluence`, `jira`, `domain-driven-design`, `atlassian`
+- [x] Tag `v0.1.0` + GitHub Release — https://github.com/cat2000/domain-knowledge-ops/releases/tag/v0.1.0
+- [x] Enable Discussions — https://github.com/cat2000/domain-knowledge-ops/discussions
+- [x] About description updated (story risk / INVEST / offline DEMO-1)
 
 ## `npx skills` / agentskills.io
 
-- [ ] Verify: `npx skills add cat2000/domain-knowledge-ops --list`
-- [ ] Document the four headline skills on the Release notes
+- [x] Verify: `npx skills add cat2000/domain-knowledge-ops --list` (6 skills discovered)
+- [x] Document the four headline skills on the Release notes
 - [ ] Optional: submit listing to [agentskills.io](https://agentskills.io) when the catalog accepts external packs
 
 ## Cursor marketplace / plugin
