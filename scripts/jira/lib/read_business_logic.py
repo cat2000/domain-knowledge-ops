@@ -26,43 +26,8 @@ def themes_from_attribution(
     return sorted(seen)
 
 
-THEME_PATTERNS: dict[str, list[tuple[str, str]]] = {
-    "checkout": [
-        ("CNCheckout/Epic68638", r"CNCheckout|CN Checkout|DEV-68638|pending order|Cart Order"),
-        ("支付宝/APO", r"Alipay|Auto Payment|Autobind|一键结算|APO"),
-        ("FPV展示", r"FPV|points"),
-        ("分享/推荐", r"Share List|Product List Share|小U推荐"),
-        ("埋点Sensor", r"Sensor|EventTrack|datatracking|promotool|promo widget"),
-    ],
-    "compensation-cbp": [
-        ("CBP2025首页", r"CBP2025.*homepage|functional zone|New user guide|dashboard"),
-        ("CBP2025 Milestone", r"Milestone card|New Milestone"),
-        ("CBP2025 Pacesetter/LB", r"CBP2025|pacesetter|Pacesetter|LB detail|Leadership|Market Capability"),
-        ("CBP2025 Gateway", r"CBP2025.*gateway|Endpoint replacement|Tracking Point"),
-        ("报表Downline", r"Downline report|Commission report"),
-        ("Matching/qualified", r"Matching|qualified|Elite bonus"),
-    ],
-    "contests": [
-        ("Contest列表/UI", r"Contest UI|contest card|DEV-63027"),
-        ("Growth/GEG", r"growth trip|GEG|菁英|成长"),
-        ("Health family", r"Health family"),
-        ("SVP/138", r"SVP contest|contest 138"),
-        ("CVP API", r"CVP contest|contest API|DEV-95217"),
-    ],
-    "compliance-identity": [
-        ("PC enroll/CPC", r"PC enroll|CPC|DEV-77464|enrollment|INVITE OE|Bind phone"),
-        ("隐私政策", r"privacy policy|Privacy|checkbox"),
-        ("职称Title", r"title information|registration address|职称|brand partner"),
-        ("MRP", r"MRP|划线"),
-    ],
-    "messaging": [
-        ("通知中心", r"notification page|Notification setting|read/unread|DEV-81326"),
-        ("推送外链", r"notification card|external URL"),
-        ("酬宾通知", r"Notifications for the new bonuses|DEV-88555"),
-        ("Oracle迁移", r"Oracle to SQL"),
-    ],
-}
-
+THEME_PATTERNS: dict[str, list[tuple[str, str]]] = {}
+# Pack ships no tenant omission clusters. Optional patterns belong in teams/<team>.json.
 
 def full_text(raw: dict) -> str:
     parts = [raw.get("summary") or "", raw.get("description_text") or ""]

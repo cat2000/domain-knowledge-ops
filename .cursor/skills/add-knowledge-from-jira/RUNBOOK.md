@@ -43,7 +43,7 @@ Jira is responsible for supplying business-detail evidence: ACs, comments, statu
 | User `mode=` | Agent should run |
 |--------------|------------|
 | `history` + `team=<t>` | `run_jira_knowledge.py --team <t>`; team maps to a board id, pulling from the earliest sprint through the current sprint (inclusive) |
-| `history` + `board-id=<id>` | Map to a team via `team-roots.json`, then run as above; e.g. `board-id=150` = `team=cma` |
+| `history` + `board-id=<id>` | Map to a team via `team-roots.json`, then run as above |
 | `sprint` + `sprint-id` | `run_jira_knowledge.py --team <resolved-team> --sprint-id <id>`; pulls only that sprint |
 | `compose` / `continue` | Wiki RUNBOOK Compose; S3 automatically incorporates Jira business tickets |
 | `distill` / `reconcile` / `full` | Legacy path removed; refuse to execute and redirect to prep → Recognize → Compose |
@@ -89,10 +89,10 @@ For parameters and troubleshooting, see [`INGEST-CLI.md`](./INGEST-CLI.md).
 |------|------|--------|
 | `python3 scripts/jira/steps/attribute.py --team <t>` | `attribution/<KEY>.yaml`, `_ticket_attribution.json` | Script |
 | `python3 scripts/jira/steps/read_business.py --team <t>` | `by-theme/<t>/gap-scan.md` (an **index**; filename follows `deliverable_locale` via `domain-knowledge/language/deliverable-locale-tokens.json` — see the zh-CN locale doc for its non-English filename; themes come from **attribution**, see [`CLASSIFY-CLI.md`](./CLASSIFY-CLI.md)) | Script |
+| Cursor rechecks low-confidence attribution | Correct the YAML under `jira/attribution/` | Cursor |
 | Optional, once a human marks **confirm** | `read_business.py --confirmed-only` | Script |
-| Cursor rechecks low confidence / WC B1 queue | Correct the YAML (see `teams/wc-attribution.md`) | Cursor |
 
-**Forbidden**: using ticket-level attribution coverage as a substitute for **Recognize** completion; treating `gateway`/`requirements` as **confirmed** propositions on par with checkout.
+**Forbidden**: using ticket-level attribution coverage as a substitute for **Recognize** completion; treating sink slugs (`gateway` / `requirements` or team-configured sinks) as **confirmed** business propositions.
 
 **Classify gate**: `python3 scripts/domain_check.py jira --team <t> --full-raw` (end of script prep)
 
@@ -161,8 +161,8 @@ Ingest-only fine-grained parameters: `python3 scripts/run_jira_ingest.py …`
 
 | Intent | Phrasing |
 |------|------|
-| Ingest only · specified sprint | `@add-knowledge-from-jira team=cma mode=sprint sprint-id=1726` |
-| Ingest · full board history | `@add-knowledge-from-jira team=cma mode=history` or `board-id=150 mode=history` |
+| Ingest only · specified sprint | `@add-knowledge-from-jira team=demo mode=sprint sprint-id=1726` |
+| Ingest · full board history | `@add-knowledge-from-jira team=demo mode=history` or `board-id=<id> mode=history` |
 | Script prep | `mode=history` or `run_jira_knowledge.py` (no flag) |
 | Compose (unified brief) | **`continue`** + Wiki RUNBOOK |
 | Removed legacy path | `mode=distill/reconcile/full`; refuse to execute and redirect to unified Compose |

@@ -402,7 +402,7 @@ When source language already equals `deliverable_locale`, still emit the canonic
 **Evidence insufficiency (mandatory when low/zero tagged sources or `pages_with_props=0`):** place this banner at the top of S7 (locale labels OK):
 
 ```markdown
-> **Evidence insufficiency** — This module lacks enough tagged Confluence/Jira sources for committed adjudication. Treat as non-SSOT for `@requirement-risk` / `@ticket-splitter` until sources are remounted. See Open items.
+> **Evidence insufficiency** — This module lacks enough tagged Confluence/Jira sources for committed adjudication. Treat as non-SSOT for `@requirement-risk` / `@ticket-splitter` until sources are landed into axes. See Open items.
 ```
 
 Prefer reverting Status to **pending** instead of shipping a stub. If the human insists on a placeholder file, the banner + Open items are required.

@@ -93,7 +93,7 @@ Write **`version: 3`** JSON. Do **not** write the old v2 shape (root/overview on
 
 - Empty company/intro and empty module table → stop; do not invent an industry.
 - Empty `checklist_themes` → do not pretend Recognize/wiki modules exist.
-- Never reintroduce shipped demo modules (`checkout`, `compensation-cbp`, …) unless the user’s confirmed strategy contains them.
+- Never reintroduce shipped offline-demo fixture slugs unless the user’s confirmed strategy contains them.
 - Do not scrape the public web into brief rule bodies; optional public hints for *module naming* only, always confirmed.
 - Do not write v2-only team records (overview + board on the same object without `libraries{}`).
 

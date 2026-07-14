@@ -42,7 +42,7 @@ Jira 负责提供业务细则证据：AC、评论、状态流转、阈值、last
 | 用户 `mode=` | Agent 应跑 |
 |--------------|------------|
 | `history` + `team=<t>` | `run_jira_knowledge.py --team <t>`；team 映射到 board id，从最早 Sprint 拉到当前 Sprint（含当前） |
-| `history` + `board-id=<id>` | 按 `team-roots.json` 映射到 team，再执行同上；如 `board-id=150` = `team=cma` |
+| `history` + `board-id=<id>` | 按 `team-roots.json` 映射到 team，再执行同上 |
 | `sprint` + `sprint-id` | `run_jira_knowledge.py --team <resolved-team> --sprint-id <id>`；只拉该 Sprint |
 | `compose` / `继续` | Wiki RUNBOOK Compose；S3 自动纳入 Jira 业务票 |
 | `distill` / `reconcile` / `full` | 旧路径已删除；拒绝执行，改走备料 → Recognize → Compose |
@@ -89,9 +89,9 @@ Jira 负责提供业务细则证据：AC、评论、状态流转、阈值、last
 | `python3 scripts/jira/steps/attribute.py --team <t>` | `attribution/<KEY>.yaml`、`_ticket_attribution.json` | 脚本 |
 | `python3 scripts/jira/steps/read_business.py --team <t>` | `by-theme/<t>/遗漏扫描.md`（**索引**；主题来自 **attribution**，见 [`CLASSIFY-CLI.md`](./CLASSIFY-CLI.md)） | 脚本 |
 | 人标 **`确认`** 后可选 | `read_business.py --confirmed-only` | 脚本 |
-| Cursor 复核低置信 / WC B1 队列 | 修正 YAML（见 `teams/wc-attribution.md`） | Cursor |
+| Cursor 复核低置信 attribution | 修正 `jira/attribution/` 下 YAML | Cursor |
 
-**禁止**：用票级 attribution 覆盖率代替 **Recognize** 完成；将 `gateway`/`requirements` 当作与 checkout 同级的 **确认** 命题。
+**禁止**：用票级 attribution 覆盖率代替 **Recognize** 完成；将 sink slug（`gateway` / `requirements` 或团队配置的 sinks）当作已 **确认** 的业务命题。
 
 **Classify 门禁**：`python3 scripts/domain_check.py jira --team <t> --full-raw`（脚本备料末）
 
@@ -160,8 +160,8 @@ S3 准入：
 
 | 意图 | 说法 |
 |------|------|
-| 仅 Ingest · 指定 Sprint | `@add-knowledge-from-jira team=cma mode=sprint sprint-id=1726` |
-| Ingest · Board 历史拉满 | `@add-knowledge-from-jira team=cma mode=history` 或 `board-id=150 mode=history` |
+| 仅 Ingest · 指定 Sprint | `@add-knowledge-from-jira team=demo mode=sprint sprint-id=1726` |
+| Ingest · Board 历史拉满 | `@add-knowledge-from-jira team=demo mode=history` 或 `board-id=<id> mode=history` |
 | 脚本备料 | `mode=history` 或 `run_jira_knowledge.py`（无 flag） |
 | Compose（统一定稿） | **`继续`** + Wiki RUNBOOK |
 | 已删除旧路径 | `mode=distill/reconcile/full`；拒绝执行并改走统一 Compose |

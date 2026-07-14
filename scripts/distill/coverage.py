@@ -63,7 +63,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Check rules → curated path coverage.")
     parser.add_argument(
         "--root-id",
-        help="Only check this Confluence root page ID directory (e.g. 48693262).",
+        help="Only check this Confluence root page ID directory (e.g. 100001).",
     )
     parser.add_argument(
         "--exclude-prefix",

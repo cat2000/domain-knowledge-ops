@@ -30,9 +30,8 @@ def _status_is_confirmed(status: str) -> bool:
 def load_allowed_themes(root_id: str) -> frozenset[str]:
     path = checklist_path(root_id)
     if not path.is_file():
-        from jira.lib.jira_first_principles import DEFAULT_CMA_THEMES
-
-        return DEFAULT_CMA_THEMES
+        # Fail closed: sinks only — never invent a tenant business theme set.
+        return frozenset(FALLBACK_THEMES)
     rows = parse_checklist_rows(path.read_text(encoding="utf-8"))
     slugs = {slug for slug, _ in rows}
     if str(SCRIPTS_DIR) not in sys.path:

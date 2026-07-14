@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 FORBIDDEN_THEME_SLUGS = frozenset({"mall-app", "hui-app", "mall", "hui", "promotool"})
+# Above names are *examples* of channel/layout slugs that must never be primary.
+# Teams may extend via pipeline checks; essence = filing layout ≠ domain axis.
 
 
 def issues_for_raw_ticket(key: str, doc: dict | None, raw_exists: bool) -> list[str]:

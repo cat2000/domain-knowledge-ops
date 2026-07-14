@@ -29,10 +29,9 @@ def load_attribution_config(team_key: str | None = None, root_id: str | None = N
 
 
 def facets_tuple(cfg: dict[str, Any] | None) -> tuple[tuple[str, tuple[str, ...]], ...]:
+    """Keyword facets from team.json only — pack has no default tenant facet table."""
     if not cfg:
-        from jira.lib.jira_first_principles import _PROPOSITION_FACETS
-
-        return _PROPOSITION_FACETS
+        return ()
     out: list[tuple[str, tuple[str, ...]]] = []
     for row in cfg.get("facets") or []:
         if len(row) >= 2:

@@ -30,7 +30,7 @@ Process terms (first mention): **confirm** = approve module cut lines; **source 
 
 1. **Strategy-first**: if `s2-domain-profiles.json` `checklist_themes` is empty, or `strategy.md` §2 is still mostly placeholders → **stop**, run `@setup-domain-ops`. Never silently invent industry modules.
 2. Default run is **prep only** (S1→S2) then **pause**; do not Compose until checklist rows are marked **confirm**.
-3. **Tagging acceptance before confirm**: after S2, run `python3 scripts/distill/tagging_acceptance.py --root-id <R>`, show the report, and **do not** ask humans to confirm every row. Zero-source rows stay **pending**. Industry cuts are axes; completeness = remount + closure + report (+ Jira when board exists).
+3. **Tagging acceptance before confirm**: after S2, run `python3 scripts/distill/tagging_acceptance.py --root-id <R>`, show the report, and **do not** ask humans to confirm every row. Zero-source rows stay **pending**. Industry cuts are axes; completeness = land-in-axes + closure + report (+ Jira when board exists).
 4. **Keep industry axes**: land wiki/Jira into those axes ([`references/industry-axis-remount.md`](references/industry-axis-remount.md)); do not promote source-tree layout into modules, and do not hard-code tenant remount tables.
 5. **No translation in S1–S6**. **S6** = source-language brief. **S7** = locale expression only.
 6. **confirm** ≠ briefs already exist, and ≠ every corpus rule already written into S7.

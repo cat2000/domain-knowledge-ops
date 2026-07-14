@@ -2,17 +2,19 @@
 
 # Jira 归属 · 第一性原理（与 Confluence 归类对齐）
 
+> **Pack 法则 vs 举例：** 下文「primary = 业态轴；渠道 ≠ 领域；sink ≠ 已确认业务」是可复用本质。产品名（商城 / 荟 / 结账 / CBP）仅为**举例**。运行时默认**空表**——词表在 `teams/<team>.json` + checklist（setup 之后）。
+
 ## 本质问题
 
 Ticket 归属要回答的是：**这条素材应进入哪条「业务命题」知识链**（与 `DOMAIN_MODULE_CHECKLIST` / `_deliver` 一致），而不是 **在哪个 App 里做**。
 
 | 维度 | 回答的问题 | 落盘字段 | 是否等于「新领域」 |
 |------|------------|----------|-------------------|
-| **业务命题 `primary` / `themes[]`** | 影响会员/顾问的哪类规则（结账、酬宾、竞赛…） | `primary`, `themes` | **是**（仅清单已有 slug） |
-| **渠道 `product_line`** | 实现在商城 App / Reporting App / Gateway 哪一侧 | `product_line` | **否**（标签，不建 `_deliver/`） |
+| **业务命题 `primary` / `themes[]`** | 影响哪类规则（strategy 业态轴） | `primary`, `themes` | **是**（仅清单已有 slug） |
+| **渠道 `product_line`** | 实现在哪个 App / 渠道 | `product_line` | **否**（标签，不建 `_deliver/`） |
 | **素材类 `material_kind`** | 规范业务 / 映射工程 / 协作噪声 | `material_kind` | **否**（决定 `signal`） |
 
-与 [`strategy.md`](../strategy.md) 一致：**CMA Space 为一个限界上下文**；Hui App、Mall APP 为 **产品线父页（子树根）**，不是与 checkout、CBP 平级的领域目录。
+与 [`strategy.md`](../strategy.md) 一致：一个 Confluence Space 通常是一个限界上下文；产品线父页是 **子树根**，不是与业态轴平级的领域目录。
 
 ## `gateway` / `requirements` 不是领域（禁止升格为「确认」）
 

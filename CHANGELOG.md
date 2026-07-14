@@ -25,7 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **requirement-risk validator** — accept English `Scope` / `Counts: MUST FIX …` variants
 - **`tagging_acceptance.py`** — prep report (closure / Jira half / axis-landing essence / per-module confirm advice) + `--after-s3` exhaustiveness + `--after-s7 --strict` write-through gate (zero-rule fake coverage = FAIL); Path C / wiki skills require it before confirm and after S7
 - **Axis landing & write-through** — [`industry-axis-remount.md`](.cursor/skills/generate-knowledge-from-wiki/references/industry-axis-remount.md): essence only (axes × land × write-through × confirm gates); no tenant product remount table in the pack (iron-laws 4d/4e)
+- **Fail-closed Jira defaults** — no pack-default CMA theme/facet/proposition tables; checklist + `teams/<team>.json` only; removed WC epic / CBP keyword specials
 - **Path C** — default Jira half when board exists; done = OK confirms + pending empty modules (not “all rows confirmed”); ban zero-rule confirmed S7
+- Jira/wiki skill examples normalized to `team=demo` (zh-CN CLI/playbooks no longer teach `cma` / board 150)
 
 ### Fixed
 

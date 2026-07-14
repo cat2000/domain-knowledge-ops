@@ -2,17 +2,19 @@
 
 Chinese locale: [`first-principles-attribution.zh-CN.md`](./first-principles-attribution.zh-CN.md).
 
+> **Pack law vs examples:** the *rules* below (primary = checklist axis; channel ≠ domain; sinks ≠ confirmed business) are reusable essence. Product names (Mall / Hui / checkout / CBP) are **illustrative**. Runtime defaults ship **empty** — facets and proposition patterns belong in `teams/<team>.json` + checklist after setup.
+
 ## The real question
 
 Ticket attribution must answer: **which business-proposition knowledge chain should this evidence enter** (same as `DOMAIN_MODULE_CHECKLIST` / `_deliver`), **not** which app implements it.
 
 | Dimension | Question answered | Field | New domain? |
 |-----------|-------------------|-------|-------------|
-| **Business proposition `primary` / `themes[]`** | Which rule family (checkout, rewards, contests, …) | `primary`, `themes` | **Yes** (only checklist slugs) |
-| **Channel `product_line`** | Mall App / Reporting App / Gateway side | `product_line` | **No** (label only; no `_deliver/`) |
+| **Business proposition `primary` / `themes[]`** | Which rule family (strategy axes) | `primary`, `themes` | **Yes** (only checklist slugs) |
+| **Channel `product_line`** | Which app / channel implemented it | `product_line` | **No** (label only; no `_deliver/`) |
 | **Material kind `material_kind`** | Normative business / mapping engineering / collaboration noise | `material_kind` | **No** (drives `signal`) |
 
-Aligned with [`strategy.md`](../strategy.md): one Confluence space is typically one bounded context; product-line parent pages are **subtree roots**, not peer domain folders next to checkout / CBP.
+Aligned with [`strategy.md`](../strategy.md): one Confluence space is typically one bounded context; product-line parent pages are **subtree roots**, not peer domain folders.
 
 ## `gateway` / `requirements` are not domains
 

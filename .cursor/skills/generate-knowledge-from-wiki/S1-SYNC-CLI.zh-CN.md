@@ -9,7 +9,7 @@
 粘贴 **Confluence 链接或数字 ID** → **粘贴页 ID**（支持 `/pages/<id>/`、`homepageId=`、`…/spaces/<KEY>/overview` 经 REST 取 homepage、正文内长数字 ID）。
 
 - **默认**：粘贴页 = **枚举根**，拉整棵后代 → `extracted/by-root/<ID>/`、`materialized/by-root/<ID>/`（落盘根可能因复用而与枚举根不同，见 domain-knowledge-pipeline-contract §2）。
-- **团队整库**：粘贴 **本 Space overview / homepage**，勿把 Hui/Mall 等产品分组页当默认权威根。
+- **团队整库**：粘贴 **本 Space overview / homepage**，勿把产品分组 / 渠道子树页当默认权威根。
 - **祖先升格**（可选）：`.env` 中 `CONFLUENCE_CANONICAL_ROOT_IDS` + `--resolve-canonical-root` 或 `CONFLUENCE_RESOLVE_CANONICAL_ROOT=1`。
 
 ## 编排脚本内部顺序
@@ -29,8 +29,6 @@
    - 清理当前 source set 不再生成的旧 materialized `.md`
 
 **`curated/`**：脚本 **不写**；由 Agent 按 [`RUNBOOK.md`](./RUNBOOK.md)（S2–S3 `_aggregate/`、S4–S5 `_deliver/`）写入。
-
-**遗留**：`--product mall|hui` 物化固定 by-root（48696506 / 48694645）。
 
 ## 耗时与翻译
 

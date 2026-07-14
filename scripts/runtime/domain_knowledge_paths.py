@@ -19,6 +19,8 @@ EXTRACTED_BY_ROOT = DOMAIN_KNOWLEDGE / DIR_EXTRACTED / "by-root"
 
 FACET_UNMATCHED = "facet-unmatched"
 FACET_MISC = "facet-misc"
+# Remaining facet-* names are S1 machine bucket labels (not checklist domain modules).
+# Prefer deriving facet dirs from s2-domain-profiles.json; these constants are fallbacks.
 FACET_CHECKOUT = "facet-checkout"
 FACET_GATEWAY = "facet-gateway"
 FACET_COMPENSATION_CBP = "facet-compensation-cbp"

@@ -42,4 +42,4 @@ python3 scripts/domain_check.py jira --team demo --full-raw
 
 Ticket count with attribution ≠ pipeline done. Proceed to shared Recognize after Classify.
 
-Full historical WC/B1 notes: see [`CLASSIFY-CLI.zh-CN.md`](./CLASSIFY-CLI.zh-CN.md) if needed.
+Full prep notes: Chinese locale [`CLASSIFY-CLI.zh-CN.md`](./CLASSIFY-CLI.zh-CN.md) mirrors this file (demo examples only).

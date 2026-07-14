@@ -2,11 +2,11 @@
 First-principles Jira ticket attribution (no LLM).
 
 Separates:
-  - business proposition → primary / themes (checklist slugs only)
-  - product channel → product_line (mall | hui | gateway | shared | unknown)
+  - business proposition → primary / themes (checklist + teams/<team>.json only)
+  - product channel → product_line label (never a domain module)
   - material kind → normative_business | mapping_engineering | collaboration_noise
 
-Aligned with domain-knowledge/strategy.md and scripts/facet_classify.py facet order.
+Themes and keyword facets are **not** hard-coded for any tenant in this pack.
 """
 
 from __future__ import annotations
@@ -21,194 +21,33 @@ from jira.lib.jira_proposition import classify_distill_tier, proposition_cluster
 from jira.lib.jira_proposition import proposition_extract as should_proposition_extract_body
 from jira.lib.jira_substance import should_distill_queue, substance_metrics
 
-# Checklist-legal theme slugs (CMA; extend per team via load_checklist_themes).
-DEFAULT_CMA_THEMES: frozenset[str] = frozenset(
-    {
-        "checkout",
-        "compensation-cbp",
-        "contests",
-        "compliance-identity",
-        "messaging",
-        "gateway",
-        "requirements",
-    }
-)
+# Pack ships no tenant theme set. Themes come from checklist + teams/<team>.json.
+# (Historical name kept as empty alias so old imports fail closed.)
+DEFAULT_CMA_THEMES: frozenset[str] = frozenset()
 
-# (slug, keywords) — narrower / higher-priority facets first (mirror facet_classify).
-_PROPOSITION_FACETS: tuple[tuple[str, Sequence[str]], ...] = (
-    (
-        "compensation-cbp",
-        (
-            "cbp",
-            "pacesetter",
-            "ps4_sponsorship",
-            "elite bonus",
-            "sales bonus",
-            "compensation",
-            "酬宾",
-            "奖金",
-            "milestone",
-            "market capability",
-        ),
-    ),
-    (
-        "checkout",
-        (
-            "checkout",
-            "check out",
-            "cart order",
-            "place order",
-            "payment",
-            "shipping",
-            "order history",
-            "order detail",
-            "auto order",
-            "promotool",
-            "datatracking",
-            "data tracking",
-            "promo widget",
-            "结账",
-            "支付",
-            "购物车",
-            "运费",
-        ),
-    ),
-    (
-        "contests",
-        (
-            "contest",
-            "opt-in",
-            "opt in",
-            "cvp",
-            "geg",
-            "竞赛",
-            "菁英",
-        ),
-    ),
-    (
-        "compliance-identity",
-        (
-            "customer title",
-            "customer policy",
-            "privacy policy",
-            "职称",
-            "brand partner",
-            "cpc",
-            "forgerock",
-            "合规",
-            "身份",
-            "registration address",
-        ),
-    ),
-    (
-        "messaging",
-        (
-            "notification",
-            "push",
-            "jiguang",
-            "极光",
-            "message analytics",
-            "microphone access",
-            "csr tool",
-            "hot fix",
-            "hotfix",
-        ),
-    ),
-    (
-        "content-mini-program",
-        (
-            "content mini",
-            "content management",
-            "cms",
-            "video plugin",
-            "icon font",
-            "内容小程序",
-            "dependencies",
-        ),
-    ),
-    (
-        "cpc-upgrade",
-        (
-            "cpc upgrade",
-            "preferred customer",
-            "upgrade",
-            "优惠顾客",
-            "approval",
-        ),
-    ),
-    (
-        "profile-management",
-        (
-            "profile management",
-            "profile",
-            "资料",
-            "address",
-            "shipping address",
-        ),
-    ),
-    (
-        "health-evaluation",
-        (
-            "health evaluation",
-            "health quiz",
-            "questionnaire",
-            "健康测评",
-            "report",
-        ),
-    ),
-    (
-        "international-wechat",
-        (
-            "international wechat",
-            "international",
-            "oe",
-            "poc",
-            "register",
-            "国际微信",
-        ),
-    ),
-    (
-        "gateway",
-        (
-            "cngw",
-            "cn gateway",
-            "shopping gateway",
-            "gateway",
-            "graphql",
-            "gql",
-            "appdynamics",
-            "splunk",
-            "eslint",
-            "session",
-            "consent shopping",
-            "网关",
-        ),
-    ),
-)
+# Keyword facets live in teams/<team>.json — not in this pack module.
+_PROPOSITION_FACETS: tuple[tuple[str, Sequence[str]], ...] = ()
 
 _COLLABORATION_NOISE = re.compile(
     r"release work transfer|code transfer|code review with 3pl|merge code for|"
     r"save for late function discovery|support 3pl|perpare the code transfer|"
-    r"launch the mall app to oppo|auto update the android version$",
+    r"auto update the android version$",
     re.I,
 )
 
 _ENGINEERING_ONLY = re.compile(
     r"\beslint\b|editorconf|console log for splunk|add appdynamics|"
-    r"technical design$|schema for china shopping|define schema|poc for",
+    r"technical design$|define schema|poc for",
     re.I,
 )
 
+# Optional channel labels only (never become primary domain slugs).
+# Prefer teams/<team>.json product_line patterns when present; these are generic fallbacks.
 _PRODUCT_LINE_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
-    ("mall", re.compile(r"\[mall\]|mall app|cnmall|mallphase", re.I)),
-    ("hui", re.compile(r"\[hui\]|\bhui\b|cnhui|baoying hui|hui app", re.I)),
-    ("gateway", re.compile(r"\bcngw\b|cn gateway|shopping gateway|\[mall gateway\]", re.I)),
+    ("gateway", re.compile(r"\bgateway\b|\[gw\]", re.I)),
     (
         "wechat",
-        re.compile(
-            r"\[wechat\]|wechat|mini\s*program|miniprogram|小程序|content mini",
-            re.I,
-        ),
+        re.compile(r"\[wechat\]|wechat|mini\s*program|miniprogram|小程序", re.I),
     ),
 )
 
@@ -289,7 +128,7 @@ def score_propositions(
     facets: tuple[tuple[str, Sequence[str]], ...] | None = None,
 ) -> list[tuple[str, int]]:
     hay_raw, hay_lc = _haystack(raw)
-    table = facets if facets is not None else _PROPOSITION_FACETS
+    table = facets if facets is not None else ()
     scored: list[tuple[str, int]] = []
     for slug, keywords in table:
         sc = _score_facet(hay_lc, hay_raw, keywords)
@@ -338,11 +177,13 @@ def classify_ticket(
 
     cfg = load_attribution_config(team_key, root_id)
     rid = root_id or (str(cfg.get("root_id")) if cfg else None)
-    allowed = allowed_themes or (load_allowed_themes(rid) if rid else DEFAULT_CMA_THEMES)
-    facet_table = facets_tuple(cfg)
-    normative = normative_primaries(cfg, rid) if rid else frozenset(
-        {"checkout", "compensation-cbp", "contests", "compliance-identity", "messaging"}
+    from jira.lib.jira_checklist_themes import FALLBACK_THEMES
+
+    allowed = allowed_themes or (
+        load_allowed_themes(rid) if rid else frozenset(FALLBACK_THEMES)
     )
+    facet_table = facets_tuple(cfg)
+    normative = normative_primaries(cfg, rid) if rid else frozenset()
     sinks = sink_slugs(cfg)
     key = str(raw.get("key") or "")
     itype = str(raw.get("issuetype") or "Story")
@@ -381,24 +222,7 @@ def classify_ticket(
         if not scored and parent_raw:
             scored = score_propositions(parent_raw, facets=facet_table)
 
-        # Demo Team Gamma (wc): health-evaluation Epic — force business proposition
-        try:
-            from teams.registry import team_key_for_root_id
-
-            _team = team_key_for_root_id(str(rid)) if rid else None
-        except ImportError:
-            _team = None
-        if (
-            _team == "wc"
-            and parent_key == "DEV-87106"
-            and "health-evaluation" in allowed
-        ):
-            primary = "health-evaluation"
-            themes = ["health-evaluation"] + [
-                slug for slug, _ in scored[:2] if slug in allowed and slug != "health-evaluation"
-            ]
-            hinted = "health-evaluation"
-        elif hinted and hinted in allowed:
+        if hinted and hinted in allowed:
             primary = hinted
             themes = [hinted] + [slug for slug, _ in scored[:3] if slug in allowed and slug != hinted]
         elif scored:
@@ -410,18 +234,7 @@ def classify_ticket(
             primary = "requirements"
             themes = ["requirements"]
 
-        force_health_business = (
-            _team == "wc"
-            and primary == "health-evaluation"
-            and parent_key == "DEV-87106"
-        )
-        if force_health_business:
-            material_kind = "normative_business"
-            signal = "business" if nc >= 1 or substance_chars >= 200 else "engineering"
-            business_extract = signal == "business"
-            wiki_gap = True
-            confidence = "medium" if substance_chars >= 200 else "low"
-        elif _ENGINEERING_ONLY.search(hay_raw) and not re.search(
+        if _ENGINEERING_ONLY.search(hay_raw) and not re.search(
             r"bug|defect|production", hay_raw, re.I
         ):
             material_kind = "mapping_engineering"
@@ -492,11 +305,14 @@ def classify_ticket(
     )
     proposition_extract = should_proposition_extract_body(distill_tier)
 
-    # Mall/Hui channel must not become primary slug
-    for bad in ("mall-app", "hui-app", "mall", "hui"):
+    # Channel / filing-layout slugs must not become primary (see FORBIDDEN_THEME_SLUGS).
+    from jira.lib.pipeline_check_logic import FORBIDDEN_THEME_SLUGS
+
+    for bad in FORBIDDEN_THEME_SLUGS:
         if primary == bad:
             primary = "requirements"
             themes = ["requirements"]
+            break
 
     if primary not in allowed:
         primary = "requirements"
