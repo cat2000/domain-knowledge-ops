@@ -8,7 +8,7 @@
 
 粘贴 **Confluence 链接或数字 ID** → **粘贴页 ID**（支持 `/pages/<id>/`、`homepageId=`、`…/spaces/<KEY>/overview` 经 REST 取 homepage、正文内长数字 ID）。
 
-- **默认**：粘贴页 = **枚举根**，拉整棵后代 → `extracted/by-root/<ID>/`、`materialized/by-root/<ID>/`（落盘根可能因复用而与枚举根不同，见 domain-knowledge-pipeline-contract §2）。
+- **默认**：粘贴页 = **枚举根**，拉整棵后代 → `extracted/by-root/<ID>/`、`materialized/by-root/<ID>/`（落盘根可能因复用而与枚举根不同，见 domain-knowledge-pipeline-contract §2）。复用顺序：**先本地命中粘贴页**，未命中再 Confluence 祖先。
 - **团队整库**：粘贴 **本 Space overview / homepage**，勿把产品分组 / 渠道子树页当默认权威根。
 - **祖先升格**（可选）：`.env` 中 `CONFLUENCE_CANONICAL_ROOT_IDS` + `--resolve-canonical-root` 或 `CONFLUENCE_RESOLVE_CANONICAL_ROOT=1`。
 

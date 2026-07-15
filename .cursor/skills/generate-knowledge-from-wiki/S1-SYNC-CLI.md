@@ -6,7 +6,7 @@
 
 Paste a **Confluence URL or numeric ID** → enumeration root (`/pages/<id>/`, `homepageId=`, space overview via REST homepage, long numeric IDs in body).
 
-- **Default**: pasted page = enum root → full descendants → `extracted/by-root/<ID>/`, `materialized/by-root/<ID>/` (disk root may differ if reuse applies; see pipeline contract §2).
+- **Default**: pasted page = enum root → full descendants → `extracted/by-root/<ID>/`, `materialized/by-root/<ID>/` (disk root may differ if reuse applies; see pipeline contract §2). Reuse order: **local page hit first**, then Confluence ancestors if miss.
 - **Team-wide library**: paste Space overview / homepage — do not treat product subgroup pages as the default canonical root.
 - **Ancestor promotion** (optional): `.env` `CONFLUENCE_CANONICAL_ROOT_IDS` + `--resolve-canonical-root` or `CONFLUENCE_RESOLVE_CANONICAL_ROOT=1`.
 

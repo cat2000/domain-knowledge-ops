@@ -53,31 +53,51 @@ def resolve_storage_root_for_subtree(
     wiki_base: str,
     reuse_enabled: bool,
 ) -> Tuple[str, bool]:
+    """Pick on-disk by-root for a subtree sync.
+
+    Order (fast path first):
+    1. Local only — if ``pages/<enum_root_id>.md`` already exists under some
+       ``extracted/by-root/<R>/``, reuse ``R`` (no Confluence call).
+    2. Else Confluence ancestors — fetch parent chain, then local-match each
+       ancestor the same way (covers new leaves under an already-synced tree).
+    3. Else storage root = enumeration root (new by-root directory).
+    """
     if not reuse_enabled:
         return enum_root_id, False
 
+    local_hit = roots_containing_page(enum_root_id)
+    if local_hit:
+        chosen = choose_storage_root(local_hit)
+        print(
+            f"sync_domain_knowledge_from_confluence: reuse storage root {chosen} "
+            f"(local match pages/{enum_root_id}.md; enumeration root {enum_root_id})",
+            file=sys.stderr,
+        )
+        return chosen, True
+
     email = os.environ.get("ATLASSIAN_EMAIL", "").strip()
     token = os.environ.get("ATLASSIAN_API_TOKEN", "").strip()
-    auth = basic_auth_header(email, token) if email and token else ""
+    if not email or not token:
+        return enum_root_id, False
 
-    ids_to_try: List[str] = [enum_root_id]
-    if auth:
-        try:
-            ids_to_try.extend(fetch_ancestor_ids(wiki_base, auth, enum_root_id))
-        except Exception as exc:
-            print(
-                f"sync_domain_knowledge_from_confluence: reuse lookup could not fetch ancestors ({exc})",
-                file=sys.stderr,
-            )
+    auth = basic_auth_header(email, token)
+    try:
+        ancestors = fetch_ancestor_ids(wiki_base, auth, enum_root_id)
+    except Exception as exc:
+        print(
+            f"sync_domain_knowledge_from_confluence: reuse lookup could not fetch ancestors ({exc})",
+            file=sys.stderr,
+        )
+        return enum_root_id, False
 
-    for pid in ids_to_try:
+    for pid in ancestors:
         roots = roots_containing_page(pid)
         if not roots:
             continue
         chosen = choose_storage_root(roots)
         print(
             f"sync_domain_knowledge_from_confluence: reuse storage root {chosen} "
-            f"(matched pages/{pid}.md; enumeration root {enum_root_id})",
+            f"(ancestor pages/{pid}.md via Confluence; enumeration root {enum_root_id})",
             file=sys.stderr,
         )
         return chosen, True

@@ -43,7 +43,7 @@ Chinese locale: [`domain-knowledge-pipeline-contract.zh-CN.md`](./domain-knowled
 | **On-disk root** | `<ID>` in `by-root/<ID>/`. Shared by `extracted/`, `materialized/`, `curated/`. |
 
 - **Space overview**: enumeration root ≈ on-disk root ≈ space home ID (full-library refresh).
-- **Child page + default reuse**: enumeration root = child; on-disk root often = existing team library ID (hit under `extracted/.../pages/<id>.md` or ancestor chain). Do not create a parallel `by-root/<childId>/`.
+- **Child page + default reuse**: enumeration root = child; on-disk root often = existing team library ID. Lookup order: (1) **local** `extracted/.../pages/<childId>.md` (no Confluence); (2) if miss, Confluence **ancestors** then local match; (3) else new `by-root/<childId>/`. Do not create a parallel root when (1) or (2) hits.
 - Disable reuse: `--no-reuse-existing-by-root` or `CONFLUENCE_REUSE_EXISTING_BY_ROOT=0` → on-disk root = enumeration root.
 
 **`PIPELINE_HANDOFF.json`** (`extracted/by-root/<on-disk root>/`): `root_page_id` = on-disk root; if `enumeration_root_page_id` is set it may differ. Distill and gate scripts **always use the on-disk root**.

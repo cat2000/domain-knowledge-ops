@@ -43,7 +43,7 @@
 | **落盘根** | `by-root/<ID>/` 中的 `<ID>`。`extracted/`、`materialized/`、`curated/` **共用**。 |
 
 - **Space overview**：枚举根 ≈ 落盘根 ≈ Space 首页 ID（整库刷新）。
-- **子页链接 + 默认复用**：枚举根 = 子页；落盘根常 = 已有团队整库 ID。勿新建并列 `by-root/<子页ID>/`。
+- **子页链接 + 默认复用**：枚举根 = 子页；落盘根常 = 已有团队整库 ID。查找顺序：(1) **本地** `extracted/.../pages/<子页ID>.md`；(2) 未命中再 Confluence **祖先**后本地匹配；(3) 否则新建 `by-root/<子页ID>/`。命中 (1)(2) 时勿并列新根。
 - 关闭复用：`--no-reuse-existing-by-root` 或 `CONFLUENCE_REUSE_EXISTING_BY_ROOT=0` → 落盘根 = 枚举根。
 
 **`PIPELINE_HANDOFF.json`**（`extracted/by-root/<落盘根>/`）：`root_page_id` = 落盘根；若有 `enumeration_root_page_id` 则与落盘根不同。蒸馏与门禁脚本 **一律用落盘根**。
