@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **`@ticket-test-design` presentation** — optimize for ~60s start-testing (short Summary decision board; Must core fields; Design after Later; chat = draft GWT; AC as where+act+observe); golden `example-DEMO-1` slimmed accordingly
 - **Install narrative** — clone is the **only** supported install; removed `npx skills add` install examples (skill-folder copy is not an onboarding path; `skills/` kept for discovery only)
 - **Path B** — with-vs-without brief contrast via [`docs/BENCHMARK.md`](docs/BENCHMARK.md) (not a same-output re-run of Path A)
 - **`setup-domain-ops`** — slim dialogue; **writes v3** `team-roots.json` (`libraries` + team mounts)

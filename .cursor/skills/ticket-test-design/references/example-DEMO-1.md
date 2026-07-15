@@ -2,152 +2,105 @@
 
 ## Summary
 
-- **Scope**: Purchaser amends unshipped line quantities on eligible orders; quote/status gates; no price/SKU/WMS work
+- **Scope**: Amend unshipped line qty on Open orders while quote valid; no price/SKU/WMS
 - **Contract readiness**: contract-ready
-- **Pack note**: should recommended (1); includes weak-oracle API role check — does not block contract Done
+- **Pack note**: should 1 (weak API role) — does not block contract Done
 - **Counts**: must 6 · should 1 · later 2
-- **Residual risk**: Quantity-up / Partially Shipped seller-approval still undecided (PO); expired-banner copy TBD
-- **Evidence gaps**: API deny codes for non-purchaser not specified — see TC-011
-- **Evidence**: `source=offline-fixture` · `domain-knowledge/fixtures/offline-demo/` · brief `ordering` S7 · attribution `primary=ordering`
+- **Residual risk**: Quantity-up / partial-ship seller approval TBD
+- **Evidence**: offline-fixture · ordering S7
 
 ## Acceptance
 
 - **Source**: jira
-- **AC-1** `(given)`: Order `Open` + `quote_version` not expired → purchaser can change line quantity and save
-- **AC-2** `(given)`: Quote expired → Save disabled + message that a new quote is required
-- **AC-3** `(given)`: Order `Shipped` or `Cancelled` → amend controls hidden
-- **AC-4** `(given)`: Partial fulfillments → only unshipped lines editable; shipped lines are read-only
-- **AC-5** `(given)`: After successful amend, updated totals visible within 3s on order detail
+- **AC-1** `(given)`: On Open order with valid quote, purchaser changes line qty and saves → new qty shown
+- **AC-2** `(given)`: On Open order with expired quote → Save disabled + “new quote required”
+- **AC-3** `(given)`: On Shipped or Cancelled order → amend controls hidden
+- **AC-4** `(given)`: On Partially Shipped order → shipped lines read-only; unshipped editable
+- **AC-5** `(given)`: After successful amend → order totals visible within 3s
 - **Must-deferred**: (none)
-
-## Design
-
-- **Primary**: state_transition
-- **Secondary**: use_case, error_guessing
-- **Rationale**: Eligibility is driven by order/quote/line shipment states
-- **Scan**: security=needed · resilience=out_of_scope · exploratory=charter_only
-- **Coverage intent**: Q2 proves each given AC; Q4 role check as supplements; Q3 charter for approval ambiguity
 
 ## Scope
 
-- **In**: Quantity amend under Open + valid quote; expiry block; hide on Shipped/Cancelled; partial-ship editability; totals refresh
+- **In**: Open + valid quote amend; expiry block; hide on Shipped/Cancelled; partial-ship editability; totals refresh
 - **Out**: Price renegotiation; add SKUs; WMS; chaos/network faults
 
 ## Must
 
-### TC-001 · must · Purchaser amends quantity on Open order with valid quote
+### TC-001 · must · Amend qty on Open + valid quote
 
     proves: [AC-1]
     automate: candidate
-    technique: use_case
-    level: ui
-    smoke: true
-    kind: happy
-    given: Order status Open; bound quote_version not expired; role purchaser; at least one unshipped line
-    when: Change that line quantity and save
-    then: (AC-1) Line shows the new quantity after save
-    data_deps: [seed Open order + valid quote + purchaser user]
-    regression_touchpoints: [line quantity display]
-    oracle_confidence: high
-    notes: []
+    given: Order Open; quote valid; role purchaser; unshipped line exists
+    when: Change line quantity and save
+    then: (AC-1) Line shows the new quantity
 
-### TC-002 · must · Totals refresh after successful amend
+### TC-002 · must · Totals refresh after amend
 
     proves: [AC-5]
     automate: candidate
-    technique: use_case
-    level: ui
-    smoke: true
-    kind: happy
-    given: Order Open; quote valid; role purchaser; amend just saved successfully
-    when: Observe order detail after save
-    then: (AC-5) Updated totals are visible within 3 seconds
-    data_deps: [same as TC-001]
-    oracle_confidence: high
-    notes: []
+    given: Successful amend just saved (TC-001 setup)
+    when: View order detail
+    then: (AC-5) Totals update within 3s
 
-### TC-003 · must · Expired quote disables save and prompts for new quote
+### TC-003 · must · Expired quote blocks save
 
     proves: [AC-2]
     automate: candidate
-    technique: state_transition
-    level: ui
-    smoke: true
-    kind: exception
-    given: Order status Open; bound quote_version expired; role purchaser
-    when: Attempt to change line quantity and save
-    then: (AC-2) Save is disabled and the portal shows that a new quote is required
-    data_deps: [seed Open order + expired quote]
-    oracle_confidence: high
-    notes: [Exact banner copy TBD — assert intent, not final wording]
+    given: Order Open; quote expired; role purchaser
+    when: Try to change quantity and save
+    then: (AC-2) Save disabled; “new quote required” shown
+    notes: [Assert intent if banner copy TBD]
 
 ### TC-004 · must · Shipped order hides amend controls
 
     proves: [AC-3]
     automate: candidate
-    technique: state_transition
-    level: ui
-    kind: exception
-    given: Order status Shipped; role purchaser
+    given: Order Shipped; role purchaser
     when: Open order detail
-    then: (AC-3) Amend controls are not visible
-    data_deps: [seed Shipped order]
-    oracle_confidence: high
-    notes: []
+    then: (AC-3) Amend controls not visible
 
 ### TC-005 · must · Cancelled order hides amend controls
 
     proves: [AC-3]
     automate: candidate
-    technique: state_transition
-    level: ui
-    kind: exception
-    given: Order status Cancelled; role purchaser
+    given: Order Cancelled; role purchaser
     when: Open order detail
-    then: (AC-3) Amend controls are not visible
-    data_deps: [seed Cancelled order]
-    oracle_confidence: high
-    notes: []
+    then: (AC-3) Amend controls not visible
 
-### TC-006 · must · Partially shipped — only unshipped lines editable
+### TC-006 · must · Partial ship — only unshipped lines editable
 
     proves: [AC-4]
     automate: candidate
-    technique: state_transition
-    level: ui
-    kind: exception
-    given: Order Partially Shipped with shipped + unshipped lines; quote still valid; role purchaser
-    when: Inspect both lines and attempt to edit each
-    then: (AC-4) Shipped lines are read-only; unshipped lines remain editable
-    data_deps: [seed partial fulfillment + valid quote]
-    oracle_confidence: high
-    notes: []
+    given: Partially Shipped; mixed shipped/unshipped lines; quote valid; purchaser
+    when: Try edit on each line
+    then: (AC-4) Shipped read-only; unshipped editable
 
 ## Should
 
-### TC-011 · should · Non-purchaser cannot amend via API
+### TC-011 · should · Non-purchaser denied on PATCH
 
     supplements: [security-role-gate]
     automate: candidate
-    technique: error_guessing
-    level: api
-    kind: security
-    given: Order Open; quote valid; authenticated non-purchaser (read-only observer per brief)
-    when: Call PATCH /orders/{id}/lines to change quantity
-    then: Request is denied and order line quantity is unchanged
-    data_deps: [observer/read-only user; Open order]
-    oracle_confidence: weak
-    notes: [ASSUMPTION] Exact HTTP status not in ticket — confirm 401/403 against API contract; if skipped: role gate may be UI-only]
+    given: Order Open; quote valid; non-purchaser (read-only observer)
+    when: PATCH /orders/{id}/lines
+    then: Request denied; line qty unchanged
+    notes: [ASSUMPTION] Confirm 401/403 vs API contract
 
 ## Later
 
-- **charter**: Quantity-up after Partially Shipped — does seller approval apply?
-  - **why_later**: Ticket open question; PO undecided — do not script a false oracle
-- **idea**: Boundary values on quantity (0, negative, max) if field limits appear in API/UI spec
-  - **why_later**: No numeric limits in ticket or brief
+- **charter**: Quantity-up after Partially Shipped — seller approval?
+  - **why_later**: Ticket open question; no false oracle
+- **idea**: Qty boundaries if API/UI limits appear
+  - **why_later**: No numeric limits in ticket/brief
+
+## Design
+
+- **Primary**: state_transition
+- **Rationale**: Order/quote/line shipment states drive eligibility
+- **Scan**: security=needed · resilience=out_of_scope · exploratory=charter_only
 
 ## Environment
 
-    device: desktop (primary)
-    browser: Chrome (primary)
-    network: default; chaos out of scope for this story
+    device: desktop
+    browser: Chrome
+    network: default

@@ -13,9 +13,9 @@ disable-model-invocation: true
 
 ## First principles
 
-**Artifact:** a **ship/Done proof pack** a tester can execute or charter — scannable in ~60s for “what must pass.”
+**Artifact:** a **ship/Done proof pack** a tester can **start running in ~60s** — not an evidence memo.
 
-**Quality:** every **`(given)` AC** is proved by a **must** case (or **Must-deferred** with blocked **Contract readiness**); Pack note holds should/weak oracles; `proves` = direct entailment else `supplements`; must/should mark `automate` for handoff. Never invent product facts or framework code.
+**Quality:** every **`(given)` AC** is proved by a **must** case (or **Must-deferred** with blocked **Contract readiness**); Pack note holds should/weak oracles; `proves` = direct entailment else `supplements`; must/should mark `automate`. Presentation: short Summary, executable AC/GWT, Design at end, **chat = draft** (no table-compressed Must). Never invent product facts or framework code.
 
 | | `@requirement-risk` | `@ticket-splitter` | This skill |
 |--|---------------------|--------------------|------------|
@@ -70,7 +70,7 @@ Jira key or text?
 ├─ Pick primary technique (+ secondary if needed) — see technique-selection
 ├─ mode=analysis? → deliver scope/design/acceptance → STOP
 ├─ Draft readable spec (presentation) → .jira_attachments/<KEY>/test_design_draft.md
-└─ validate_ticket_test_design.py [--brief] → fix → deliver in chat
+└─ validate → fix → deliver in chat **same Must GWT as the draft** (never table-compress cases)
 ```
 
 ## Responsibility
@@ -97,22 +97,25 @@ Jira key or text?
 2. List all **`(given)`** AC; plan **one must family per given AC** before adding should.
 3. Set **Contract readiness** from given-AC must coverage only; put should/weak oracles in **Pack note**.
 4. Security without a given AC → **proposed** AC or `supplements:` — never fake-`proves`.
-5. Tag `automate: candidate|manual` on must/should (no framework codegen); draft → validate → deliver.
-6. Optional handoff: `@requirement-risk` / `@ticket-splitter` if gaps block testing.
+5. Write Must with core fields only; put Design after Later; keep Summary to the decision board (P1).
+6. Tag `automate`; draft → validate → **paste full indented Must in chat** (same as file).
+7. Optional handoff: `@requirement-risk` / `@ticket-splitter` if gaps block testing.
 
 ## Done when
 
 - [ ] Validator exit 0 (or explicitly marked failed)
-- [ ] Contract readiness + Pack note + counts scannable in ≤60s
+- [ ] Summary decision board (Contract / Pack / Counts) readable in ≤60s
 - [ ] Every given AC covered by must or Must-deferred
+- [ ] Must cases are executable GWT (not ambiguity essays); chat = draft
 - [ ] `automate` on must/should; no stretch `proves`; no “full coverage” claim
-- [ ] Reading order matches presentation (summary first)
 
 ## Forbidden
 
-- MECE five-layer mandatory dumps / emoji Golden format as required output
+- MECE five-layer dumps / emoji Golden format / table-compressed Must in chat
+- Summary evidence essays; Design/quadrants before Must
+- Soft `then` (“A or B”) without `oracle_confidence: weak`
 - Quantity quotas; silent fabrication of AC or steps
-- Skip gate; wait for confirm unless `mode=analysis` or user asks ungated draft
+- Skip gate; wait for confirm unless `mode=analysis` or ungated draft requested
 - Automation framework codegen
 
 ## References (progressive)

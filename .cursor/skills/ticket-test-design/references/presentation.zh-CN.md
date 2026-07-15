@@ -5,35 +5,55 @@
 
 ## 要点
 
-先给**摘要**（能否测、必测几条），再给**验收合同**，再给用例。用例正文用**缩进字段**（类 YAML），不用宽表，不用 emoji 强制格式。
+优化目标是 **约 60 秒能开测**，不是写证据备忘录。
 
-每条 `(given)` 验收标准须有 **必测** `proves`，或写 **Must-deferred** 并降低 **合同就绪**。摘要须拆开 **合同就绪** 与 **应测包**（勿再用「可凭必测+应测上线」单行）。非 AC 蕴含用 `supplements:`；must/should 标 `automate: candidate|manual`（不为自动化写框架细节）。
+顺序：**摘要（决策板）→ 验收标准 → 必测 → 应测 → 以后 →（可选）设计选型 / 环境**。  
+用例正文用缩进字段；**禁止**用表格压缩掉 `given/when/then`（聊天交付须与 draft 文件一致）。
+
+## 摘要预算
+
+必给且短（每行一句）：
+
+- **范围**
+- **合同就绪**
+- **应测包**
+- **计数**
+
+可选各一行：残余风险、Evidence（路径指针即可）。勿在摘要解释「为何没有 formal AC」。
+
+## 验收 / 必测句式
+
+AC 与 `given/when/then` 用 **在哪 + 做什么 + 看到什么**；产品背景、路由歧义、分支名争论 → 一条短 `notes` 或「以后」，不要写进 `when`。
+
+读者散文用中文；门禁键保持英文：`must` / `proves` / `given` / `when` / `then` / `automate` / `Must-deferred`。
+
+## 必测字段默认集
+
+默认只写：`proves` · `automate` · `given` · `when` · `then`。  
+`technique` / `level` / `kind` / `data_deps` / 长 `notes` 仅当影响怎么跑时再加。
 
 ## 读者向标题
 
-| 英文骨架标题 | 中文读者标题 |
-|--------------|--------------|
+| 英文骨架 | 中文读者 |
+|----------|----------|
 | Summary | 摘要 |
 | Acceptance | 验收标准 |
-| Design | 设计选型 |
 | Scope | 范围 |
 | Must | 必测 |
 | Should | 应测 |
 | Later | 以后 |
+| Design | 设计选型（建议放文末） |
 | Environment | 环境 |
-
-用例标题仍用：`### TC-001 · must · <一句话>`（`must`/`should` 英文键保留，便于门禁）。
-
-缩进键名保持英文：`proves` / `given` / `when` / `then` / `data_deps` 等。
 
 ## 摘要示例
 
 ```markdown
 ## 摘要
 
-- **范围**：…
-- **合同就绪**：contract-ready | blocked-by-ac-gaps | blocked-by-must-deferred | blocked-by-evidence
-- **应测包**：建议跑应测 N 条；可含弱 oracle — 不挡合同 Done | 无应测
-- **计数**：必测 N · 应测 N · 以后 N
-- **残余风险**：…
+- **范围**：Open 且报价有效时可改未发货行数量；不含改价/加 SKU/WMS
+- **合同就绪**：contract-ready
+- **应测包**：应测 1（弱 API 角色）— 不挡合同 Done
+- **计数**：必测 6 · 应测 1 · 以后 2
+- **残余风险**：加量是否需卖方审批未决
+- **Evidence**：offline-fixture · ordering S7
 ```
