@@ -201,4 +201,4 @@ Historical root cause: see [`pipeline-design.md`](../../../domain-knowledge/jira
 
 ## Next
 
-`@requirement-risk` → `@ticket-splitter` (evidence: **S7** `_deliver/<slug>/<slug>-domain-brief.md`; zh-CN filename from `deliverable-locale-tokens.json`).
+`@requirement-risk` → `@ticket-splitter` → `@ticket-test-design` (evidence: **S7** `_deliver/<slug>/<slug>-domain-brief.md`; zh-CN filename from `deliverable-locale-tokens.json`).

@@ -135,6 +135,10 @@ Unlike `@add-knowledge-from-jira`, this skill outputs **iteration backlog items*
 - Copy wiki confirm→continue as the split main flow
 - Weld multi-concern scope into one bullet; empty verbs as fake coverage
 
+## Handoff to `@ticket-test-design`
+
+After a usable split (or instead of split when AC are already clear), testers may `@ticket-test-design <same KEY>` to produce must/should/later cases proving AC / `done_when`.
+
 ## Examples
 
 ```text

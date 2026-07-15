@@ -24,7 +24,7 @@ Model: [`docs/TEAM_ROOTS_V3.md`](docs/TEAM_ROOTS_V3.md). Multi-mount illustratio
 |-------|---------|
 | **confirm** | Human accepts a module-cut row on `DOMAIN_MODULE_CHECKLIST.md` (authorizes Compose for that slug) |
 | **continue** | Resume **S3–S7** Compose for **confirmed** rows only |
-| **brief** | Short output mode on `@requirement-risk` / `@ticket-splitter` only (summary + coverage, or split overview) — **not** a synonym for S7 |
+| **brief** | Short output mode on `@requirement-risk` / `@ticket-splitter` / `@ticket-test-design` (summary + coverage, split overview, or must-only test pack) — **not** a synonym for S7 |
 | **locale brief** / **reader brief** | **S7** `*-domain-brief.md` (deliverable-locale reader doc) |
 | **source brief** | **S6** `*-source-brief.md` (source-language adjudication; intermediate) |
 
@@ -34,7 +34,7 @@ Locale-specific spellings for checklist status live in [`domain-knowledge/langua
 
 ## Newcomer path (~30–60 min)
 
-1. **60s offline**: `@requirement-risk DEMO-1 team=demo` — `DEMO-1` is a **shipped fake ticket** (not live Jira); see [`WALKTHROUGH.md`](WALKTHROUGH.md) Path A
+1. **60s offline**: `@requirement-risk DEMO-1 team=demo` (then `@ticket-splitter` / `@ticket-test-design`) — `DEMO-1` is a **shipped fake ticket** (not live Jira); see [`WALKTHROUGH.md`](WALKTHROUGH.md) Path A
 2. `@setup-domain-ops` — credentials, v3 team-roots (library + board), **strategy §2**, derive profiles
 3. [`domain-knowledge/README.md`](domain-knowledge/README.md) — on-disk layout
 4. [`domain-knowledge/strategy.md`](domain-knowledge/strategy.md) — methodology (+ your filled §2)
@@ -50,7 +50,7 @@ Walkthrough paths: [`WALKTHROUGH.md`](WALKTHROUGH.md).
 2. Relevant **S7 locale brief** (reader brief) under `_deliver/<slug>/*-domain-brief.md`
 3. Only then drill into `materialized/` / `extracted/` for evidence
 
-`@requirement-risk` and `@ticket-splitter` read **S7** locale briefs by default. If S7 is missing: optional **S6** `*-source-brief.md`, else work draft (note “not S7” in the report).
+`@requirement-risk`, `@ticket-splitter`, and `@ticket-test-design` read **S7** locale briefs by default. If S7 is missing: optional **S6** `*-source-brief.md`, else work draft (note “not S7” in the report).
 
 ---
 

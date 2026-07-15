@@ -115,7 +115,7 @@ Notes:
 
 ### 3. Story review
 
-`@requirement-risk` / `@ticket-splitter` with `team=…` load briefs from **mounted libraries** only (not the whole site).
+`@requirement-risk` / `@ticket-splitter` / `@ticket-test-design` with `team=…` load briefs from **mounted libraries** only (not the whole site).
 
 ## Resolution rules
 

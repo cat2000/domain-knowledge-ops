@@ -11,9 +11,10 @@ Open this repo root in Cursor. Use the **shipped fake ticket** `DEMO-1` (Acme Or
 ```text
 @requirement-risk DEMO-1 team=demo
 @ticket-splitter DEMO-1 team=demo
+@ticket-test-design DEMO-1 team=demo
 ```
 
-**Done when:** a readiness/risk report with Scope + MUST items, then INVEST slices with `scope` and `done_when`, both grounded in the shipped Acme Orders brief.
+**Done when:** a readiness/risk report with Scope + MUST items, INVEST slices with `scope` / `done_when`, and a test-design pack with Contract readiness + must cases proving given AC — all grounded in the shipped Acme Orders brief.
 
 Fixture layout: [`domain-knowledge/fixtures/offline-demo/`](domain-knowledge/fixtures/offline-demo/) (`jira/DEMO-1.md` + `ordering-domain-brief.md`).  
 Sample outputs: [`docs/demo/`](docs/demo/).
@@ -68,7 +69,7 @@ Map: [`saas-billing/INDUSTRY.md`](domain-knowledge/fixtures/saas-billing/INDUSTR
 4. **Jira half (default when board exists)** — `@add-knowledge-from-jira team=<your_team>` if the report shows attribution = 0, then re-run recognize / tagging acceptance
 5. **Approve modules** — mark **confirm** only on rows the report allows (zero-source stay pending) → say **continue** — agent lands sources into **industry axes**, writes **reader briefs** under `_deliver/`, then runs `--after-s7 --strict`  
    (Default resume is **continue**. `@distill-domain-knowledge` is advanced: no re-sync / partial step / new chat.)
-6. **Review a real story** — `@requirement-risk PROJ-123 team=<your_team>` → `@ticket-splitter PROJ-123`  
+6. **Review a real story** — `@requirement-risk PROJ-123 team=<your_team>` → `@ticket-splitter PROJ-123` → `@ticket-test-design PROJ-123`  
    (`PROJ-123` is a **placeholder** — replace with your real Jira issue key, e.g. `ABC-42`. It is not shipped in this repo.)
 
 | You say / do | What lands on disk |
@@ -77,7 +78,7 @@ Map: [`saas-billing/INDUSTRY.md`](domain-knowledge/fixtures/saas-billing/INDUSTR
 | `@generate-knowledge-from-wiki` + URL | **S1** + **S2** → checklist + `TAGGING_ACCEPTANCE.md` |
 | `@add-knowledge-from-jira` (when board set) | Jira attribution into the same root (completes bidirectional tagging) |
 | **confirm** (OK rows only) then **continue** | Compose **S3–S7** (land into industry axes + write-through) → reader brief + `--after-s7` |
-| `@requirement-risk` / `@ticket-splitter` | Read that reader brief as evidence |
+| `@requirement-risk` / `@ticket-splitter` / `@ticket-test-design` | Read that reader brief as evidence |
 
 Install = **clone this repo**: [`INSTALL.md`](INSTALL.md).  
 Pack layout check (no network): `python3 scripts/verify_skills_pack.py`
@@ -88,7 +89,7 @@ Pack layout check (no network): `python3 scripts/verify_skills_pack.py`
 
 | Path | Done when |
 |------|-----------|
-| A | Risk report has Scope + MUST items; split has observable `done_when` faces |
+| A | Risk report has Scope + MUST items; split has observable `done_when`; test design has Contract readiness + must↔AC |
 | B | Path B (without brief) report differs from Path A on at least one concrete point |
 | B2 | Risk report for `DEMO-BILL-1` cites Active + proration preview from the billing brief |
 | C | Tagging acceptance shown → confirm only OK rows → (Jira if board) → S7 for those rows with write-through + `--after-s7` → risk/split on a real key; zero-source / zero-rule modules still **pending** |

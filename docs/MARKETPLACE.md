@@ -11,7 +11,7 @@ Use this checklist for release polish and marketplace distribution.
 - [x] Topics: `cursor`, `agent-skills`, `confluence`, `jira`, `domain-driven-design`, `atlassian`
 - [x] Tag `v0.1.0` + GitHub Release — https://github.com/cat2000/domain-knowledge-ops/releases/tag/v0.1.0
 - [x] Enable Discussions — https://github.com/cat2000/domain-knowledge-ops/discussions
-- [x] About description updated (story risk / INVEST / offline DEMO-1)
+- [x] About description updated (story risk / INVEST / test design / offline DEMO-1)
 
 ## Discovery vs install (important for posts)
 

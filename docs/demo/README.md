@@ -1,6 +1,6 @@
 # Demo samples
 
-Static examples of what `@requirement-risk` and `@ticket-splitter` produce for the shipped offline fixture. **Not** live agent output — use these to compare structure and grounding after you run Path A in [`WALKTHROUGH.md`](../../WALKTHROUGH.md).
+Static examples of what `@requirement-risk`, `@ticket-splitter`, and `@ticket-test-design` produce for the shipped offline fixture. **Not** live agent output — use these to compare structure and grounding after you run Path A in [`WALKTHROUGH.md`](../../WALKTHROUGH.md).
 
 ## Fixture inputs
 
@@ -15,9 +15,10 @@ Invoke in Cursor (repo root open, no `.env`):
 ```text
 @requirement-risk DEMO-1 team=demo
 @ticket-splitter DEMO-1 team=demo
+@ticket-test-design DEMO-1 team=demo
 ```
 
-Add `brief` for short mode on either skill.
+Add `brief` for short mode on risk/split/test-design.
 
 ## Sample outputs
 
@@ -25,9 +26,10 @@ Add `brief` for short mode on either skill.
 |--------|-------|-------|
 | [`requirement-risk-DEMO-1.sample.md`](./requirement-risk-DEMO-1.sample.md) | `@requirement-risk` | Refinement depth; MUST items on open-order amend + quote validity |
 | [`ticket-splitter-DEMO-1.sample.md`](./ticket-splitter-DEMO-1.sample.md) | `@ticket-splitter` | INVEST slices with `scope` / `done_when` |
+| [`ticket-test-design-DEMO-1.sample.md`](./ticket-test-design-DEMO-1.sample.md) | `@ticket-test-design` | Contract readiness + must↔AC + `automate` tags |
 
 Samples are grounded in **DEMO-1** acceptance criteria and the **ordering** brief rule clusters (Open + valid quote, expired quote, shipped/cancelled, partial ship). They do not invent product facts beyond those sources.
 
 ## Validation
 
-Agent output must pass the project validate scripts for each skill (see skill `SKILL.md` and `.cursor/rules/`). If your run diverges in **substance** but passes gates, compare evidence tags (`[DOMAIN_KNOWLEDGE]`) and MUST counts against these samples.
+Agent output must pass the project validate scripts for each skill (see skill `SKILL.md` and `.cursor/rules/`). Test design: `scripts/jira/attachments/validate_ticket_test_design.py`. If your run diverges in **substance** but passes gates, compare evidence tags and contract coverage against these samples.

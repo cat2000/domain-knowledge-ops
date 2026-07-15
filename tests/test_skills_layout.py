@@ -32,6 +32,7 @@ SKILL_SUBDIRS = (
     "add-knowledge-from-jira",
     "requirement-risk",
     "ticket-splitter",
+    "ticket-test-design",
 )
 
 # Non-skill support dirs allowed under skills/
@@ -41,6 +42,7 @@ JIRA_ATTACHMENT_SCRIPTS = (
     "fetch_jira_attachments.py",
     "validate_requirement_risk_report.py",
     "validate_ticket_split.py",
+    "validate_ticket_test_design.py",
 )
 
 LEGACY_SKILL_SUBDIRS = ("share", "contracts", "team-share", "jira-attachments")
@@ -86,7 +88,7 @@ class TestSkillsLayout(unittest.TestCase):
                 self.assertFalse((SKILLS / name).exists(), name)
 
     def test_rules_reference_attachment_script_path(self) -> None:
-        for rel in ("requirement_risk.md", "ticket_system.md"):
+        for rel in ("requirement_risk.md", "ticket_system.md", "ticket_test_design.md"):
             body = (CURSOR / "rules" / rel).read_text(encoding="utf-8")
             self.assertIn("scripts/jira/attachments/fetch_jira_attachments.py", body, rel)
 

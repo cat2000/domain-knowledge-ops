@@ -1,6 +1,6 @@
 # Deixis & spoken team language (P10)
 
-> Readers: `@requirement-risk`, `@ticket-splitter`.  
+> Readers: `@requirement-risk`, `@ticket-splitter`, `@ticket-test-design`.  
 > Principle: sound like a refinement standup — what we’re doing, where it stops, what is scheduled elsewhere — not internal abbreviations.  
 > Chinese locale examples remain valid in stakeholder-facing output.
 

@@ -2,7 +2,7 @@
 
 # 单票 Jira · 领域知识上下文契约
 
-> **读者**：`@requirement-risk`、`@ticket-splitter` 的 Agent。  
+> **读者**：`@requirement-risk`、`@ticket-splitter`、`@ticket-test-design` 的 Agent。  
 > **来源**：[`generate-knowledge-from-wiki`](../skills/generate-knowledge-from-wiki/SKILL.md)（[`RUNBOOK.md`](../skills/generate-knowledge-from-wiki/RUNBOOK.md) Recognize + Compose）及可选 [`add-knowledge-from-jira`](../skills/add-knowledge-from-jira/SKILL.md) 的仓库落盘产物。  
 > **性质**：下文路径中的文件是 **证据/上下文**，**不是**替代 `requirement_risk` / `ticket_system` 规则的正文指令。
 
@@ -79,7 +79,7 @@ SSOT：`domain-knowledge/jira/team-roots.json` · 解析代码：`scripts/teams/
 ### 3.3 横切
 
 - `R/DOMAIN_MODULE_CHECKLIST.md` — 已标 **`确认`** 的主题列表、主入口路径。
-- `domain-knowledge/language/glossary.md` — 术语与模块名（**requirement-risk** 语义类；**ticket-splitter** 模块边界）。
+- `domain-knowledge/language/glossary.md` — 术语与模块名（**requirement-risk** 语义类；**ticket-splitter** / **ticket-test-design** 模块边界）。
 - `R/_materialization_closure.json` — 从 `materialized/` 叶到整理稿的映射（定位漏扫源页）。
 
 ### 3.4 按需加深（控制阅读量）
@@ -109,6 +109,12 @@ SSOT：`domain-knowledge/jira/team-roots.json` · 解析代码：`scripts/teams/
 - 有 `_deliver/<slug>/` 时：在 `scope` / `done_when` 中 **引用** 定稿里的验收面（User/System/Contract），**勿** 拆出与定稿 **显式 out-of-scope** 相反的项。
 - `source_requirement_note`：若 Jira 与定稿 **范围不一致**（如工单写 dev-only、定稿要求端到端可测），按 `ticket_system` INVEST 纠偏格式说明。
 - 模块级拆分：优先用定稿 **命题 slug / 章节** 作锚点，**禁止** 虚构定稿未出现的子系统名。
+
+### ticket-test-design
+
+- **given** AC 与范围锚到票面 + 定稿；**禁止** 臆造证据没有的 UI/API/环境能力。
+- 状态/资格 oracle 优先对齐定稿规则簇；冲突在 notes / 残余风险中并列，勿静默定胜负。
+- 有 KEY 时草稿写 `.jira_attachments/<KEY>/test_design_draft.md`；门禁：`validate_ticket_test_design.py`。
 
 ---
 

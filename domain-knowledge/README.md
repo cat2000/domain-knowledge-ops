@@ -13,7 +13,7 @@ Landing zone for domain knowledge: Confluence → `extracted/` / `materialized/`
 | You are… | Start here |
 |----------|------------|
 | First-time setup | `@setup-domain-ops` → fill strategy → derive profiles |
-| Offline demo (no Atlassian) | [`fixtures/offline-demo/`](fixtures/offline-demo/) → `@requirement-risk DEMO-1` |
+| Offline demo (no Atlassian) | [`fixtures/offline-demo/`](fixtures/offline-demo/) → `@requirement-risk` / `@ticket-splitter` / `@ticket-test-design DEMO-1` |
 | Story reviewer | [`TEAM_KNOWLEDGE_BASE.md`](../TEAM_KNOWLEDGE_BASE.md) |
 | Methodology template | [`strategy.md`](strategy.md) · fictional fill example [`strategy.example.md`](strategy.example.md) |
 | Wiki distill | `@generate-knowledge-from-wiki` → [RUNBOOK](../.cursor/skills/generate-knowledge-from-wiki/RUNBOOK.md) |

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **`@ticket-test-design`** — single-ticket release/Done test pack (must/should/later; given-AC→must coverage; Contract readiness vs Pack note; `automate` handoff tags). Rule: [`ticket_test_design.md`](.cursor/rules/ticket_test_design.md); gate: `scripts/jira/attachments/validate_ticket_test_design.py`; sample: [`docs/demo/ticket-test-design-DEMO-1.sample.md`](docs/demo/ticket-test-design-DEMO-1.sample.md)
 - [`docs/TEAM_ROOTS_V3.md`](docs/TEAM_ROOTS_V3.md) + [`team-roots.v3.example.json`](domain-knowledge/jira/team-roots.v3.example.json) — one Confluence **space** = one **library**; Jira teams mount `libraries[]` (multi-space compose deferred)
 - `scripts/teams/team_roots_normalize.py` — load v2/v3 team-roots; flatten mounts for backward-compatible `team.root_id` / deliver maps
 

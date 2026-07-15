@@ -6,14 +6,14 @@
 
 **Stop reviewing Jira stories against vibes.**
 
-Agent skills that turn Confluence + Jira into domain briefs, then run story risk and INVEST splits against that shared truth.
+Agent skills that turn Confluence + Jira into domain briefs, then run story risk, INVEST splits, and ticket test design against that shared truth.
 
 | Without a domain brief | With this pack |
 |------------------------|----------------|
 | Open decisions become silent assumptions | MUST / SHOULD / OPTIONAL from ticket + brief evidence |
 | Agents invent out-of-scope work | Boundaries stay out |
 | “Done” = code merged / ready for QA | Done = observable user, system, or contract outcome |
-| Every story invents its own vocabulary | Same module language across risk and split |
+| Every story invents its own vocabulary | Same module language across risk, split, and test design |
 
 Complements [Superpowers](https://github.com/obra/superpowers) / [Spec Kit](https://github.com/github/spec-kit) (how to build). This pack: what the domain allows.  
 Before/after: [docs/BENCHMARK.md](docs/BENCHMARK.md).
@@ -30,6 +30,7 @@ cd domain-knowledge-ops
 ```text
 @requirement-risk DEMO-1 team=demo
 @ticket-splitter DEMO-1 team=demo
+@ticket-test-design DEMO-1 team=demo
 ```
 
 DEMO-1 is a shipped fake ticket (amend open order while quote is valid). team=demo uses the offline curated tree. Any DEMO-* key skips the network.
@@ -91,6 +92,21 @@ Invoke: `@ticket-splitter` + issue key (or DEMO-1).
 Spike (uncertainty) → Stories (shippable) → optional Enabler.  
 Details: [ticket-splitter skill](.cursor/skills/ticket-splitter/SKILL.md)
 
+### Ticket test design
+
+Goal: release/Done proof pack for one ticket — every **given** AC covered by **must** cases; should/weak oracles in Pack note; light `automate` tags for handoff.
+
+Invoke: `@ticket-test-design` + issue key (or DEMO-1).
+
+| Field | Means |
+|-------|--------|
+| Contract readiness | given-AC must pack only (`contract-ready` / blocked-*) |
+| Pack note | should recommendations; does not block contract Done |
+| must / should / later | Ship blockers · iteration hygiene · charters |
+| automate | `candidate` \| `manual` (no framework codegen here) |
+
+Details: [ticket-test-design skill](.cursor/skills/ticket-test-design/SKILL.md)
+
 ## Build briefs
 
 | You need… | Invoke | You get |
@@ -126,6 +142,7 @@ flowchart LR
   subgraph review [Story review]
     RR[requirement-risk]
     TS[ticket-splitter]
+    TD[ticket-test-design]
   end
 
   CF --> S1
@@ -135,6 +152,7 @@ flowchart LR
   S3 --> S4S5 --> S6 --> S7
   S7 --> RR
   S7 --> TS
+  S7 --> TD
 ```
 
 S1–S7 = Ingest → Recognize → Compose. Reader-facing output is the S7 domain brief (`*-domain-brief.md`).
@@ -164,6 +182,7 @@ Mark checklist rows confirm, then say continue. Then:
 ```text
 @requirement-risk PROJ-123 team=<your_team>
 @ticket-splitter PROJ-123
+@ticket-test-design PROJ-123
 ```
 
 ## Configuration
@@ -185,7 +204,7 @@ Pipeline outputs under by-root (`curated/`, `extracted/`, `materialized/`) are l
 | [INSTALL.md](INSTALL.md) | Clone (only supported install) |
 | [docs/METHODOLOGY.md](docs/METHODOLOGY.md) | Confirm-gated Compose |
 | [docs/TEAM_ROOTS_V3.md](docs/TEAM_ROOTS_V3.md) | One space = one library; teams mount libraries (Path C single-lib ready) |
-| [docs/demo/](docs/demo/) | Sample risk and split outputs |
+| [docs/demo/](docs/demo/) | Sample risk, split, and test-design outputs |
 
 Also: [HARNESS](docs/HARNESS.md) · [CONTRIBUTING](CONTRIBUTING.md) · [CHANGELOG](CHANGELOG.md) · [SECURITY](SECURITY.md) · [MARKETPLACE](docs/MARKETPLACE.md) · [skills README](.cursor/skills/README.md)
 

@@ -139,8 +139,9 @@ python3 -c "from teams.registry import load_team_roots; print(list(load_team_roo
 |-------|------|
 | `@requirement-risk` | 单票风险可见性报告（对话交付；rule：`requirement_risk`） |
 | `@ticket-splitter` | 单票拆单（rule：`ticket_system`） |
+| `@ticket-test-design` | 单票测试设计 / 上线证明包（rule：`ticket_test_design`） |
 | `scripts/jira/attachments/fetch_jira_attachments.py` | MCP 无附件时 REST 落盘 `.jira_attachments/<KEY>/` |
 
-**与领域库联动**：两 Skill 在分析 Jira KEY 时 **默认读取** 领域库落盘，见 [`jira-issue-domain-knowledge-context.md`](jira-issue-domain-knowledge-context.md)。**不**替代 §3–§4 流水线，**不**写入 `curated/`。
+**与领域库联动**：上述 Skill 在分析 Jira KEY 时 **默认读取** 领域库落盘，见 [`jira-issue-domain-knowledge-context.md`](jira-issue-domain-knowledge-context.md)。**不**替代 §3–§4 流水线，**不**写入 `curated/`。
 
 索引：[`.cursor/skills/README.md`](../skills/README.md)。凭据可与 §7 共用 `ATLASSIAN_*`。

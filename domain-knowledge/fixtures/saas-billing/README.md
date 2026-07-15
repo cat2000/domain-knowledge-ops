@@ -8,6 +8,8 @@ This is a **compact second demo**, not a full parallel curated tree. Use it to v
 
 ```text
 @requirement-risk DEMO-BILL-1 team=demo
+@ticket-test-design DEMO-BILL-1 team=demo
+
 ```
 
 Agents: when key is `DEMO-BILL-*`, read this folder the same way as offline-demo (no Jira network). Prefer this fixture’s curated brief over Acme Orders.

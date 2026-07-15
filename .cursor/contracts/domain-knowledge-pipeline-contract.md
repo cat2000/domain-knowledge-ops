@@ -141,8 +141,9 @@ Parallel to §3–§4; **do not** write `curated/`:
 |-------|------|
 | `@requirement-risk` | Single-ticket risk visibility (chat deliverable; rule: `requirement_risk`) |
 | `@ticket-splitter` | Single-ticket split (rule: `ticket_system`) |
+| `@ticket-test-design` | Single-ticket test design / Done proof pack (rule: `ticket_test_design`) |
 | `scripts/jira/attachments/fetch_jira_attachments.py` | REST drop under `.jira_attachments/<KEY>/` when MCP lacks attachments |
 
-**Domain-library linkage**: both skills **default-read** wiki/jira disk artifacts (`_deliver`, attribution YAML, `by-theme` indexes, etc.) — see [`jira-issue-domain-knowledge-context.md`](jira-issue-domain-knowledge-context.md). They **do not** replace §3–§4 and **do not** write `curated/`.
+**Domain-library linkage**: these skills **default-read** wiki/jira disk artifacts (`_deliver`, attribution YAML, `by-theme` indexes, etc.) — see [`jira-issue-domain-knowledge-context.md`](jira-issue-domain-knowledge-context.md). They **do not** replace §3–§4 and **do not** write `curated/`.
 
 Index: [`.cursor/skills/README.md`](../skills/README.md). Credentials may share `ATLASSIAN_*` with §7.

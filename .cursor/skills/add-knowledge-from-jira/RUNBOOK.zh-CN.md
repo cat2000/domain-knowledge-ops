@@ -200,4 +200,4 @@ S3 准入：
 
 ## Next
 
-`@requirement-risk` → `@ticket-splitter`（证据：`_deliver/…定稿.md`）。
+`@requirement-risk` → `@ticket-splitter` → `@ticket-test-design`（证据：`_deliver/…定稿.md`）。

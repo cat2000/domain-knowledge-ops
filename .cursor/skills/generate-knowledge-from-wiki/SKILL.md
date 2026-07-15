@@ -13,7 +13,7 @@ disable-model-invocation: false
 
 **Ingest (S1)** → **Recognize (S2)** → human **confirm** → **Compose (S3→S7)**.
 
-Top coding packs teach agents how to build. This skill adjudicates **domain truth** from Confluence, then feeds `@requirement-risk` / `@ticket-splitter`.
+Top coding packs teach agents how to build. This skill adjudicates **domain truth** from Confluence, then feeds `@requirement-risk` / `@ticket-splitter` / `@ticket-test-design`.
 
 Process terms (first mention): **confirm** = approve module cut lines; **source brief** = S6 adjudicated doc in **source language**; **locale brief** / **reader brief** = S7 target-locale reader doc; **brief** alone = short mode on risk/split (see `TEAM_KNOWLEDGE_BASE.md`); **continue** = default resume Compose after confirm. (zh-CN strings for process tokens live in `domain-knowledge/language/deliverable-locale-tokens.json`, cited once here rather than inline throughout.)
 
@@ -23,7 +23,7 @@ Process terms (first mention): **confirm** = approve module cut lines; **source 
 
 | Use | Do not use → instead |
 |-----|----------------------|
-| Refresh a Confluence subtree; re-run after policy change | Single-ticket risk / split → `@requirement-risk` / `@ticket-splitter` |
+| Refresh a Confluence subtree; re-run after policy change | Single-ticket risk / split / test design → `@requirement-risk` / `@ticket-splitter` / `@ticket-test-design` |
 | Build domain briefs from wiki | Config only → `@setup-domain-ops` |
 
 ## Hard gates (read first)
@@ -51,7 +51,7 @@ Full Compose rules → [`references/iron-laws.md`](references/iron-laws.md) (loa
 
 Follow [`FIRST-RUN.md`](./FIRST-RUN.md): checklist → **tagging acceptance** → **confirm** → **continue** → S6 → S7 → `--after-s7`.
 
-Offline risk/split without wiki: `@requirement-risk DEMO-1 team=demo` ([`WALKTHROUGH.md`](../../../WALKTHROUGH.md) Path A).
+Offline story review without wiki: `@requirement-risk DEMO-1 team=demo` ([`WALKTHROUGH.md`](../../../WALKTHROUGH.md) Path A).
 
 ## Agent: five steps
 
@@ -105,4 +105,4 @@ Risk/split **read the S7 locale brief** (reader brief) by default. If source lan
 
 ## Next
 
-`@requirement-risk` → `@ticket-splitter` (read **S7** briefs; or offline `DEMO-1`).
+`@requirement-risk` → `@ticket-splitter` → `@ticket-test-design` (read **S7** briefs; or offline `DEMO-1`).

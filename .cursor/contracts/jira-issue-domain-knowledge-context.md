@@ -2,7 +2,7 @@
 
 Chinese locale: [`jira-issue-domain-knowledge-context.zh-CN.md`](./jira-issue-domain-knowledge-context.zh-CN.md).
 
-> **Readers**: Agents for `@requirement-risk` and `@ticket-splitter`.  
+> **Readers**: Agents for `@requirement-risk`, `@ticket-splitter`, and `@ticket-test-design`.  
 > **Sources**: Disk artifacts from [`generate-knowledge-from-wiki`](../skills/generate-knowledge-from-wiki/SKILL.md) ([`RUNBOOK.md`](../skills/generate-knowledge-from-wiki/RUNBOOK.md) Recognize + Compose) and optional [`add-knowledge-from-jira`](../skills/add-knowledge-from-jira/SKILL.md) prep.  
 > **Nature**: Paths below are **evidence/context**, **not** a substitute for the `requirement_risk` / `ticket_system` rule bodies.
 
@@ -80,7 +80,7 @@ If no **S7 locale brief**: may read `*-source-brief.md` (**S6**), else `*-work-d
 ### 3.3 Cross-cutting
 
 - `R/DOMAIN_MODULE_CHECKLIST.md` — themes marked **confirmed**, main-entry paths.
-- `domain-knowledge/language/glossary.md` — terms / module names (**requirement-risk** semantics; **ticket-splitter** module boundaries).
+- `domain-knowledge/language/glossary.md` — terms / module names (**requirement-risk** semantics; **ticket-splitter** / **ticket-test-design** module boundaries).
 - `R/_materialization_closure.json` — leaf → curated mapping (find missed source pages).
 
 ### 3.4 Deepen on demand (cap reading)
@@ -110,6 +110,12 @@ If no **S7 locale brief**: may read `*-source-brief.md` (**S6**), else `*-work-d
 - When `_deliver/<slug>/` exists: **cite** brief acceptance surfaces (User/System/Contract) in `scope` / `done_when`; **do not** split items that contradict explicit out-of-scope in the brief.
 - `source_requirement_note`: if Jira vs brief **scope diverge** (e.g. ticket says dev-only, brief requires end-to-end testability), use `ticket_system` INVEST correction format.
 - Module splits: anchor on brief **proposition slug / sections**; **do not** invent subsystem names absent from the brief.
+
+### ticket-test-design
+
+- Anchor **given** AC and `scope` / `out` to ticket + brief; **do not** invent UI/API paths or environment capabilities absent from evidence.
+- Prefer brief rule clusters for state/eligibility oracles; conflicts → list side-by-side in notes / residual risk (do not silently pick a winner).
+- Draft under `.jira_attachments/<KEY>/test_design_draft.md` when KEY present; gate with `validate_ticket_test_design.py`.
 
 ---
 

@@ -1,6 +1,6 @@
 # Offline demos (`DEMO-*` / `DEMO-BILL-*`) · shared
 
-> Used by `@requirement-risk` and `@ticket-splitter`.
+> Used by `@requirement-risk`, `@ticket-splitter`, and `@ticket-test-design`.
 
 ## Triggers
 

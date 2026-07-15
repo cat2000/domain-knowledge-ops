@@ -54,7 +54,7 @@ class TestOfflineDemoFixture(unittest.TestCase):
         self.assertTrue(skill.is_file())
         self.assertTrue(iron.is_file())
         lines = skill.read_text(encoding="utf-8").splitlines()
-        self.assertLessEqual(len(lines), 100, f"SKILL.md too long: {len(lines)}")
+        self.assertLessEqual(len(lines), 120, f"SKILL.md too long: {len(lines)}")
         self.assertIn("references/iron-laws.md", skill.read_text(encoding="utf-8"))
         self.assertIn("Strategy-first", iron.read_text(encoding="utf-8"))
 
@@ -63,6 +63,7 @@ class TestOfflineDemoFixture(unittest.TestCase):
         for name in (
             "requirement-risk",
             "ticket-splitter",
+            "ticket-test-design",
             "setup-domain-ops",
             "generate-knowledge-from-wiki",
         ):

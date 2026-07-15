@@ -1,6 +1,6 @@
 # Cursor Skills · this repo
 
-Three tracks: **build briefs** (Confluence → adjudicated domain knowledge) → **story risk** → **testable splits**. Same domain language across Jira tickets — not ad-hoc prompts.
+Four tracks: **build briefs** (Confluence → adjudicated domain knowledge) → **story risk** → **testable splits** → **ticket test design**. Same domain language across Jira tickets — not ad-hoc prompts.
 
 **Language**: skill surfaces (`SKILL.md`, English `RUNBOOK.md`, CLI refs) are **English**. Chinese locales ship as `*.zh-CN.md` next to them. Process gloss: **confirm**, **continue**, **brief**. (zh-CN strings for these tokens live in `domain-knowledge/language/deliverable-locale-tokens.json`.)
 
@@ -17,6 +17,7 @@ No Marketplace plugin required. Clone, open the repo root in Cursor, `@` a skill
 ```text
 @requirement-risk DEMO-1 team=demo
 @ticket-splitter DEMO-1 team=demo
+@ticket-test-design DEMO-1 team=demo
 ```
 
 Fixture: [`../../domain-knowledge/fixtures/offline-demo/`](../../domain-knowledge/fixtures/offline-demo/).  
@@ -57,6 +58,12 @@ Or: `@requirement-risk team=<your-team-key> PROJ-123` · optional `stage=pre_spr
 @ticket-splitter PROJ-123
 ```
 
+**Test design** (explicit `@` — release-confidence cases for one ticket)
+
+```text
+@ticket-test-design PROJ-123
+```
+
 **Jira into compose** (optional)
 
 ```text
@@ -75,6 +82,7 @@ Or: `@requirement-risk team=<your-team-key> PROJ-123` · optional `stage=pre_spr
 | [`add-knowledge-from-jira`](add-knowledge-from-jira/SKILL.md) | `@…` + team/mode | Yes (supplement) |
 | [`requirement-risk`](requirement-risk/SKILL.md) | explicit `@` + KEY/text | No (read-only) |
 | [`ticket-splitter`](ticket-splitter/SKILL.md) | explicit `@` + KEY | No (read-only) |
+| [`ticket-test-design`](ticket-test-design/SKILL.md) | explicit `@` + KEY/text | No (read-only) |
 
 Runtime rules SSOT: `.cursor/rules/`. Contracts: `.cursor/contracts/`.
 

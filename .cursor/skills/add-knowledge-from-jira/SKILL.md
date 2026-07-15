@@ -19,7 +19,7 @@ Compose language (same as wiki): **S6** = source-language brief; **S7** = conver
 ## When to use
 
 - Fold sprint/history ticket rules, AC, and comment decisions into the same domain library
-- **Not** for single-ticket risk/split → `@requirement-risk` / `@ticket-splitter`
+- **Not** for single-ticket risk/split/test-design → `@requirement-risk` / `@ticket-splitter` / `@ticket-test-design`
 
 ## Prep vs Compose (stop boundaries)
 
@@ -95,4 +95,4 @@ Review checklist → **confirm** → **continue** → verify aggregates/work dra
 
 ## Next
 
-`@requirement-risk` → `@ticket-splitter` (read **S7** Compose briefs).
+`@requirement-risk` → `@ticket-splitter` → `@ticket-test-design` (read **S7** Compose briefs).

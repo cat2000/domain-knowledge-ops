@@ -514,4 +514,4 @@ python3 scripts/distill/tagging_acceptance.py --root-id <R> --after-s7 --strict
 
 ## Next
 
-`@requirement-risk` → `@ticket-splitter`（证据：`_deliver/…定稿.md`）。
+`@requirement-risk` → `@ticket-splitter` → `@ticket-test-design`（证据：`_deliver/…定稿.md`）。

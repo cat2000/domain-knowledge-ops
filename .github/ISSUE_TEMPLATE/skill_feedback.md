@@ -13,6 +13,7 @@ labels: enhancement
 - [ ] `add-knowledge-from-jira`
 - [ ] `requirement-risk`
 - [ ] `ticket-splitter`
+- [ ] `ticket-test-design`
 - [ ] Other: ___
 
 ## Invocation

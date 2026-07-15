@@ -1,6 +1,6 @@
 # 指称与团队口语（P10）
 
-> **读者**：`@requirement-risk`、`@ticket-splitter`。  
+> **读者**：`@requirement-risk`、`@ticket-splitter`、`@ticket-test-design`。  
 > **原则**：像 refinement **口头同步**；读者要的是做什么、边界在哪、剩什么要另排，不是学习内部缩写。  
 > English SSOT: [`presentation-p10.md`](./presentation-p10.md)。
 

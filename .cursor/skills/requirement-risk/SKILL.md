@@ -115,10 +115,11 @@ Jira key?
 5. Standards: `requirement_risk.md` + presentation; scripts verify only.
 6. Never write `curated/` or run `domain_check distill`; `risk_draft.md` is for gating only.
 
-## Handoff to `@ticket-splitter`
+## Handoff to `@ticket-splitter` / `@ticket-test-design`
 
 - “Must decide first” `R-00N` items are preferred splitter inputs.
-- Do not wait for human confirm on the risk report before splitting.
+- After readiness is clear, testers may `@ticket-test-design <same KEY>` for must/should/later cases.
+- Do not wait for human confirm on the risk report before splitting or test design.
 
 ## Presentation & domain library
 

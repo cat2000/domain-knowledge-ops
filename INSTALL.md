@@ -22,6 +22,7 @@ Offline demo (no Atlassian). **`DEMO-1`** is a shipped fake key under [`domain-k
 ```text
 @requirement-risk DEMO-1 team=demo
 @ticket-splitter DEMO-1 team=demo
+@ticket-test-design DEMO-1 team=demo
 ```
 
 Real tenant (credentials): copy [`.env.example`](.env.example) → `.env`, then [WALKTHROUGH.md](WALKTHROUGH.md) **Path C**.
@@ -30,9 +31,9 @@ Real tenant (credentials): copy [`.env.example`](.env.example) → `.env`, then 
 
 | Need | Use |
 |------|-----|
-| Offline demo (`DEMO-1` / `DEMO-BILL-1`) | Open repo root → `@requirement-risk` / `@ticket-splitter` |
+| Offline demo (`DEMO-1` / `DEMO-BILL-1`) | Open repo root → `@requirement-risk` / `@ticket-splitter` / `@ticket-test-design` |
 | Setup + Confluence → **S7** briefs | `.env` + `@setup-domain-ops` / `@generate-knowledge-from-wiki` |
-| Story risk/split on real Jira | Briefs under `domain-knowledge/curated/` (or fixtures for DEMO) |
+| Story risk / split / test design on real Jira | Briefs under `domain-knowledge/curated/` (or fixtures for DEMO) |
 | Jira history into Compose | `@add-knowledge-from-jira` |
 
 ## Not an install path

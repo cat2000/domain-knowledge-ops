@@ -34,6 +34,7 @@ REQUIRED = (
     "add-knowledge-from-jira",
     "requirement-risk",
     "ticket-splitter",
+    "ticket-test-design",
 )
 
 FM_NAME = re.compile(r"^name:\s*([^\s#]+)\s*$", re.M)
