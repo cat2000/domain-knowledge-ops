@@ -46,7 +46,7 @@ After confirm, say **continue** (optionally name a slug):
 | 7b | After S7: `python3 scripts/distill/tagging_acceptance.py --root-id <R> --after-s7 --strict` — fix FAIL rows (zero-rule fake coverage) | write-through gate |
 | 8 | `python3 scripts/run_distill_gate.py --root-id <R>` | gate report |
 
-**Low-evidence / zero-rule S7**: if `pages_with_props=0` or S7 has **zero** `### 规则` while sources exist → **revert confirm** or rewrite. Do not ship empty core-rules. Insufficiency banner alone is only for intentional placeholders (non-SSOT for risk).
+**Low-evidence / zero-rule S7**: if `pages_with_props=0` or S7 has **zero** `### Rule` headings while sources exist → **revert confirm** or rewrite. Do not ship empty core-rules. Insufficiency banner alone is only for intentional placeholders (non-SSOT for risk).
 
 Keep **industry adjudication axes**. Land sources into those axes by business commitment — do not promote source-tree layout into modules, and do not hard-code tenant remount specials.
 Then: `@requirement-risk KEY` → `@ticket-splitter KEY` → `@ticket-test-design KEY` (read **S7**).

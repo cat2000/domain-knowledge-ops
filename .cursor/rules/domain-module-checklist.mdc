@@ -38,7 +38,7 @@ Only **`confirmed`** modules: **S3** `_aggregate/` → **S4** domain model → *
 - After S2 (recommended): `python3 scripts/distill/coverage.py --root-id <root>`
 - After S3: `python3 scripts/distill/tagging_acceptance.py --root-id <root> --after-s3`
 - After S7: `python3 scripts/distill/tagging_acceptance.py --root-id <root> --after-s7 --strict` then `python3 scripts/domain_check.py distill --root-id <root>`
-- Confirmed + sources + zero S7 `### 规则` / `### Rule` = fake coverage → revert to **pending**
+- Confirmed + sources + zero S7 `### Rule` headings = fake coverage → revert to **pending**
 
 ## 5. Appendix links on this page
 

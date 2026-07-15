@@ -13,7 +13,7 @@ S7 usefulness ≈ industry axes × land-in-axes × write-through × confirm gate
 |-------|--------|-----|
 | **Industry axes** | `strategy.md` §2 / profiles = adjudication questions | Coverage already done; product folder names as modules |
 | **Land-in-axes** | Every accepted source lands in an existing axis slug (or a human-confirmed new slug) | Promoting app/channel/facet/product-line directories into checklist rows |
-| **Write-through** | Landed business propositions become S7 `### 规则`/`### Rule` or explicit Open items | Closure tagged but brief empty / thin while sources exist |
+| **Write-through** | Landed business propositions become S7 `### Rule` headings or explicit Open items | Closure tagged but brief empty / thin while sources exist |
 | **Confirm gates** | Confirm only with tagged sources; ship only when write-through passes (`tagging_acceptance --after-s7`) | Confirming empty rows; shipping zero-rule “covered” briefs |
 
 ```text

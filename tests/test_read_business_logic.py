@@ -30,14 +30,16 @@ class TestFullText(unittest.TestCase):
 
 class TestScanTheme(unittest.TestCase):
     def test_clusters_checkout_pattern_default_locale_en(self) -> None:
+        # Pack ships no tenant omission clusters; tickets stay unmatched until teams/<team>.json.
         keys = ["DEV-1", "DEV-2"]
         raw_by_key = {
             "DEV-1": {"summary": "CNCheckout flow", "description_text": "", "comments": []},
             "DEV-2": {"summary": "unrelated", "description_text": "misc", "comments": []},
         }
         text = scan_theme("checkout", keys, raw_by_key, {}, {"DEV-1": {}, "DEV-2": {}})
-        self.assertIn("CNCheckout/Epic68638", text)
-        self.assertIn("Unmatched by clusters above", text)
+        self.assertNotIn("CNCheckout/Epic68638", text)
+        self.assertIn("Unmatched by clusters above**: 2", text)
+        self.assertIn("_orphan (2)", text)
 
     def test_substance_sorted_desc_en(self) -> None:
         keys = ["A", "B"]
@@ -63,8 +65,9 @@ class TestScanTheme(unittest.TestCase):
         text = scan_theme(
             "checkout", keys, raw_by_key, {}, {"DEV-1": {}, "DEV-2": {}}, locale="zh-CN"
         )
-        self.assertIn("CNCheckout/Epic68638", text)
-        self.assertIn("未命中上述簇", text)
+        self.assertNotIn("CNCheckout/Epic68638", text)
+        self.assertIn("未命中上述簇**：2", text)
+        self.assertIn("_orphan（2）", text)
 
     def test_substance_sorted_desc_zh(self) -> None:
         keys = ["A", "B"]

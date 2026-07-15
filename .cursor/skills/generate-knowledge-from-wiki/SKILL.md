@@ -34,7 +34,7 @@ Process terms (first mention): **confirm** = approve module cut lines; **source 
 4. **Keep industry axes**: land wiki/Jira into those axes ([`references/industry-axis-remount.md`](references/industry-axis-remount.md)); do not promote source-tree layout into modules, and do not hard-code tenant remount tables.
 5. **No translation in S1–S6**. **S6** = source-language brief. **S7** = locale expression only.
 6. **confirm** ≠ briefs already exist, and ≠ every corpus rule already written into S7.
-7. **Zero-rule fake coverage banned**: after S7, run `tagging_acceptance.py --after-s7 --strict`; confirmed + sources + zero `### 规则` → revert or rewrite.
+7. **Zero-rule fake coverage banned**: after S7, run `tagging_acceptance.py --after-s7 --strict`; confirmed + sources + zero `### Rule` headings → revert or rewrite.
 8. No in-repo HTTP LLM API writing `curated/`.
 9. S1 page errors block S2 by default (unless explicit `--allow-partial`).
 

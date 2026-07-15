@@ -407,7 +407,7 @@ When source language already equals `deliverable_locale`, still emit the canonic
 
 Prefer reverting Status to **pending** instead of shipping a stub. If the human insists on a placeholder file, the banner + Open items are required.
 
-**Zero-rule fake coverage banned:** confirmed slug with tagged sources but **zero** `### 规则` / `### Rule` in S7 → revert to **pending** or rewrite. Do not ship empty core-rules as committed briefs.
+**Zero-rule fake coverage banned:** confirmed slug with tagged sources but **zero** `### Rule` headings in S7 → revert to **pending** or rewrite. Do not ship empty core-rules as committed briefs.
 
 **After S7 (required write-through gate):**
 
