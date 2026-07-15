@@ -42,3 +42,25 @@ Do **not** emit Layer-1…Layer-5 section titles unless the user asks for that p
 - State the reduction strategy in Design or case `notes`.
 - Never label a reduced set as exhaustive.
 - Keep invalid combinations independent unless testing resilience explicitly.
+
+## Partition residual (same AC)
+
+When AC or QA notes list a set (filters, status tags, roles, …) **or field modes** (online vs offline location under one “location” AC):
+
+| Layer | Duty |
+|-------|------|
+| **must** | One faithful instance → contract green |
+| **should** | **Closed** residual: finite named partitions/modes, **or** Stage stopping rule (e.g. every filter with ≥1 hit); plus shared negatives (empty filter) |
+| **later / Residual risk** | Name leftovers explicitly — don’t pretend must exhausted the set |
+
+Forbid open shoulds (“tap more if data/time”). Do **not** spend should on out-of-scope shell UI before closed residual disposition.
+
+## Interface level (not a pyramid product)
+
+| AC shape | Prefer `level` |
+|----------|----------------|
+| Fields/status “match API” / gateway contract | `api` (optional thin `ui` for display) |
+| Pure interaction / navigation / layout | `ui` |
+| Pure rules without UI | `logic` |
+
+Tag `level` when not obviously `ui`. Still **no** framework codegen in this skill.

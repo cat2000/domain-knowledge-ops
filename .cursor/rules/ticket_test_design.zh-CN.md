@@ -10,6 +10,8 @@ English SSOT: [`ticket_test_design.md`](./ticket_test_design.md)
 
 **本质不变量（勿特例修补）：** 每条 `(given)` AC 必须被某条 **must** 的 `proves` 覆盖，或写入 **Must-deferred** 并降低 **合同就绪**；`proves` 仅表示直接蕴含，否则用 `supplements`；**合同就绪**与**应测包**分列；must/should 标 `automate`。
 
+**补充（与英文 SSOT 同步）：** **must = 合同实例**且须**可判定**（可观察结果 + oracle + seed）；筛选/状态/字段模式残余须**闭合**处置。优先用仍能蕴含 AC 的**最低稳定接口**（`level: api|logic|ui`）。`security|resilience: needed` 须闭合处置。无具名 oracle/夹具勿标 `candidate`。**本 skill 不做**：发布列车回归包、逃逸率度量体系、无 AC 的默认 NFR/混沌套件、自动化框架代码。
+
 ## 读者向标签（与 presentation 对齐）
 
 | 英文键 | 中文读者标签 |

@@ -15,9 +15,15 @@ Presentation (scan order, field labels): skill [`presentation.md`](../skills/tic
 1. Infinite design space → cut with **must / should / later** only.
 2. **Acceptance criteria are the Done/ship contract**; cases are evidence. Priority is **not** free-floating taste — it is anchored to that contract (see **Given-AC coverage**).
 3. **`proves` means direct entailment**: the case’s observable outcome is an instance of the AC’s commitment — not “related”, “security near”, or “same feature area”.
-4. Technique mastery = **select and cut**, not checklist theater (ISTQB / quadrants / MECE layers).
-5. Never invent product facts, UI paths, or environment capabilities the evidence does not support. Mark `[ASSUMPTION]` / `[INSUFFICIENT_EVIDENCE]`.
-6. Do **not** claim full coverage. Always state **residual risk**.
+4. **Contract instance ≠ partition exhaustion:** ≥1 **must** per `(given)` AC proves the **contract** with one faithful instance. It does **not** by itself exhaust risk when evidence lists a **partition set** under that AC (filters, statuses, roles, …) **or field modes** inside a bundled AC (e.g. online vs offline location display). Uncovered partitions/modes are **same-AC residual** — dispose explicitly via **should**, **later**, or named **Residual risk**. Never leave them silent after a green must.
+5. **Residual disposition must be closed:** a residual **should** (or the Residual-risk line that replaces it) names **exactly one** of: (a) an **explicit finite sample** of partitions/modes, (b) a **Stage-evaluable stopping rule** (e.g. “every listed filter that returns ≥1 event”), or (c) the **named leftover set** deferred to later/risk. Forbid open wording (“sample some”, “as time allows”, “and other filters if data exists”) — that is residual theater, not a test.
+6. **A proof is decidable only with observable + oracle + seed:** `then` states what to see; the **oracle** (how pass/fail is judged) and **seed** (account/fixture/build/log needed to judge) must be namable in `given` / Environment / short `notes`. If a **must** cannot be decided even by a careful human on the stated environment → **Must-deferred** or **Contract readiness `blocked-by-evidence`** — do not ship a green contract on undecidable musts. Missing *nice* fixtures with a workable manual oracle (e.g. proxy once) → `automate: manual` + Evidence gaps, not automatic block.
+7. **Prefer the lowest stable interface that still entails the AC** (`level: api|logic|ui`): data/contract ACs → prove at API/logic when evidence allows; UI only when the AC is interaction/presentation. This is interface selection — **not** automation codegen or a test-pyramid product.
+8. Technique mastery = **select and cut**, not checklist theater (ISTQB / quadrants / MECE layers).
+9. Never invent product facts, UI paths, or environment capabilities the evidence does not support. Mark `[ASSUMPTION]` / `[INSUFFICIENT_EVIDENCE]`.
+10. Do **not** claim full coverage. Always state **residual risk**.
+
+**Out of this skill’s job (do not “fix” by expanding scope):** release-train regression packs; defect-escape metrics loops; default NFR suites (perf/a11y/i18n) without given AC/`focus`; chaos/fault theaters when scan is `out_of_scope`; fixture platforms or Playwright/POM codegen.
 
 ---
 
@@ -26,15 +32,21 @@ Presentation (scan order, field labels): skill [`presentation.md`](../skills/tic
 | Level | Meaning |
 |-------|---------|
 | **must** | Proves **given** (or explicitly accepted) contract obligations — cannot call Done/ship without these |
-| **should** | Valuable beyond the given contract (extra paths, hardening) **or** proves only **proposed** AC; skip only under explicit time cut |
+| **should** | Valuable beyond the minimal contract instance: **same-AC residual partitions**, negatives, weak-oracle hardening, **or** proves only **proposed** AC; skip only under explicit time cut |
 | **later** | Deferred intent or exploratory **charter** — no fake long scripts |
 
-**should anti-padding:** each should case must state a concrete observable failure mode if skipped.  
+**Should spend order (after must exists):** (1) same-AC residual partitions / negatives → (2) weak-oracle or data-fragile proofs of given ACs → (3) security/`supplements` that change ship risk → (4) only then unrelated chrome. Prefer deleting a case over filling should with mock shell (tabs/icons) for **out-of-scope** UI.
+
+**should anti-padding:** each should case must state a concrete **ship-visible** failure mode if skipped (in `notes` or `then` context). If the only failure is cosmetic chrome for out-of-scope surface → **omit** or demote to **later** idea — do not occupy should.
+
 **later:** `type: charter | idea` + `intent` + `why_later` only.
 
-Do **not** mirror `requirement_risk` severities (MUST FIX / …). Do **not** use P0–P3 as the primary axis.
+Do **not** mirror `requirement_risk` severities (MUST FIX / …). Do **not** use P0–P3 as the primary axis. Do **not** invent quantity quotas (“N filters ⇒ N must cases”).
 
-**Root failure to prevent:** demoting a **given** AC into should-only because the path feels “secondary”. If it is on the ticket as acceptance, it is must-tier evidence unless **Must-deferred** (below).
+**Root failures to prevent:**
+- Demoting a **given** AC into should-only because the path feels “secondary”.
+- Treating “≥1 must per given AC” as **design complete**, then padding should with unrelated chrome while same-AC partitions stay unnamed.
+- Writing residual shoulds that are **not closed** (open-ended sampling) so nobody can fail the case.
 
 ---
 
@@ -66,9 +78,10 @@ Story **Done / ship contract** = given-AC **must** pack only.
 
 Rules:
 
-- `contract-ready` only when every `(given)` AC has must `proves` and **Must-deferred** is none.
+- `contract-ready` only when every `(given)` AC has must `proves`, **Must-deferred** is none, and those musts are **decidable** on the stated Environment (principle 6).
 - Weak-oracle **should** / `supplements` belong in **Pack note**, not in Contract readiness.
 - If all must cases rest only on **proposed** AC → Contract readiness = `blocked-by-ac-gaps`.
+- If musts exist but **cannot be judged** (no Stage/API/seed and no manual oracle path) → `blocked-by-evidence`.
 - Legacy single line `Readiness: ship-with-must+should` is **forbidden** in new drafts (splits the two axes).
 
 ## `proves` vs `supplements`
@@ -91,11 +104,11 @@ Mark each **must/should** case for the *next* step (automation skill / eng pick-
 
 | `automate` | Meaning |
 |------------|---------|
-| `candidate` | Stable oracle + seedable data; prefer `level: api`/`logic`, or stable UI |
-| `manual` | Needs human judgment, weak oracle, exploratory taste, or brittle UI |
+| `candidate` | **Named** stable oracle + seedable data already in `given` / short `notes`; prefer `api`/`logic`, or stable UI |
+| `manual` | Needs human judgment, weak/compare-by-eye oracle, missing fixture, exploratory taste, or brittle UI |
 | `n/a` | Not a scripted case (reserved; **later** charters omit the field) |
 
-Rules: required on must/should; do **not** invent framework/selectors/POM. Optional one-line why in `notes` when not obvious. Charters stay in **later** without `automate`.
+Rules: required on must/should; do **not** invent framework/selectors/POM. **`candidate` is dishonest** when the oracle is “looks right” or “compare to API” with no stated seed/fixture/log — use `manual` (or add the data dependency). Optional one-line why in `notes` when not obvious. Charters stay in **later** without `automate`.
 
 ---
 
@@ -114,14 +127,23 @@ scan_checklist:
 
 Select primary from requirement **shape** (see technique-selection). Money / auth / PII → security is rarely `out_of_scope`. Most stories may mark resilience `out_of_scope` — **do not** invent chaos/gateway faults.
 
+**Scan disposal:** If `security` or `resilience` is `needed`, dispose like partition residual — closed **should** / **later** / named **Residual risk**. A `needed` scan with zero disposition is decoration.
+
 When security is `needed` but no given AC states a role/authz rule: add a **`(proposed)`** AC **or** a should/must case with `supplements: [security-…]` — do **not** hang it on an unrelated given AC via `proves`.
 
+**Interface (`level`):** Choose `api` / `logic` / `ui` per principle 7. When AC is “matches API” / contract fields, prefer `level: api` (or api oracle + thin ui) over UI-only eyeballing. Omit `level` only when obviously `ui`.
+
 **Oracle:** `then` is a single primary observable **per proved AC**. Ban “A or B” unless `oracle_confidence: weak` and a note explains why.  
+**Seed:** Shared Stage/account/fixture needs belong in **Environment** (`seed:` one line) and/or case `given` — not implied.  
 **Negatives:** one primary invalid factor per case (avoid masking).  
 **Combinatorics:** prefer pairwise / reduced sets; explain reduction; never call a reduced set exhaustive.
 
-Per case: `automate: candidate|manual|n/a` on must/should.  
-Optional: `level` (`ui|api|logic`), `smoke: true` (must happy-path only, ≤3), `kind` (`happy|exception|security|resilience`), `data_deps`, `regression_touchpoints` (omit if unknown — **never** pad with `N/A`).
+**Partition residual (same AC):** When AC/QA/UI evidence enumerates a set (e.g. seven filters, four status tags) **or field modes** (e.g. online vs offline location under “location matches API”), **must** may use one representative. Before closing should, dispose residuals with a **closed** should, later charter, or named Residual risk — not chrome shoulds.
+
+**Closed residual (required shape):** Residual `when`/`then` (or Summary Residual risk) must be fail-able: finite named list, or stopping rule checkable on Stage, or explicit “left untested: {set}”. Never “tap more filters if time/data”.
+
+Per case: `automate: candidate|manual|n/a` on must/should; set `level` when not obvious ui.  
+Optional: `smoke: true` (must happy-path only, ≤3), `kind` (`happy|exception|security|resilience`), `data_deps`, `regression_touchpoints` (omit if unknown — **never** pad with `N/A`). **`regression_touchpoints`** = same-ticket blast radius only — not a multi-ticket release pack.
 
 ---
 
@@ -159,3 +181,6 @@ Optional `focus=security` deepens security scan on the full baseline.
 - Fabricating REQ ids as given facts (local `AC-n` / proposed only)
 - Playwright/POM/framework code generation
 - Declaring “full coverage” or “MECE complete”
+- Expanding into release regression packs, metrics programs, or default NFR/chaos suites (see **Out of this skill’s job**)
+- Undecidable musts while claiming `contract-ready`
+- `security|resilience: needed` with no closed disposition

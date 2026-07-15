@@ -121,6 +121,8 @@ Do **not** narrate “why there is no formal AC” in Summary — that belongs i
 
     device: desktop
     browser: Chrome
+    build: Stage (or named build)
+    seed: [accounts / fixtures / market needed to decide must oracles — or "none"]
     network: default
 ```
 
@@ -134,8 +136,9 @@ English keys in the indented body (validator depends on them). Reader headings m
 | `supplements` | should when not AC-entailed |
 | `automate` | every must/should |
 | `given` / `when` / `then` | every must/should |
+| `level` | when not obviously `ui` (prefer api/logic for data/contract ACs) |
 | `notes` | only when assumption/gap changes how to run (≤1 short line) |
-| `technique` / `level` / `kind` / `data_deps` / `smoke` | optional — omit if default/obvious |
+| `technique` / `kind` / `data_deps` / `smoke` | optional — omit if default/obvious |
 
 ## Anti-patterns
 
@@ -150,3 +153,11 @@ English keys in the indented body (validator depends on them). Reader headings m
 | Mix reader languages mid-AC list | One reader locale for AC + case prose |
 | Put a **given** AC only under Should | Must (or Must-deferred) |
 | Stretch `proves` onto nearby AC | `supplements:` |
+| Should = mock chrome for out-of-scope tabs/icons | Same-AC residual sample, or omit |
+| Silent leftover filters/statuses after one must | should / later / Residual risk names the set |
+| Residual should: “sample some / if data exists” | Finite list, Stage stopping rule, or named leftover |
+| `automate: candidate` + “compare to API” with no seed | `manual` or name fixture in `given` |
+| UI-only must for “fields match API” | `level: api` oracle (or api + thin ui) |
+| Environment without build/seed when must needs Stage data | Name build + seed line |
+| `security: needed` with no case/charter/risk | Closed scan disposition |
+| Turn this skill into release packs / metrics / NFR platform | Keep one-ticket Done proof |
